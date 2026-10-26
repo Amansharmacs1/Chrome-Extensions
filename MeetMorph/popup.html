@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MeetMorph</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-group">
+        <div class="logo-icon" aria-hidden="true">✨</div>
+        <div class="logo-text">
+          <h1>MeetMorph</h1>
+          <span class="version-tag">v1.0 • Google Meet</span>
+        </div>
+      </div>
+      <div class="status-indicator-badge" id="mainStatusBadge" role="status" aria-live="polite">
+        <span class="status-dot" id="mainStatusDot" aria-hidden="true"></span>
+        <span class="status-label" id="mainStatusLabel">Connecting...</span>
+      </div>
+    </header>
+
+    <!-- Error/Alert Banner (Conditional) -->
+    <div class="alert-banner" id="alertBanner" style="display: none;" role="alert">
+      <span class="alert-icon" id="alertIcon" aria-hidden="true">⚠️</span>
+      <div class="alert-content">
+        <div class="alert-title" id="alertTitle">Notice</div>
+        <div class="alert-desc" id="alertDesc">Description</div>
+      </div>
+      <button class="alert-dismiss" id="alertDismissBtn" aria-label="Dismiss alert">✕</button>
+    </div>
+
+    <!-- Previews Section -->
+    <section class="previews-section" aria-label="Video Previews">
+      <div class="preview-card">
+        <div class="preview-header">
+          <span class="preview-title">📹 Live Camera</span>
+          <span class="preview-meta" id="liveFpsBadge">0 FPS</span>
+        </div>
+        <div class="preview-viewport">
+          <video id="liveVideoPreview" autoplay muted playsinline aria-label="Live camera preview"></video>
+          <div class="viewport-placeholder" id="livePlaceholder">
+            <span>Camera Inactive</span>
+            <button class="btn btn-xs btn-outline" id="startCamBtn" aria-label="Start local camera preview">Start Camera</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="preview-card">
+        <div class="preview-header">
+          <span class="preview-title">🖼️ Empty Background</span>
+          <span class="preview-meta" id="bgStatusBadge">None</span>
+        </div>
+        <div class="preview-viewport">
+          <img id="bgImagePreview" src="" alt="Captured Empty Room Background" style="display: none;">
+          <div class="viewport-placeholder" id="bgPlaceholder">
+            <span>No Background Captured</span>
+            <span class="subtext">Must capture room before vanishing</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Countdown Overlay (For popup during capture) -->
+    <div class="capture-overlay" id="captureOverlay" style="display: none;" role="dialog" aria-modal="true" aria-label="Background capture countdown">
+      <div class="countdown-circle">
+        <span id="countdownNumber">3</span>
+      </div>
+      <div class="countdown-msg">Step out of camera view!</div>
+      <div class="countdown-sub">Capturing clean empty room...</div>
+      <button class="btn btn-xs btn-secondary" id="cancelCaptureBtn" aria-label="Cancel capture">Cancel</button>
+    </div>
+
+    <!-- Main Action Buttons -->
+    <section class="actions-section" aria-label="Meeting Controls">
+      <div class="primary-controls-grid">
+        <button class="btn btn-vanish" id="btnVanish" disabled aria-label="Vanish: switch outgoing video to empty room">
+          <span class="btn-icon" aria-hidden="true">✨</span>
+          <span class="btn-label">VANISH</span>
+          <span class="btn-sub">Show Empty Room</span>
+        </button>
+
+        <button class="btn btn-return active-return" id="btnReturn" disabled aria-label="Return: restore live webcam video">
+          <span class="btn-icon" aria-hidden="true">👤</span>
+          <span class="btn-label">RETURN</span>
+          <span class="btn-sub">Show Live Webcam</span>
+        </button>
+      </div>
+
+      <div class="secondary-controls-bar">
+        <button class="btn btn-action" id="btnCaptureBg" aria-label="Capture empty background">
+          <span class="btn-icon" aria-hidden="true">📸</span>
+          <span id="captureBtnText">Capture Empty Background</span>
+        </button>
+        <button class="btn btn-icon-only" id="btnRefreshPage" title="Connect / Refresh Meeting Integration" aria-label="Refresh integration">
+          🔄
+        </button>
+      </div>
+    </section>
+
+    <!-- Finger Snap Trigger (Web Audio API) -->
+    <section class="section-card snap-section" aria-label="Finger Snap Settings">
+      <div class="snap-header">
+        <div class="snap-title-group">
+          <span class="snap-icon" aria-hidden="true">🫰</span>
+          <div>
+            <div class="section-title">Finger Snap Trigger</div>
+            <div class="section-desc">Snap fingers to instantly toggle Vanish / Return</div>
+          </div>
+        </div>
+        <label class="switch" aria-label="Enable finger snap detection">
+          <input type="checkbox" id="snapToggle" aria-label="Toggle snap trigger">
+          <span class="slider round"></span>
+        </label>
+      </div>
+
+      <div class="snap-body" id="snapSettingsBody" style="display: none;">
+        <div class="slider-row">
+          <label for="snapSensitivitySlider" class="slider-label">Sensitivity</label>
+          <input type="range" min="1" max="10" value="6" id="snapSensitivitySlider" aria-label="Snap sensitivity">
+          <span class="slider-val" id="snapSensitivityVal" aria-hidden="true">6</span>
+        </div>
+        <div class="snap-meter-wrapper" aria-hidden="true">
+          <div class="snap-meter-bar" id="snapMeterBar"></div>
+          <span class="snap-meter-indicator" id="snapIndicator">Snap Detected!</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Outgoing WebRTC Integration Diagnostics -->
+    <section class="section-card diag-section" aria-label="Integration Diagnostics">
+      <div class="diag-header" id="diagToggleHeader" role="button" tabindex="0" aria-expanded="true" aria-controls="diagBody">
+        <div class="section-title">🔍 Integration Diagnostics</div>
+        <span class="diag-toggle-icon" id="diagToggleIcon" aria-hidden="true">▾</span>
+      </div>
+
+      <div class="diag-body" id="diagBody">
+        <div class="diag-grid">
+          <div class="diag-row">
+            <span class="diag-label">Target Page:</span>
+            <span class="diag-value" id="diagTargetPage">Checking...</span>
+          </div>
+          <div class="diag-row">
+            <span class="diag-label">Page Bridge:</span>
+            <span class="diag-value" id="diagPageBridge">Not Hooked</span>
+          </div>
+          <div class="diag-row">
+            <span class="diag-label">Canvas Pipeline:</span>
+            <span class="diag-value" id="diagCanvasPipeline">Inactive</span>
+          </div>
+          <div class="diag-row">
+            <span class="diag-label">Active WebRTC Senders:</span>
+            <span class="diag-value" id="diagWebRtcSenders">0 senders hooked</span>
+          </div>
+          <div class="diag-row">
+            <span class="diag-label">Outgoing Video Track:</span>
+            <span class="diag-value" id="diagOutgoingTrack">None</span>
+          </div>
+          <div class="diag-row">
+            <span class="diag-label">Resolution / Target:</span>
+            <span class="diag-value" id="diagResolution">N/A</span>
+          </div>
+        </div>
+
+        <div class="diagnostic-actions">
+          <button class="btn btn-xs btn-outline" id="btnTestRoom" aria-label="Launch local test room">Launch Local Test Room</button>
+          <button class="btn btn-xs btn-outline" id="btnStopAll" aria-label="Stop video engine">Stop Engine</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <span>Shortcut: <kbd>⌘+Shift+V</kbd> to toggle</span>
+      <span class="footer-dot">•</span>
+      <span id="footerTargetLink">https://meet.google.com</span>
+    </footer>
+  </div>
+
+  <script src="video-engine.js"></script>
+  <script src="snap-detector.js"></script>
+  <script src="permissions.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

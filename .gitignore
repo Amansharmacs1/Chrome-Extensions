@@ -1,0 +1,20 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Node dependencies & logs
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Chrome runtime / test artifacts
+*.log
+chrome-test-profile/
+test-results/
+
+# Temporary / backup files
+*.tmp
+*.bak
+*~

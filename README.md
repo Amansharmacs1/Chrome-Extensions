@@ -4,13 +4,13 @@
 
 Chrome Extensions is a growing collection of browser tools designed to make everyday browsing more productive, convenient, secure, and enjoyable.
 
-From focused study sessions and personalized new-tab experiences to website design utilities and link safety checks, each extension aims to solve a specific real-world problem.
+From focused study sessions and personalized new-tab experiences to website design utilities, WebRTC camera magic, and link safety checks, each extension aims to solve a specific real-world problem.
 
 ## ✨ Extensions
 
 | Extension | Description | Status |
 |---|---|---|
-| **MeetMorph** | Enhance Google Meet with creative effects and convenient meeting interactions. | In development |
+| [**MeetMorph**](./MeetMorph) | Vanish and reappear on Google Meet by switching your outgoing WebRTC webcam feed to an empty room image. | Completed & Tested |
 | **FocusFlow** | Improve productivity with focus sessions and distraction management. | Planned |
 | **WebNotes** | Take and organize notes directly on websites. | Planned |
 | **NewTab Pro** | Turn every new tab into a personalized productivity dashboard. | Planned |
@@ -37,71 +37,73 @@ Depending on the extension, the collection may use:
 - JavaScript, HTML, and CSS
 - Chrome Extensions API
 - Manifest V3
+- WebRTC & Canvas APIs
 - React and other frontend tools where appropriate
 - Browser storage APIs
 - Optional third-party APIs for features that need them
 
-Each extension may have its own technology stack and setup instructions.
+Each extension includes its own self-contained directory, documentation, and automated tests.
 
 ## 📂 Repository Structure
 
 ```text
 Chrome-Extensions/
 ├── README.md
-├── CONTRIBUTING.md
-├── LICENSE
-├── extensions/
-│   ├── MeetMorph/
-│   ├── FocusFlow/
-│   ├── WebNotes/
-│   ├── NewTab-Pro/
-│   ├── ReadEase/
-│   ├── ColorPeek/
-│   ├── FontLens/
-│   └── LinkShield/
-└── assets/
-    └── screenshots/
+├── .gitignore
+├── MeetMorph/
+│   ├── manifest.json
+│   ├── popup.html / popup.js / popup.css
+│   ├── background.js
+│   ├── content.js
+│   ├── page-bridge.js
+│   ├── video-engine.js
+│   ├── snap-detector.js
+│   ├── permissions.js
+│   ├── test-room.html / test-room.js
+│   ├── tests/
+│   ├── screenshots/
+│   └── README.md (Full documentation suite)
+└── ...
 ```
 
-The structure may evolve as the collection grows. Each extension should include its own README, source files, and relevant assets.
+The structure will evolve as the collection grows. Each extension includes its own README, source files, automated tests, and relevant documentation.
 
 ## 🚀 Installation
 
-1. Clone or download this repository.
+1. Clone or download this repository:
+   ```bash
+   git clone https://github.com/Amansharmacs1/Chrome-Extensions.git
+   ```
 2. Open `chrome://extensions` in Google Chrome.
-3. Enable **Developer mode**.
-4. Click **Load unpacked**.
-5. Select the directory of the extension you want to try, using its own installation instructions.
-6. Follow any extension-specific setup steps.
-
-Some extensions may require a build step or additional configuration. Check the corresponding extension README first.
+3. Enable **Developer mode** (toggle in the top-right corner).
+4. Click **Load unpacked** (button in top-left).
+5. Select the directory of the extension you want to run (e.g., the `MeetMorph` folder).
+6. Follow any extension-specific setup steps outlined in its local README.
 
 ## 🔒 Security and Privacy
 
-Security and privacy are important goals of this collection.
+Security and privacy are core priorities of this collection:
 
-- Request only the permissions required for each extension's functionality.
-- Explain data collection and external API usage where applicable.
+- Request only the minimal permissions required for each extension's functionality.
+- Explain data handling, local processing, and camera access transparently.
 - Avoid exposing API keys, credentials, or personal information.
+- Zero telemetry and zero remote transmission — everything runs locally in-browser.
 - Document known limitations and security considerations.
-- Never treat an undetected threat as proof that a URL is completely safe.
 
-Review each extension's documentation for its specific permission and privacy details.
+Review each extension's directory for its dedicated `PERMISSIONS.md` and `PRIVACY.md` documentation.
 
 ## 🤝 Contributing
 
-Contributions, bug reports, feature ideas, and improvements are welcome.
+Contributions, bug reports, feature ideas, and improvements are welcome:
 
 1. Fork the repository.
-2. Create a branch for your changes.
-3. Make your changes and test them.
-4. Submit a pull request with a clear explanation.
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+2. Create a branch for your changes (`git checkout -b feature/amazing-extension`).
+3. Make your changes and test them thoroughly.
+4. Submit a pull request with a clear explanation of your additions.
 
 ## 🗺️ Roadmap
 
-- [ ] Complete and test MeetMorph.
+- [x] Complete, test, and document MeetMorph.
 - [ ] Build FocusFlow.
 - [ ] Develop WebNotes and NewTab Pro.
 - [ ] Add ReadEase, ColorPeek, and FontLens.
@@ -111,7 +113,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ## 📜 License
 
-A license will be added once selected. Until then, no particular open-source reuse permissions are granted by this repository.
+A license will be added once selected. Until then, standard repository terms apply.
 
 ## 👨‍💻 Author
 
@@ -122,4 +124,4 @@ A license will be added once selected. Until then, no particular open-source reu
 
 ---
 
-If you find these projects useful, consider starring the repository ⭐ and sharing feedback or ideas for future extensions.
+If you find these projects useful, consider starring the repository ⭐ and sharing feedback or ideas for future extensions!

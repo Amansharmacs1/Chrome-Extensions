@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MeetMorph Video & WebRTC Test Harness</title>
+  <link rel="stylesheet" href="test-room.css">
+</head>
+<body>
+  <div class="test-container">
+    <!-- Header -->
+    <header class="test-header">
+      <div class="title-wrap">
+        <h1>MeetMorph Video Chat & WebRTC Test Harness</h1>
+        <p class="subtitle">Validates actual outgoing WebRTC video track transmission, audio continuity, and Google Meet integration.</p>
+      </div>
+      <div class="header-badges">
+        <span class="badge badge-pulse" id="harnessStatusBadge">Simulation Ready</span>
+        <button class="btn btn-primary" id="btnRunAutomatedTests">▶ Run Verification Suite</button>
+      </div>
+    </header>
+
+    <!-- Main Video Chat Grid (Simulating Google Meet / WebRTC call) -->
+    <main class="chat-viewport-grid">
+      <!-- Local User Video (Left) -->
+      <div class="video-panel local-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span class="role-icon">👤</span>
+            <span>You (Local Meeting User)</span>
+          </div>
+          <span class="stream-pill" id="localStreamPill">No Stream</span>
+        </div>
+        <div class="video-wrapper">
+          <video id="localVideo" autoplay muted playsinline></video>
+          <div class="video-overlay" id="localOverlay">
+            <span>Click "Start Camera" to initialize meeting session</span>
+          </div>
+        </div>
+        <div class="panel-meta">
+          <span id="localResolution">0x0</span>
+          <span id="localFps">0 FPS</span>
+          <span id="localTrackId">Track: None</span>
+        </div>
+      </div>
+
+      <!-- Remote Peer Video (Right) -->
+      <div class="video-panel remote-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span class="role-icon">🌐</span>
+            <span>Remote Participant (WebRTC Receiver)</span>
+          </div>
+          <span class="stream-pill" id="remoteStreamPill">Disconnected</span>
+        </div>
+        <div class="video-wrapper">
+          <video id="remoteVideo" autoplay playsinline></video>
+          <div class="video-overlay" id="remoteOverlay">
+            <span>Awaiting WebRTC Peer Connection...</span>
+          </div>
+        </div>
+        <div class="panel-meta">
+          <span id="remoteResolution">0x0</span>
+          <span id="remoteFps">0 FPS</span>
+          <span id="remoteAudioLevel">Mic: Idle</span>
+        </div>
+      </div>
+    </main>
+
+    <!-- WebRTC Live Telemetry & Stats -->
+    <section class="telemetry-section">
+      <div class="section-heading">
+        <h2>📡 Live WebRTC PeerConnection Telemetry</h2>
+        <span class="telemetry-tag">Real-Time getStats() API</span>
+      </div>
+      <div class="telemetry-grid">
+        <div class="telemetry-card">
+          <div class="telemetry-label">Outgoing Video Bitrate</div>
+          <div class="telemetry-value" id="statOutgoingBitrate">0 kbps</div>
+        </div>
+        <div class="telemetry-card">
+          <div class="telemetry-label">Outgoing Packets Sent</div>
+          <div class="telemetry-value" id="statPacketsSent">0</div>
+        </div>
+        <div class="telemetry-card">
+          <div class="telemetry-label">WebRTC Video Codec</div>
+          <div class="telemetry-value" id="statVideoCodec">None</div>
+        </div>
+        <div class="telemetry-card">
+          <div class="telemetry-label">Outgoing Track Type</div>
+          <div class="telemetry-value" id="statTrackType">Unregistered</div>
+        </div>
+        <div class="telemetry-card">
+          <div class="telemetry-label">Remote Audio Stream</div>
+          <div class="telemetry-value" id="statAudioStatus">Continuous</div>
+        </div>
+        <div class="telemetry-card">
+          <div class="telemetry-label">Transmission State</div>
+          <div class="telemetry-value highlight" id="statTransmissionState">IDLE</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Meeting Simulation Controls -->
+    <section class="controls-section">
+      <div class="section-heading">
+        <h2>🎮 Meeting Session Controls</h2>
+      </div>
+      <div class="controls-toolbar">
+        <button class="btn btn-secondary" id="btnStartOmeTv">📹 1. Start Meeting Camera</button>
+        <button class="btn btn-secondary" id="btnConnectStranger" disabled>🤝 2. Connect Participant (WebRTC)</button>
+        <button class="btn btn-secondary" id="btnNextStranger" disabled>⏭️ 3. Reconnect Peer</button>
+        <button class="btn btn-vanish" id="btnSimulateVanish" disabled>✨ Vanish (Show Empty Room)</button>
+        <button class="btn btn-return" id="btnSimulateReturn" disabled>👤 Return (Show Live Webcam)</button>
+        <button class="btn btn-outline" id="btnCaptureTestBg">📸 Capture Test Room</button>
+        <button class="btn btn-danger" id="btnStopSession">🛑 Stop Session</button>
+      </div>
+    </section>
+
+    <!-- Automated Verification Results -->
+    <section class="verification-section">
+      <div class="section-heading">
+        <h2>📋 Automated Verification Results</h2>
+        <span id="testSummaryPill" class="test-pill">0 / 7 Passed</span>
+      </div>
+      <div class="test-results-list" id="testResultsList">
+        <div class="test-row" id="test-row-1">
+          <span class="test-icon">⏳</span>
+          <span class="test-name">Test 1: getUserMedia Interception & Composite Stream Creation</span>
+          <span class="test-status">Pending</span>
+        </div>
+        <div class="test-row" id="test-row-2">
+          <span class="test-icon">⏳</span>
+          <span class="test-name">Test 2: VideoEngine 30 FPS Canvas Pipeline Generation</span>
+          <span class="test-status">Pending</span>
+        </div>
+        <div class="test-row" id="test-row-3">
+          <span class="test-icon">⏳</span>
+          <span class="test-name">Test 3: Audio Continuity (Microphone unmodified and unmuted)</span>
+          <span class="test-status">Pending</span>
+        </div>
+        <div class="test-row" id="test-row-4">
+          <span class="test-icon">⏳</span>
+          <span class="test-name">Test 4: RTCPeerConnection Outgoing Track Binding</span>
+          <span class="test-status">Pending</span>
+        </div>
+        <div class="test-row" id="test-row-5">
+          <span class="test-icon">⏳</span>
+          <span class="test-name">Test 5: WebRTC Outgoing Video Vanish Mode Transmission</span>
+          <span class="test-status">Pending</span>
+        </div>
+        <div class="test-row" id="test-row-6">
+          <span class="test-icon">⏳</span>
+          <span class="test-name">Test 6: WebRTC Outgoing Video Return Mode Restoration</span>
+          <span class="test-status">Pending</span>
+        </div>
+        <div class="test-row" id="test-row-7">
+          <span class="test-icon">⏳</span>
+          <span class="test-name">Test 7: Reconnect & Resolution Renegotiation Stability</span>
+          <span class="test-status">Pending</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="video-engine.js"></script>
+  <script src="snap-detector.js"></script>
+  <script src="page-bridge.js"></script>
+  <script src="test-room.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "meetmorph",
+  "version": "1.0.0",
+  "description": "Chrome Extension for macOS that lets you vanish and reappear on Google Meet by switching outgoing webcam video to a clean empty-room background.",
+  "main": "background.js",
+  "scripts": {
+    "test": "node tests/run-all.js"
+  },
+  "keywords": [
+    "meetmorph",
+    "google-meet",
+    "chrome-extension",
+    "webrtc",
+    "vanish",
+    "camera",
+    "canvas",
+    "macos"
+  ],
+  "author": "Antigravity Engineering",
+  "license": "MIT"
+}
