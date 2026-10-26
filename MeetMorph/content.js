@@ -87,7 +87,11 @@
         } else {
           postToPage('GET_STATUS');
           setTimeout(() => {
-            sendResponse({ status: latestStatus });
+            try {
+              sendResponse({ status: latestStatus });
+            } catch (e) {
+              // Message channel may have closed
+            }
           }, 150);
           return true; // Keep channel open for async response
         }
