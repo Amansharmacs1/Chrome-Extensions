@@ -1,0 +1,22 @@
+{
+  "name": "focusflow",
+  "version": "1.0.0",
+  "description": "FocusFlow - Premium Pomodoro timer, task manager, distraction blocker, and productivity analytics for Chrome.",
+  "type": "module",
+  "main": "background.js",
+  "scripts": {
+    "test": "node tests/run-all.js"
+  },
+  "keywords": [
+    "focusflow",
+    "pomodoro",
+    "productivity",
+    "chrome-extension",
+    "manifest-v3",
+    "distraction-blocker",
+    "tasks",
+    "analytics"
+  ],
+  "author": "Antigravity Engineering",
+  "license": "MIT"
+}

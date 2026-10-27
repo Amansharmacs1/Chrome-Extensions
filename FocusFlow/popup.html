@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusFlow</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="brand">
+      <img src="icons/icon32.png" alt="FocusFlow Logo" class="brand-icon">
+      <span class="brand-title">FocusFlow</span>
+    </div>
+    <div class="header-actions">
+      <button id="btnHeaderSound" class="icon-button" title="Toggle Sound" aria-label="Toggle Sound">
+        <svg class="icon-svg" viewBox="0 0 24 24" id="soundIconSvg">
+          <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+        </svg>
+      </button>
+      <button id="btnOpenDashboard" class="icon-button" title="Open Full Dashboard" aria-label="Open Full Dashboard">
+        <svg class="icon-svg" viewBox="0 0 24 24">
+          <path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <nav class="nav-tabs" role="tablist">
+    <button class="tab-btn active" data-tab="focus" role="tab" aria-selected="true" id="tabFocus">
+      <svg class="tab-icon" viewBox="0 0 24 24">
+        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/>
+      </svg>
+      <span>Focus</span>
+    </button>
+    <button class="tab-btn" data-tab="tasks" role="tab" aria-selected="false" id="tabTasks">
+      <svg class="tab-icon" viewBox="0 0 24 24">
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+      </svg>
+      <span>Tasks</span>
+    </button>
+    <button class="tab-btn" data-tab="insights" role="tab" aria-selected="false" id="tabInsights">
+      <svg class="tab-icon" viewBox="0 0 24 24">
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+      </svg>
+      <span>Insights</span>
+    </button>
+    <button class="tab-btn" data-tab="settings" role="tab" aria-selected="false" id="tabSettings">
+      <svg class="tab-icon" viewBox="0 0 24 24">
+        <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+      </svg>
+      <span>Settings</span>
+    </button>
+  </nav>
+
+  <!-- PANEL 1: FOCUS -->
+  <section id="panelFocus" class="tab-panel active" role="tabpanel">
+    <div class="timer-hero">
+      <div class="session-badge-container">
+        <span id="sessionModeBadge" class="mode-badge">Focus Session</span>
+        <span id="sessionCycleBadge" class="cycle-badge">Cycle 1 of 4</span>
+      </div>
+
+      <!-- Circular Dial -->
+      <div class="timer-dial">
+        <svg class="timer-svg" viewBox="0 0 200 200">
+          <defs>
+            <linearGradient id="timerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00d2ff" />
+              <stop offset="100%" stop-color="#3b82f6" />
+            </linearGradient>
+          </defs>
+          <circle class="timer-track" cx="100" cy="100" r="90" />
+          <circle id="timerProgressRing" class="timer-progress" cx="100" cy="100" r="90" />
+        </svg>
+        <div class="timer-inner-content">
+          <div id="timerDigits" class="timer-digits">25:00</div>
+          <div id="timerStatusLabel" class="timer-status-text">Ready to Flow</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Task Bar -->
+    <div id="activeTaskBar" class="active-task-bar" title="Click to view and choose a task">
+      <div class="active-task-info">
+        <svg class="active-task-icon" viewBox="0 0 24 24">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+        </svg>
+        <span id="activeTaskTitle" class="active-task-title active-task-placeholder">No task selected (optional)</span>
+      </div>
+      <button type="button" class="active-task-change-btn" id="btnChangeActiveTask">Select</button>
+    </div>
+
+    <!-- Timer Controls -->
+    <div class="timer-controls">
+      <button id="btnResetTimer" class="btn-secondary" title="Reset Session">
+        <svg class="icon-svg" viewBox="0 0 24 24">
+          <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
+        </svg>
+        <span>Reset</span>
+      </button>
+
+      <button id="btnMainAction" class="btn-primary" title="Start Focus Session">
+        <svg class="icon-svg" viewBox="0 0 24 24" id="mainActionIcon">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+        <span id="mainActionText">Start</span>
+      </button>
+
+      <button id="btnSkipTimer" class="btn-secondary" title="Skip to Next Session">
+        <svg class="icon-svg" viewBox="0 0 24 24">
+          <path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"/>
+        </svg>
+        <span>Skip</span>
+      </button>
+    </div>
+
+    <!-- Distraction Blocker Status -->
+    <div class="blocker-status-badge" id="blockerStatusNotice">
+      <span class="blocker-status-dot" id="blockerDot"></span>
+      <span id="blockerNoticeText">Distraction Blocker: Inactive</span>
+    </div>
+  </section>
+
+  <!-- PANEL 2: TASKS -->
+  <section id="panelTasks" class="tab-panel" role="tabpanel">
+    <div class="tasks-header">
+      <form id="formAddTask" class="task-input-bar">
+        <input type="text" id="inputTaskTitle" class="task-input" placeholder="Add a new task..." maxlength="200" autocomplete="off" required>
+        <select id="selectTaskPriority" class="task-priority-select" title="Priority">
+          <option value="medium">Med</option>
+          <option value="high">High</option>
+          <option value="low">Low</option>
+        </select>
+        <button type="submit" class="btn-add-task" title="Add Task">
+          <svg class="icon-svg" viewBox="0 0 24 24">
+            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+          </svg>
+        </button>
+      </form>
+
+      <div class="task-filter-bar">
+        <button class="filter-chip active" data-filter="all">All</button>
+        <button class="filter-chip" data-filter="pending">Pending</button>
+        <button class="filter-chip" data-filter="completed">Completed</button>
+      </div>
+    </div>
+
+    <!-- Tasks List -->
+    <div id="tasksList" class="tasks-list">
+      <!-- Dynamically Rendered -->
+    </div>
+
+    <div id="tasksEmptyState" class="empty-state" style="display: none;">
+      <svg class="empty-icon" viewBox="0 0 24 24">
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4 6h-4v4h4V9zm2 8H7v-2h10v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/>
+      </svg>
+      <p class="empty-text">No tasks yet. Create one above to stay organized!</p>
+    </div>
+  </section>
+
+  <!-- PANEL 3: INSIGHTS -->
+  <section id="panelInsights" class="tab-panel" role="tabpanel">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div id="statFocusMinutes" class="stat-value">0</div>
+        <div class="stat-label">Focus Mins</div>
+      </div>
+      <div class="stat-card">
+        <div id="statSessionsCount" class="stat-value">0</div>
+        <div class="stat-label">Sessions</div>
+      </div>
+      <div class="stat-card">
+        <div id="statTasksCount" class="stat-value">0</div>
+        <div class="stat-label">Tasks Done</div>
+      </div>
+    </div>
+
+    <!-- Daily Goal Progress -->
+    <div class="goals-section">
+      <div class="section-title">Today's Goals</div>
+      <div class="goal-item">
+        <div class="goal-header">
+          <span>Focus Time</span>
+          <span id="goalMinutesProgress">0 / 120m</span>
+        </div>
+        <div class="progress-track">
+          <div id="goalMinutesBar" class="progress-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <div class="goal-item">
+        <div class="goal-header">
+          <span>Sessions</span>
+          <span id="goalSessionsProgress">0 / 4</span>
+        </div>
+        <div class="progress-track">
+          <div id="goalSessionsBar" class="progress-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <div class="goal-item">
+        <div class="goal-header">
+          <span>Tasks Completed</span>
+          <span id="goalTasksProgress">0 / 3</span>
+        </div>
+        <div class="progress-track">
+          <div id="goalTasksBar" class="progress-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7-Day Chart -->
+    <div class="chart-container">
+      <div class="section-title">Last 7 Days (Minutes)</div>
+      <div id="chart7Days" class="bar-chart">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL 4: SETTINGS -->
+  <section id="panelSettings" class="tab-panel" role="tabpanel">
+    <div class="settings-group">
+      <div class="section-title">Timer Durations (minutes)</div>
+      <div class="setting-row">
+        <div class="setting-label-block">
+          <span class="setting-name">Focus Session</span>
+          <span class="setting-desc">Standard pomodoro length</span>
+        </div>
+        <input type="number" id="inputFocusDuration" class="setting-input-num" min="1" max="180" value="25">
+      </div>
+      <div class="setting-row">
+        <div class="setting-label-block">
+          <span class="setting-name">Short Break</span>
+          <span class="setting-desc">Rest between focus intervals</span>
+        </div>
+        <input type="number" id="inputShortBreak" class="setting-input-num" min="1" max="60" value="5">
+      </div>
+      <div class="setting-row">
+        <div class="setting-label-block">
+          <span class="setting-name">Long Break</span>
+          <span class="setting-desc">Extended recovery interval</span>
+        </div>
+        <input type="number" id="inputLongBreak" class="setting-input-num" min="1" max="90" value="15">
+      </div>
+      <div class="setting-row">
+        <div class="setting-label-block">
+          <span class="setting-name">Sessions Before Long Break</span>
+          <span class="setting-desc">Default is 4 cycles</span>
+        </div>
+        <input type="number" id="inputSessionsBeforeLong" class="setting-input-num" min="1" max="12" value="4">
+      </div>
+      <div class="setting-row">
+        <div class="setting-label-block">
+          <span class="setting-name">Dev Fast Timer (10s)</span>
+          <span class="setting-desc">Short test sessions for verification</span>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggleFastTimer">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Automation & Alerts -->
+    <div class="settings-group">
+      <div class="section-title">Automation & Alerts</div>
+      <div class="setting-row">
+        <div class="setting-label-block">
+          <span class="setting-name">Auto-start Breaks</span>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggleAutoBreaks">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="setting-row">
+        <div class="setting-label-block">
+          <span class="setting-name">Auto-start Focus</span>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggleAutoFocus">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="setting-row">
+        <div class="setting-label-block">
+          <span class="setting-name">Sound Alerts</span>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggleSound">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="setting-row">
+        <div class="setting-label-block">
+          <span class="setting-name">Desktop Notifications</span>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggleNotifications">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Distraction Blocker -->
+    <div class="settings-group">
+      <div class="section-title">Distraction Blocker</div>
+      <div class="setting-row">
+        <div class="setting-label-block">
+          <span class="setting-name">Enable Website Blocking</span>
+          <span class="setting-desc">Blocks distracting sites while focusing</span>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggleDistractionBlocker">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="setting-row">
+        <div class="setting-label-block">
+          <span class="setting-name">Also Block During Breaks</span>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggleBlockBreaks">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <!-- Add Domain -->
+      <div class="domain-add-bar">
+        <input type="text" id="inputBlockDomain" class="task-input" placeholder="e.g. youtube.com or x.com">
+        <button type="button" id="btnAddDomain" class="btn-secondary">Add</button>
+      </div>
+
+      <!-- Domain list tags -->
+      <div id="domainTagsList" class="domain-tags">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- Danger Zone -->
+    <div class="settings-group danger-zone">
+      <div class="section-title" style="color: var(--danger);">Reset Data</div>
+      <p class="setting-desc">Erase all custom settings, tasks, and historical session logs.</p>
+      <button type="button" id="btnOpenResetModal" class="btn-danger">Reset All FocusFlow Data</button>
+    </div>
+  </section>
+
+  <!-- Reset Confirmation Modal -->
+  <div id="resetModal" class="modal-overlay">
+    <div class="modal-card">
+      <h3 class="modal-title">Reset Everything?</h3>
+      <p class="modal-desc">This action cannot be undone. All your session history, tasks, and preferences will be permanently wiped.</p>
+      <div class="modal-actions">
+        <button type="button" id="btnCancelReset" class="btn-secondary" style="flex: 1;">Cancel</button>
+        <button type="button" id="btnConfirmReset" class="btn-danger" style="flex: 1; margin-top: 0;">Confirm Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

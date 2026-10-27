@@ -11,7 +11,7 @@ From focused study sessions and personalized new-tab experiences to website desi
 | Extension | Description | Status |
 |---|---|---|
 | [**MeetMorph**](./MeetMorph) | Vanish and reappear on Google Meet by switching your outgoing WebRTC webcam feed to an empty room image. | Completed & Tested |
-| **FocusFlow** | Improve productivity with focus sessions and distraction management. | Planned |
+| [**FocusFlow**](./FocusFlow) | Improve productivity with focus sessions, distraction blocking, and analytics. | Completed & Tested |
 | **WebNotes** | Take and organize notes directly on websites. | Planned |
 | **NewTab Pro** | Turn every new tab into a personalized productivity dashboard. | Planned |
 | **ReadEase** | Enjoy a cleaner, distraction-free reading experience. | Planned |
