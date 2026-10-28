@@ -12,7 +12,7 @@ From focused study sessions and personalized new-tab experiences to website desi
 |---|---|---|
 | [**MeetMorph**](./MeetMorph) | Vanish and reappear on Google Meet by switching your outgoing WebRTC webcam feed to an empty room image. | Completed & Tested |
 | [**FocusFlow**](./FocusFlow) | Improve productivity with focus sessions, distraction blocking, and analytics. | Completed & Tested |
-| **WebNotes** | Take and organize notes directly on websites. | Planned |
+| [**WebNotes**](./WebNotes) | Take and organize notes directly on websites, capture quotes, and manage research. | Completed & Tested |
 | **NewTab Pro** | Turn every new tab into a personalized productivity dashboard. | Planned |
 | **ReadEase** | Enjoy a cleaner, distraction-free reading experience. | Planned |
 | **ColorPeek** | Pick website colors and copy HEX, RGB, and HSL values. | Planned |
@@ -104,8 +104,9 @@ Contributions, bug reports, feature ideas, and improvements are welcome:
 ## 🗺️ Roadmap
 
 - [x] Complete, test, and document MeetMorph.
-- [ ] Build FocusFlow.
-- [ ] Develop WebNotes and NewTab Pro.
+- [x] Build, test, and document FocusFlow.
+- [x] Build, test, and document WebNotes.
+- [ ] Develop NewTab Pro.
 - [ ] Add ReadEase, ColorPeek, and FontLens.
 - [ ] Develop LinkShield with appropriate threat-intelligence checks.
 - [ ] Add screenshots, usage guides, and testing documentation.

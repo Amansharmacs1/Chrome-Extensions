@@ -1,0 +1,22 @@
+{
+  "name": "webnotes",
+  "version": "1.0.0",
+  "description": "WebNotes — Remember what matters, right where you found it. Local-first webpage notes and quotes for Chrome.",
+  "type": "module",
+  "main": "background.js",
+  "scripts": {
+    "test": "node tests/run-all.js"
+  },
+  "keywords": [
+    "webnotes",
+    "notes",
+    "quotes",
+    "highlights",
+    "chrome-extension",
+    "manifest-v3",
+    "local-first",
+    "privacy-first"
+  ],
+  "author": "Antigravity Engineering",
+  "license": "MIT"
+}

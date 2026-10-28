@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=380">
+  <title>WebNotes</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-brand">
+        <div class="header-logo">
+          <svg viewBox="0 0 32 32" fill="none">
+            <rect x="2" y="4" width="20" height="24" rx="3" stroke="currentColor" stroke-width="2" fill="none"/>
+            <rect x="10" y="2" width="20" height="24" rx="3" fill="#0d1117" stroke="currentColor" stroke-width="2"/>
+            <line x1="14" y1="9" x2="26" y2="9" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="14" y1="13" x2="24" y2="13" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+            <line x1="14" y1="17" x2="22" y2="17" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+            <circle cx="26" cy="22" r="5" fill="#00d4ff"/>
+            <line x1="26" y1="19.5" x2="26" y2="24.5" stroke="#0d1117" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="23.5" y1="22" x2="28.5" y2="22" stroke="#0d1117" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="header-title">WebNotes</span>
+      </div>
+      <div class="header-actions">
+        <button class="icon-btn" id="btn-capture" title="Capture selected text" aria-label="Capture selected text">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M4 2h2M10 2h2M14 4v2M14 10v2M12 14h-2M6 14H4M2 12V10M2 6V4"/>
+            <path d="M5 6h6M5 8h4M5 10h5" stroke-width="1.2"/>
+          </svg>
+        </button>
+        <button class="icon-btn" id="btn-open-dashboard" title="Open full dashboard" aria-label="Open dashboard">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="12" height="12" rx="2"/>
+            <line x1="2" y1="6" x2="14" y2="6"/>
+            <line x1="6" y1="6" x2="6" y2="14"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Page Context -->
+    <div class="page-context" id="page-context">
+      <div class="page-context-label">Current Page</div>
+      <div class="page-context-title" id="page-title">Loading...</div>
+      <div class="page-context-url" id="page-url"></div>
+    </div>
+
+    <!-- Capture Bar (shown when text is selected) -->
+    <div class="capture-bar" id="capture-bar">
+      <div class="capture-bar-icon">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M6 2L3 14M10 2L13 14M2 6h12M2 10h12"/>
+        </svg>
+      </div>
+      <div class="capture-bar-content">
+        <div class="capture-bar-text" id="captured-text-preview"></div>
+        <div class="capture-bar-actions">
+          <button class="btn btn-sm btn-primary" id="btn-save-capture">Save Quote</button>
+          <button class="btn btn-sm btn-ghost" id="btn-dismiss-capture">Dismiss</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab Navigation -->
+    <nav class="tab-nav" role="tablist">
+      <button class="tab-btn active" data-tab="notes" role="tab" aria-selected="true" id="tab-notes">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <rect x="3" y="2" width="10" height="12" rx="1.5"/>
+          <line x1="5.5" y1="5" x2="10.5" y2="5"/>
+          <line x1="5.5" y1="7.5" x2="9.5" y2="7.5"/>
+          <line x1="5.5" y1="10" x2="8" y2="10"/>
+        </svg>
+        Notes
+        <span class="tab-badge" id="notes-count">0</span>
+      </button>
+      <button class="tab-btn" data-tab="highlights" role="tab" aria-selected="false" id="tab-highlights">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M2 12h12M4 8l4-5 4 5"/>
+          <line x1="5" y1="8" x2="11" y2="8"/>
+        </svg>
+        Quotes
+        <span class="tab-badge" id="highlights-count">0</span>
+      </button>
+    </nav>
+
+    <!-- Notes Tab -->
+    <div class="tab-content active" id="content-notes" role="tabpanel">
+      <!-- Quick Add -->
+      <div class="quick-add" id="quick-add">
+        <div class="quick-add-header">
+          <span class="quick-add-title">New Note</span>
+          <div class="scope-toggle">
+            <button class="scope-btn active" data-scope="page" id="scope-page" title="Note for this page">Page</button>
+            <button class="scope-btn" data-scope="domain" id="scope-domain" title="Note for entire domain">Domain</button>
+          </div>
+        </div>
+        <input type="text" class="input-field title-input" id="note-title-input" placeholder="Title (optional)" maxlength="200" aria-label="Note title">
+        <textarea class="input-field" id="note-body-input" placeholder="Write your note..." rows="3" aria-label="Note content"></textarea>
+        <div class="quick-add-footer">
+          <div class="tags-input-wrapper">
+            <input type="text" class="tags-input" id="note-tags-input" placeholder="Tags (comma separated)" aria-label="Tags">
+          </div>
+          <button class="btn btn-primary" id="btn-save-note" disabled>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <line x1="8" y1="3" x2="8" y2="13"/>
+              <line x1="3" y1="8" x2="13" y2="8"/>
+            </svg>
+            Save
+          </button>
+        </div>
+      </div>
+
+      <!-- Notes List -->
+      <div class="notes-list" id="notes-list">
+        <!-- Notes render here -->
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" id="notes-empty" style="display: none;">
+        <div class="empty-state-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <rect x="8" y="4" width="32" height="40" rx="4"/>
+            <line x1="14" y1="14" x2="34" y2="14"/>
+            <line x1="14" y1="20" x2="30" y2="20"/>
+            <line x1="14" y1="26" x2="26" y2="26"/>
+            <circle cx="24" cy="36" r="2"/>
+          </svg>
+        </div>
+        <div class="empty-state-title">No notes yet</div>
+        <div class="empty-state-desc">Create your first note for this page using the form above.</div>
+      </div>
+    </div>
+
+    <!-- Highlights Tab -->
+    <div class="tab-content" id="content-highlights" role="tabpanel">
+      <div class="notes-list" id="highlights-list">
+        <!-- Highlights render here -->
+      </div>
+      <div class="empty-state" id="highlights-empty" style="display: none;">
+        <div class="empty-state-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <rect x="8" y="6" width="32" height="36" rx="3"/>
+            <path d="M14 18h20M14 24h16M14 30h12" stroke-width="2" opacity="0.5"/>
+            <path d="M16 14h12" stroke="#00d4ff" stroke-width="3"/>
+          </svg>
+        </div>
+        <div class="empty-state-title">No saved quotes</div>
+        <div class="empty-state-desc">Select text on any page and right-click → Save to WebNotes, or use the capture button above.</div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="popup-footer">
+      <span class="footer-stats" id="footer-stats"></span>
+      <button class="footer-link" id="btn-dashboard-link">
+        Open Library
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4.5 2.5h5v5"/>
+          <line x1="9.5" y1="2.5" x2="2.5" y2="9.5"/>
+        </svg>
+      </button>
+    </footer>
+  </div>
+
+  <!-- Edit Overlay -->
+  <div class="edit-overlay" id="edit-overlay">
+    <div class="edit-panel">
+      <div class="edit-panel-title" id="edit-panel-title">Edit Note</div>
+      <input type="text" class="input-field title-input" id="edit-title" placeholder="Title (optional)" maxlength="200" aria-label="Edit title">
+      <textarea class="input-field" id="edit-body" placeholder="Note content..." rows="5" aria-label="Edit content"></textarea>
+      <input type="text" class="input-field" id="edit-tags" placeholder="Tags (comma separated)" aria-label="Edit tags">
+      <div class="edit-panel-actions">
+        <button class="btn btn-secondary" id="btn-edit-cancel">Cancel</button>
+        <button class="btn btn-primary" id="btn-edit-save">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Dialog -->
+  <div class="confirm-overlay" id="confirm-overlay">
+    <div class="confirm-dialog">
+      <div class="confirm-dialog-title" id="confirm-title">Confirm</div>
+      <div class="confirm-dialog-message" id="confirm-message">Are you sure?</div>
+      <div class="confirm-dialog-actions">
+        <button class="btn btn-secondary" id="btn-confirm-cancel">Cancel</button>
+        <button class="btn btn-danger" id="btn-confirm-ok">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="popup.js" type="module"></script>
+</body>
+</html>
