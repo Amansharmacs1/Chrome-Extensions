@@ -5,6 +5,7 @@
 import {
   getInitials,
   getDeterministicColor,
+  getFaviconUrl,
   createShortcut,
   updateShortcut,
   removeShortcut,
@@ -32,6 +33,12 @@ assert(getInitials('GitHub') === 'GI', 'Derives 2-letter prefix for single word'
 assert(getInitials('Google Docs') === 'GD', 'Derives initials from multi-word title');
 assert(getInitials('X') === 'X', 'Handles single character title');
 assert(getInitials('', 'https://reddit.com') === 'RE', 'Falls back to domain when title is empty');
+
+// Favicon URL Derivation
+const favGithub = getFaviconUrl('https://github.com/trending', 64);
+assert(favGithub.includes('github.com'), 'Derives favicon URL for website domain');
+assert(favGithub.includes('sz=64'), 'Passes size parameter to favicon provider');
+assert(getFaviconUrl('') === '', 'Returns empty string on empty input');
 
 // 2. Deterministic Colors
 const c1 = getDeterministicColor('GitHub');

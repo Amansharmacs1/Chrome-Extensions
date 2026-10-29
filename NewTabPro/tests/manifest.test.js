@@ -42,7 +42,12 @@ try {
 
   // Minimal Permissions
   assert(Array.isArray(content.permissions), 'Permissions is an array');
-  assert(content.permissions.length === 1 && content.permissions[0] === 'storage', 'Permissions strictly limited to ["storage"]');
+  assert(
+    content.permissions.length === 2 &&
+    content.permissions.includes('storage') &&
+    content.permissions.includes('favicon'),
+    'Permissions strictly limited to ["storage", "favicon"]'
+  );
   assert(!content.host_permissions, 'No broad host_permissions requested');
   assert(!content.background, 'No unnecessary background service worker overhead');
 

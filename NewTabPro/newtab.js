@@ -13,6 +13,7 @@ import {
   updateShortcut,
   removeShortcut,
   getInitials,
+  getFaviconUrl,
   PALETTE_COLORS
 } from './modules/shortcuts.js';
 import {
@@ -385,8 +386,46 @@ function renderShortcuts() {
 
     const badge = document.createElement('div');
     badge.className = 'shortcut-badge';
-    badge.style.backgroundColor = shortcut.color || '#3B82F6';
-    badge.textContent = getInitials(shortcut.title, shortcut.url);
+    if (shortcut.color) {
+      badge.style.boxShadow = `0 4px 14px ${shortcut.color}33`;
+    }
+
+    const faviconUrl = getFaviconUrl(shortcut.url, 64);
+
+    const img = document.createElement('img');
+    img.className = 'shortcut-icon-img';
+    img.alt = shortcut.title;
+    img.src = faviconUrl;
+    img.loading = 'lazy';
+
+    const fallbackInitials = document.createElement('span');
+    fallbackInitials.className = 'shortcut-fallback-initials';
+    fallbackInitials.style.display = 'none';
+    fallbackInitials.textContent = getInitials(shortcut.title, shortcut.url);
+
+    img.addEventListener('error', () => {
+      try {
+        const domain = new URL(shortcut.url).hostname;
+        const googleFallback = `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=64`;
+        if (img.src !== googleFallback && !img.dataset.failedOnce) {
+          img.dataset.failedOnce = 'true';
+          img.src = googleFallback;
+          return;
+        }
+      } catch {}
+
+      img.style.display = 'none';
+      badge.style.backgroundColor = shortcut.color || '#3B82F6';
+      fallbackInitials.style.display = 'block';
+    });
+
+    img.addEventListener('load', () => {
+      img.style.display = 'block';
+      fallbackInitials.style.display = 'none';
+    });
+
+    badge.appendChild(img);
+    badge.appendChild(fallbackInitials);
 
     const title = document.createElement('span');
     title.className = 'shortcut-title';

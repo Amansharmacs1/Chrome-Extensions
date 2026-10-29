@@ -23,7 +23,7 @@ npm test
 | **Storage & Migration** | `tests/storage.test.js` | 26 | Default state, schema versioning, null/corrupted migrations, enum validation, widget fields. |
 | **Clock, Date & Greeting** | `tests/clock.test.js` | 20 | 12h/24h conversion, running seconds, date formatting, time-aware greetings. |
 | **Search & Safe Navigation** | `tests/search.test.js` | 27 | Google, DDG, Bing, Brave, query URI-encoding, URL detection, dangerous scheme rejection. |
-| **Shortcuts Engine** | `tests/shortcuts.test.js` | 20 | Shortcut CRUD, initials generator, deterministic colors, reordering, URL sanitization. |
+| **Shortcuts Engine** | `tests/shortcuts.test.js` | 23 | Shortcut CRUD, initials generator, favicon URL derivation, deterministic colors, reordering, URL sanitization. |
 | **Tasks & Productivity** | `tests/tasks.test.js` | 23 | Task creation, completion toggle, title editing, filtering, date keys, progress metrics. |
 | **Themes & Appearance** | `tests/themes.test.js` | 32 | Theme registry (Midnight, Ocean, Aurora, Light, Minimal, Atmosphere), background presets, CSS tokens. |
 | **Widget Registry** | `tests/widgets.test.js` | 33 | 13 widgets registration, enable/disable toggling, accessible keyboard reordering. |
@@ -32,7 +32,7 @@ npm test
 | **Habit Tracker & Streaks** | `tests/habits.test.js` | 10 | Habit creation, emoji icon, daily toggle, consecutive day streak calculations. |
 | **Quick Calculator** | `tests/calculator.test.js` | 15 | Digits, decimals, addition, subtraction, multiplication, division, zero-error, percent, negation. |
 | **Live Weather Atmosphere** | `tests/weather-atmosphere.test.js` | 21 | WMO code resolution, day vs night skies, ambient fx classes (rain, snow, stars, sunbeam, storm). |
-| **Total** | **13 Test Suites** | **293** | **100% Pass Rate (293 passed, 0 failed)** |
+| **Total** | **13 Test Suites** | **296** | **100% Pass Rate (296 passed, 0 failed)** |
 
 ---
 
@@ -46,7 +46,7 @@ npm test
   ✓ PASS   storage.test.js           (26 passed, 0 failed)
   ✓ PASS   clock.test.js             (20 passed, 0 failed)
   ✓ PASS   search.test.js            (27 passed, 0 failed)
-  ✓ PASS   shortcuts.test.js         (20 passed, 0 failed)
+  ✓ PASS   shortcuts.test.js         (23 passed, 0 failed)
   ✓ PASS   tasks.test.js             (23 passed, 0 failed)
   ✓ PASS   themes.test.js            (32 passed, 0 failed)
   ✓ PASS   widgets.test.js           (33 passed, 0 failed)
@@ -56,6 +56,6 @@ npm test
   ✓ PASS   calculator.test.js        (15 passed, 0 failed)
   ✓ PASS   weather-atmosphere.test.js (21 passed, 0 failed)
 -----------------------------------------------------------------
-  Total: 293 passed, 0 failed across 13 suites.
+  Total: 296 passed, 0 failed across 13 suites.
 =================================================================
 ```

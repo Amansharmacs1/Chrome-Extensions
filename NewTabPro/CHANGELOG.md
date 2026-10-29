@@ -6,6 +6,20 @@ The project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
+## [1.2.0] - 2026-10-29
+
+### Added
+- **Automatic Website Logos & Favicons for Shortcuts:**
+  - Implemented automatic high-resolution website logo/favicon resolution in `modules/shortcuts.js` via `getFaviconUrl(url, size)`.
+  - Added native Chrome favicon cache access using the `chrome-extension://${id}/_favicon/?pageUrl=${url}&size=64` endpoint.
+  - Declared `"favicon"` permission in `manifest.json`.
+  - Added reliable secondary fallback pipeline to Google's public S2 favicon service (`https://www.google.com/s2/favicons?domain=${domain}&sz=64`) for non-cached sites and development/preview environments.
+  - Added graceful offline fallback: automatically hides image and seamlessly displays the user's styled initials badge if an icon fails to load or the network is unreachable (zero broken image boxes).
+  - Modernized shortcut card visuals with glass badge backdrop, ambient glowing drop shadows, smooth hover micro-interactions (`scale(1.1)`), and lazy loading (`loading="lazy"`).
+  - Added comprehensive automated unit tests for favicon derivation, custom sizing, and domain extraction (3 new unit tests, bringing the suite to 296 passing tests).
+
+---
+
 ## [1.1.0] - 2026-10-29
 
 ### Added

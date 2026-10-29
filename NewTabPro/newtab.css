@@ -605,21 +605,43 @@ body {
 }
 
 .shortcut-badge {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  transition: transform var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--surface-border);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .shortcut-card:hover .shortcut-badge {
-  transform: scale(1.06);
+  transform: translateY(-2px) scale(1.05);
+  border-color: var(--surface-border-hover);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.shortcut-icon-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 6px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  transition: transform var(--transition-fast);
+}
+
+.shortcut-card:hover .shortcut-icon-img {
+  transform: scale(1.1);
+}
+
+.shortcut-fallback-initials {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #ffffff;
 }
 
 .shortcut-title {

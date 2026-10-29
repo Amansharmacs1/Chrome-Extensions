@@ -65,7 +65,8 @@ NewTab Pro includes **6 curated workspace templates** tailored for specific work
 
 - **⚡ Quick Links & Bookmarks:**
   - Add, edit, reorder, and remove frequently used websites.
-  - Initial badges with custom color palette or deterministic pastel accents.
+  - Automatic website logo & favicon fetching via Chrome's native favicon cache with Google S2 service fallback.
+  - Graceful offline fallback to stylish initials badge with custom or deterministic color accents (zero broken images).
   - Option to open links in the current tab or a new tab.
 
 - **✅ Daily Tasks & Progress Ring:**

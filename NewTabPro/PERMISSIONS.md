@@ -8,12 +8,13 @@
 
 ## 1. Declared Permissions
 
-The extension declares only **one** Chrome permission in its `manifest.json`:
+The extension declares only **two** minimal Chrome permissions in its `manifest.json`:
 
 ```json
 {
   "permissions": [
-    "storage"
+    "storage",
+    "favicon"
   ]
 }
 ```
@@ -23,6 +24,7 @@ The extension declares only **one** Chrome permission in its `manifest.json`:
 | Permission | Purpose | Why It Cannot Be Omitted |
 |---|---|---|
 | `storage` | Provides access to `chrome.storage.local` to persist the user's dashboard preferences, shortcuts, daily tasks, widget layout, theme selections, and scratchpad notes across browser sessions. | Without persistent storage, all user shortcuts, tasks, and configurations would be wiped whenever Chrome is closed. |
+| `favicon` | Grants access to Chrome's native local favicon cache (`chrome-extension://${id}/_favicon/?pageUrl=${url}&size=${size}`) to automatically display crisp website logos on shortcut tiles. | Without this permission, shortcut tiles cannot query Chrome's local icon store, requiring remote fallbacks or plain initials. Does not grant access to browsing history or active tabs. |
 
 ---
 

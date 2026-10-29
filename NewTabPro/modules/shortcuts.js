@@ -60,6 +60,41 @@ export function getDeterministicColor(seed = '') {
 }
 
 /**
+ * Derives a high-resolution favicon image URL for a given website URL.
+ * Uses Chrome's local extension /_favicon/ cache if available, with Google S2 service fallback.
+ * @param {string} webUrl
+ * @param {number} [size=64]
+ * @returns {string}
+ */
+export function getFaviconUrl(webUrl, size = 64) {
+  if (!webUrl || typeof webUrl !== 'string') return '';
+
+  try {
+    const parsed = new URL(webUrl);
+    const domain = parsed.hostname;
+
+    if (
+      typeof chrome !== 'undefined' &&
+      chrome.runtime &&
+      typeof chrome.runtime.getURL === 'function'
+    ) {
+      try {
+        const chromeFaviconUrl = new URL(chrome.runtime.getURL('/_favicon/'));
+        chromeFaviconUrl.searchParams.set('pageUrl', webUrl);
+        chromeFaviconUrl.searchParams.set('size', String(size));
+        return chromeFaviconUrl.toString();
+      } catch {
+        // Fallback to Google S2
+      }
+    }
+
+    return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=${size}`;
+  } catch {
+    return '';
+  }
+}
+
+/**
  * Validates and creates a new shortcut object
  * @param {Object} input
  * @param {string} input.title
