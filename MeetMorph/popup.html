@@ -130,6 +130,35 @@
       </div>
     </section>
 
+    <!-- Vanish & Return Animation Effect Settings -->
+    <section class="section-card animation-section" aria-label="Transition Animation Settings">
+      <div class="snap-header">
+        <div class="snap-title-group">
+          <span class="snap-icon" aria-hidden="true">✨</span>
+          <div>
+            <div class="section-title">Transition Animation</div>
+            <div class="section-desc">Visual effect when disappearing & reappearing</div>
+          </div>
+        </div>
+      </div>
+      <div class="animation-body">
+        <div class="control-row">
+          <label for="animStyleSelect" class="control-label">Effect Style</label>
+          <select id="animStyleSelect" class="form-select" aria-label="Animation effect style">
+            <option value="magic" selected>✨ Magic Sparkles & Bloom</option>
+            <option value="shockwave">🌊 Energy Shockwave</option>
+            <option value="glitch">👾 Cyber Glitch Slice</option>
+            <option value="fade">🎬 Smooth Film Dissolve</option>
+          </select>
+        </div>
+        <div class="slider-row">
+          <label for="animDurationSlider" class="slider-label">Duration</label>
+          <input type="range" min="200" max="1000" step="50" value="480" id="animDurationSlider" aria-label="Animation duration">
+          <span class="slider-val" id="animDurationVal" style="width: 45px;" aria-hidden="true">480ms</span>
+        </div>
+      </div>
+    </section>
+
     <!-- Outgoing WebRTC Integration Diagnostics -->
     <section class="section-card diag-section" aria-label="Integration Diagnostics">
       <div class="diag-header" id="diagToggleHeader" role="button" tabindex="0" aria-expanded="true" aria-controls="diagBody">

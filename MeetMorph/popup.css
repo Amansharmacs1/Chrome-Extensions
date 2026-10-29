@@ -536,6 +536,51 @@ input:checked + .slider:before {
   text-shadow: 0 0 6px #38bdf8;
 }
 
+/* Animation Section */
+.animation-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.animation-body {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.control-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.control-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  width: 75px;
+}
+
+.form-select {
+  flex: 1;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.form-select:hover, .form-select:focus {
+  border-color: var(--accent-purple);
+}
+
 /* Diagnostics Section */
 .diag-header {
   display: flex;

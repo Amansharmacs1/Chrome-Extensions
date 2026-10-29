@@ -17,7 +17,14 @@
   let isHudMinimized = false;
 
   // 1. Storage Integration: Load previously saved background image and settings
-  chrome.storage.local.get(['savedBackgroundDataUrl', 'snapEnabled', 'snapSensitivity', 'hudMinimized'], (data) => {
+  chrome.storage.local.get([
+    'savedBackgroundDataUrl',
+    'snapEnabled',
+    'snapSensitivity',
+    'animationStyle',
+    'animationDuration',
+    'hudMinimized'
+  ], (data) => {
     if (data.savedBackgroundDataUrl) {
       console.log('[MeetMorph] Found stored background image, sending to page bridge...');
       postToPage('LOAD_BACKGROUND', { dataUrl: data.savedBackgroundDataUrl });
@@ -28,6 +35,13 @@
     postToPage('SET_SNAP_CONFIG', {
       enabled: snapEnabled,
       sensitivity: snapSensitivity
+    });
+    // Send animation configuration
+    const animStyle = data.animationStyle || 'magic';
+    const animDuration = data.animationDuration || 480;
+    postToPage('SET_ANIMATION_CONFIG', {
+      style: animStyle,
+      duration: animDuration
     });
     if (data.hudMinimized !== undefined) {
       isHudMinimized = !!data.hudMinimized;
@@ -131,6 +145,15 @@
         }
         if (payload.sensitivity !== undefined) {
           chrome.storage.local.set({ snapSensitivity: payload.sensitivity });
+        }
+        sendResponse({ ok: true });
+        break;
+
+      case 'SET_ANIMATION_CONFIG':
+        postToPage('SET_ANIMATION_CONFIG', payload);
+        if (payload) {
+          if (payload.style) chrome.storage.local.set({ animationStyle: payload.style });
+          if (payload.duration) chrome.storage.local.set({ animationDuration: payload.duration });
         }
         sendResponse({ ok: true });
         break;
@@ -272,6 +295,41 @@
         #meetmorph-hud .hud-snap-icon.flash {
           transform: scale(1.4);
           filter: drop-shadow(0 0 6px #38bdf8);
+        }
+        @keyframes hudVanishPulse {
+          0% { transform: scale(1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+          35% { transform: scale(1.08); box-shadow: 0 0 35px rgba(168, 85, 247, 0.85), 0 0 15px rgba(56, 189, 248, 0.65); }
+          100% { transform: scale(1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        }
+        @keyframes hudReturnPulse {
+          0% { transform: scale(1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+          35% { transform: scale(1.08); box-shadow: 0 0 35px rgba(16, 185, 129, 0.85), 0 0 15px rgba(56, 189, 248, 0.65); }
+          100% { transform: scale(1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        }
+        #meetmorph-hud.anim-vanish {
+          animation: hudVanishPulse 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #meetmorph-hud.anim-return {
+          animation: hudReturnPulse 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #meetmorph-screen-flash {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          pointer-events: none;
+          z-index: 2147483645;
+          opacity: 0;
+          transition: opacity 0.5s ease-out;
+        }
+        #meetmorph-screen-flash.flash-vanish {
+          opacity: 1;
+          box-shadow: inset 0 0 120px rgba(168, 85, 247, 0.45), inset 0 0 50px rgba(56, 189, 248, 0.35);
+        }
+        #meetmorph-screen-flash.flash-return {
+          opacity: 1;
+          box-shadow: inset 0 0 120px rgba(16, 185, 129, 0.45), inset 0 0 50px rgba(56, 189, 248, 0.35);
         }
         #meetmorph-hud .hud-collapse-btn {
           background: none;
@@ -464,6 +522,11 @@
 
     if (!dot || !text || !toggleBtn) return;
 
+    // Trigger visual pulse when transition state changes
+    if (latestStatus && latestStatus.isVanished !== status.isVanished) {
+      triggerVanishAnimation(status.isVanished);
+    }
+
     if (status.snapEnabled) {
       snapIcon.classList.add('active');
       snapIcon.title = status.snapListening
@@ -515,6 +578,28 @@
       const num = document.getElementById('meetmorph-countdown-num');
       if (num) num.textContent = secondsRemaining;
     }
+  }
+
+  function triggerVanishAnimation(isVanished) {
+    if (floatingHudElement) {
+      floatingHudElement.classList.remove('anim-vanish', 'anim-return');
+      void floatingHudElement.offsetWidth; // trigger reflow
+      floatingHudElement.classList.add(isVanished ? 'anim-vanish' : 'anim-return');
+      setTimeout(() => {
+        if (floatingHudElement) floatingHudElement.classList.remove('anim-vanish', 'anim-return');
+      }, 600);
+    }
+
+    let flash = document.getElementById('meetmorph-screen-flash');
+    if (!flash) {
+      flash = document.createElement('div');
+      flash.id = 'meetmorph-screen-flash';
+      document.body.appendChild(flash);
+    }
+    flash.className = isVanished ? 'flash-vanish' : 'flash-return';
+    setTimeout(() => {
+      if (flash) flash.className = '';
+    }, 550);
   }
 
   function flashFloatingSnap(showToast = true) {

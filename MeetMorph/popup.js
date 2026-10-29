@@ -36,6 +36,9 @@
   let snapSensitivityVal;
   let snapMeterBar;
   let snapIndicator;
+  let animStyleSelect;
+  let animDurationSlider;
+  let animDurationVal;
   let diagToggleHeader;
   let diagBody;
   let diagToggleIcon;
@@ -87,6 +90,10 @@
     snapSensitivityVal = document.getElementById('snapSensitivityVal');
     snapMeterBar = document.getElementById('snapMeterBar');
     snapIndicator = document.getElementById('snapIndicator');
+
+    animStyleSelect = document.getElementById('animStyleSelect');
+    animDurationSlider = document.getElementById('animDurationSlider');
+    animDurationVal = document.getElementById('animDurationVal');
 
     diagToggleHeader = document.getElementById('diagToggleHeader');
     diagBody = document.getElementById('diagBody');
@@ -316,6 +323,35 @@
       });
     }
 
+    // Animation Style Selection
+    if (animStyleSelect) {
+      animStyleSelect.addEventListener('change', (e) => {
+        const style = e.target.value;
+        sendTabMessage({
+          action: 'SET_ANIMATION_CONFIG',
+          payload: { style }
+        });
+        try {
+          chrome.storage.local.set({ animationStyle: style });
+        } catch {}
+      });
+    }
+
+    // Animation Duration Slider
+    if (animDurationSlider) {
+      animDurationSlider.addEventListener('input', (e) => {
+        const duration = Number(e.target.value);
+        if (animDurationVal) animDurationVal.textContent = `${duration}ms`;
+        sendTabMessage({
+          action: 'SET_ANIMATION_CONFIG',
+          payload: { duration }
+        });
+        try {
+          chrome.storage.local.set({ animationDuration: duration });
+        } catch {}
+      });
+    }
+
     // Diagnostics collapsible toggle
     function toggleDiagnostics() {
       if (!diagBody) return;
@@ -375,7 +411,14 @@
 
   function loadSavedSettings() {
     try {
-      chrome.storage.local.get(['snapEnabled', 'snapSensitivity', 'savedBackgroundDataUrl', 'backgroundMetadata'], (data) => {
+      chrome.storage.local.get([
+        'snapEnabled',
+        'snapSensitivity',
+        'animationStyle',
+        'animationDuration',
+        'savedBackgroundDataUrl',
+        'backgroundMetadata'
+      ], (data) => {
         if (chrome.runtime.lastError || !data) return;
         const snapEnabled = data.snapEnabled !== undefined ? !!data.snapEnabled : true;
         if (snapToggle) {
@@ -386,6 +429,14 @@
         if (snapSensitivitySlider) {
           snapSensitivitySlider.value = sensitivity;
           if (snapSensitivityVal) snapSensitivityVal.textContent = sensitivity;
+        }
+        if (data.animationStyle && animStyleSelect) {
+          animStyleSelect.value = data.animationStyle;
+        }
+        const duration = data.animationDuration !== undefined ? Number(data.animationDuration) : 480;
+        if (animDurationSlider) {
+          animDurationSlider.value = duration;
+          if (animDurationVal) animDurationVal.textContent = `${duration}ms`;
         }
         if (data.savedBackgroundDataUrl) {
           showCapturedBackground(data.savedBackgroundDataUrl, data.backgroundMetadata);

@@ -63,10 +63,24 @@ function run() {
   engine.toggle();
   assert.strictEqual(engine.isVanished, false, 'Toggle should flip back to visible');
 
-  // 5. Diagnostics reporting
+  // 5. Diagnostics reporting & Transition Styles
   const diag = engine.getDiagnosticInfo();
   assert.strictEqual(diag.isVanished, false);
   assert.strictEqual(diag.hasBackground, true);
+  assert.strictEqual(diag.transitionStyle, 'magic', 'Default transition style should be magic');
+
+  // Test Animation style and duration setter
+  engine.setTransitionStyle('shockwave');
+  assert.strictEqual(engine.transitionStyle, 'shockwave', 'Transition style should update to shockwave');
+  engine.setTransitionStyle('invalid_style');
+  assert.strictEqual(engine.transitionStyle, 'shockwave', 'Invalid transition style must be ignored');
+
+  engine.setTransitionDuration(600);
+  assert.strictEqual(engine.transitionDuration, 600, 'Transition duration should update to 600ms');
+
+  // Test transition particle generation
+  engine._initParticles();
+  assert(engine.particles.length > 0, 'Particles array must be populated for magic transition');
 
   // 6. Stop and cleanup
   engine.stop();

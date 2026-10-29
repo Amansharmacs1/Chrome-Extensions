@@ -387,6 +387,14 @@
             }
             break;
 
+          case 'SET_ANIMATION_CONFIG':
+            if (payload) {
+              if (payload.style) this.videoEngine.setTransitionStyle(payload.style);
+              if (payload.duration) this.videoEngine.setTransitionDuration(payload.duration);
+              this._notifyStatus();
+            }
+            break;
+
           case 'STOP':
             this.stop();
             break;
@@ -453,6 +461,8 @@
         snapEnabled: this.snapDetector.enabled,
         snapSensitivity: this.snapDetector.sensitivity,
         snapListening: this.snapDetector.isListening,
+        transitionStyle: diag.transitionStyle,
+        transitionDuration: diag.transitionDuration,
         lastError: diag.lastError,
         diagnostics: this.diagnosticHistory.slice(-5)
       };
