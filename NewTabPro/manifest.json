@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "NewTab Pro — Personal Productivity Dashboard",
+  "version": "1.0.0",
+  "description": "Your browser. Your space. Your flow. A fast, private, customizable new-tab dashboard with quick links, tasks, search, notes, and themes.",
+  "icons": {
+    "16": "assets/icon16.png",
+    "32": "assets/icon32.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "permissions": [
+    "storage"
+  ]
+}

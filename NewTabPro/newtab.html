@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="midnight">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NewTab Pro — Your browser. Your space. Your flow. Premium productivity dashboard.">
+  <title>New Tab</title>
+  <link rel="stylesheet" href="newtab.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icon32.png">
+</head>
+<body>
+  <!-- Dynamic Background Surface & Weather Atmosphere Overlay -->
+  <div id="dashboardBackground" class="dashboard-bg" aria-hidden="true">
+    <div id="weatherAtmosphereOverlay" class="weather-atmosphere-layer" aria-hidden="true"></div>
+  </div>
+
+  <!-- Top Utility Bar -->
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <!-- Weather Widget Container -->
+      <section id="widget-weather" class="widget-weather widget-hidden" aria-label="Weather">
+        <div class="weather-pill" id="weatherPill" tabindex="0" role="region" aria-live="polite">
+          <span class="weather-icon" id="weatherIcon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </span>
+          <span class="weather-temp" id="weatherTemp">--°</span>
+          <span class="weather-city" id="weatherCity">Weather</span>
+        </div>
+      </section>
+
+      <!-- Quick Template Pill Switcher -->
+      <button id="quickTemplateBtn" class="pill-btn" aria-label="Choose Dashboard Template" title="Choose Workspace Template">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+        <span id="activeTemplateBadge">Templates</span>
+      </button>
+    </div>
+
+    <div class="top-bar-right">
+      <div class="keyboard-hint" aria-hidden="true">
+        <kbd>/</kbd> <span>Search</span>
+      </div>
+      <button id="openSettingsBtn" class="icon-button" aria-label="Dashboard Settings" title="Dashboard Settings (,)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Dashboard Container -->
+  <main class="dashboard-main">
+    <!-- Hero: Clock & Greeting -->
+    <section id="widget-clock" class="widget-clock hero-section" aria-label="Clock and Greeting">
+      <div class="clock-wrap">
+        <h1 class="clock-display" id="clockDisplay">12:00</h1>
+        <span class="clock-period" id="clockPeriod">PM</span>
+      </div>
+      <div class="date-display" id="dateDisplay">Thursday, October 29, 2026</div>
+      <div class="greeting-display" id="greetingDisplay">Good afternoon</div>
+    </section>
+
+    <!-- Search Section -->
+    <section id="widget-search" class="widget-search search-section" aria-label="Search">
+      <form class="search-form" id="searchForm" role="search">
+        <label for="searchInput" class="sr-only">Search the web or type a URL</label>
+        <div class="search-box">
+          <span class="search-engine-icon" id="searchEngineIcon" aria-hidden="true" title="Default Search Engine">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </span>
+          <input
+            type="text"
+            id="searchInput"
+            class="search-input"
+            placeholder="Search Google or type a URL..."
+            autocomplete="off"
+            spellcheck="false"
+          >
+          <button type="button" id="searchClearBtn" class="search-clear-btn" aria-label="Clear search input" hidden>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+          <button type="submit" id="searchSubmitBtn" class="search-submit-btn" aria-label="Search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Daily Inspiration / Quote Widget -->
+    <section id="widget-quote" class="widget-quote quote-banner" aria-label="Daily Quote">
+      <div class="quote-content">
+        <span class="quote-mark" aria-hidden="true">“</span>
+        <blockquote class="quote-text" id="quoteText">The secret of getting ahead is getting started.</blockquote>
+        <cite class="quote-author" id="quoteAuthor">— Mark Twain</cite>
+      </div>
+      <div class="quote-actions">
+        <button id="copyQuoteBtn" class="quote-action-btn" title="Copy quote to clipboard" aria-label="Copy quote">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        </button>
+        <button id="shuffleQuoteBtn" class="quote-action-btn" title="Next inspirational quote" aria-label="Shuffle quote">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline><line x1="15" y1="15" x2="21" y2="21"></line><line x1="4" y1="4" x2="9" y2="9"></line></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- Quick Tools / Browser Launcher Bar -->
+    <section id="widget-quickTools" class="widget-quick-tools" aria-label="Browser Utilities">
+      <div class="quick-tools-bar">
+        <button class="tool-pill" data-url="chrome://downloads" title="Open Chrome Downloads">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          <span>Downloads</span>
+        </button>
+        <button class="tool-pill" data-url="chrome://bookmarks" title="Open Chrome Bookmarks">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+          <span>Bookmarks</span>
+        </button>
+        <button class="tool-pill" data-url="chrome://history" title="Open Chrome History">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+          <span>History</span>
+        </button>
+        <button class="tool-pill" data-url="chrome://extensions" title="Manage Chrome Extensions">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>
+          <span>Extensions</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Quick Links / Shortcuts Section -->
+    <section id="widget-shortcuts" class="widget-shortcuts panel-section" aria-label="Quick Links">
+      <div class="section-header">
+        <h2 class="section-title">Quick Links</h2>
+        <button id="addShortcutBtn" class="action-btn-sm" aria-label="Add new shortcut">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <span>Add Shortcut</span>
+        </button>
+      </div>
+      <div class="shortcuts-grid" id="shortcutsGrid" role="list">
+        <!-- Rendered via JS -->
+      </div>
+      <div class="empty-state shortcuts-empty" id="shortcutsEmpty" hidden>
+        <p>No shortcuts yet. Click "Add Shortcut" to pin your favorite sites.</p>
+      </div>
+    </section>
+
+    <!-- Productivity Panels Grid: Tasks, Habits, Pomodoro, Scratchpad, Calculator, World Clock -->
+    <div class="productivity-grid" id="productivityGrid">
+      <!-- Left Column: Tasks & Habits -->
+      <div class="productivity-main-col">
+        <!-- Tasks Widget -->
+        <section id="widget-tasks" class="widget-tasks card-panel" aria-label="Today's Tasks">
+          <div class="card-header">
+            <div class="card-title-wrap">
+              <h2 class="card-title">Today's Tasks</h2>
+              <span class="badge" id="tasksCountBadge">0</span>
+            </div>
+            <div class="task-filters" role="tablist" aria-label="Task Filter">
+              <button class="filter-tab active" data-filter="all" role="tab" aria-selected="true">All</button>
+              <button class="filter-tab" data-filter="pending" role="tab" aria-selected="false">Pending</button>
+              <button class="filter-tab" data-filter="completed" role="tab" aria-selected="false">Done</button>
+            </div>
+          </div>
+
+          <form class="task-add-form" id="taskAddForm">
+            <label for="taskInput" class="sr-only">New task title</label>
+            <input
+              type="text"
+              id="taskInput"
+              class="task-input"
+              placeholder="Add a new task for today..."
+              autocomplete="off"
+            >
+            <button type="submit" class="task-add-btn" aria-label="Add task">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+          </form>
+
+          <ul class="tasks-list" id="tasksList" role="list">
+            <!-- Rendered via JS -->
+          </ul>
+          <div class="empty-state tasks-empty" id="tasksEmpty" hidden>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <p id="tasksEmptyText">All caught up! Have a productive day.</p>
+          </div>
+        </section>
+
+        <!-- Habits Tracker Widget -->
+        <section id="widget-habits" class="widget-habits card-panel widget-hidden" aria-label="Habit Tracker">
+          <div class="card-header">
+            <div class="card-title-wrap">
+              <h2 class="card-title">Daily Habits</h2>
+              <span class="badge" id="habitsStreakSummary">Streaks</span>
+            </div>
+            <button id="addHabitBtn" class="action-btn-sm" aria-label="Add habit">+ New Habit</button>
+          </div>
+          <ul class="habits-list" id="habitsList" role="list">
+            <!-- Rendered via JS -->
+          </ul>
+        </section>
+      </div>
+
+      <!-- Right Column: Focus Timer, Progress, Scratchpad, Calculator, World Clock -->
+      <div class="productivity-side-col">
+        <!-- Focus Timer (Pomodoro) Widget -->
+        <section id="widget-focusTimer" class="widget-focus-timer card-panel widget-hidden" aria-label="Focus Timer">
+          <div class="card-header">
+            <div class="card-title-wrap">
+              <h2 class="card-title">Focus Timer</h2>
+              <span class="badge" id="pomodoroSessionsBadge">0 Sessions</span>
+            </div>
+            <div class="timer-mode-pills" role="tablist">
+              <button class="timer-mode-btn active" data-mode="focus">Focus</button>
+              <button class="timer-mode-btn" data-mode="shortBreak">Short</button>
+              <button class="timer-mode-btn" data-mode="longBreak">Long</button>
+            </div>
+          </div>
+          <div class="timer-display-wrap">
+            <div class="timer-time-display" id="timerTimeDisplay">25:00</div>
+            <div class="timer-progress-bar">
+              <div class="timer-progress-fill" id="timerProgressFill" style="width: 0%"></div>
+            </div>
+          </div>
+          <div class="timer-controls">
+            <button id="timerToggleBtn" class="btn btn-primary btn-sm">Start Focus</button>
+            <button id="timerResetBtn" class="btn btn-secondary btn-sm">Reset</button>
+          </div>
+        </section>
+
+        <!-- Progress Ring Widget -->
+        <section id="widget-progress" class="widget-progress card-panel" aria-label="Daily Progress">
+          <div class="card-header">
+            <h2 class="card-title">Daily Progress</h2>
+          </div>
+          <div class="progress-ring-container">
+            <svg class="progress-ring" width="130" height="130" viewBox="0 0 120 120">
+              <circle
+                class="progress-ring-circle-bg"
+                stroke="currentColor"
+                stroke-width="8"
+                fill="transparent"
+                r="48"
+                cx="60"
+                cy="60"
+              />
+              <circle
+                id="progressRingCircle"
+                class="progress-ring-circle"
+                stroke="currentColor"
+                stroke-width="8"
+                stroke-linecap="round"
+                fill="transparent"
+                r="48"
+                cx="60"
+                cy="60"
+              />
+            </svg>
+            <div class="progress-ring-text">
+              <span class="progress-percent" id="progressPercent">0%</span>
+              <span class="progress-label">Done</span>
+            </div>
+          </div>
+          <p class="progress-subtitle" id="progressSubtitle">0 of 0 tasks completed</p>
+        </section>
+
+        <!-- World Clock Widget -->
+        <section id="widget-worldClock" class="widget-world-clock card-panel widget-hidden" aria-label="World Clock">
+          <div class="card-header">
+            <h2 class="card-title">World Clock</h2>
+          </div>
+          <div class="world-clock-list" id="worldClockList">
+            <!-- Rendered in JS -->
+          </div>
+        </section>
+
+        <!-- Quick Calculator Widget -->
+        <section id="widget-calculator" class="widget-calculator card-panel widget-hidden" aria-label="Quick Calculator">
+          <div class="card-header">
+            <h2 class="card-title">Quick Calculator</h2>
+            <button id="calcClearBtn" class="text-button">Clear</button>
+          </div>
+          <div class="calc-display" id="calcDisplay">0</div>
+          <div class="calc-keypad" id="calcKeypad">
+            <button class="calc-key op-key" data-calc="clear">C</button>
+            <button class="calc-key op-key" data-calc="sign">±</button>
+            <button class="calc-key op-key" data-calc="percent">%</button>
+            <button class="calc-key op-key highlight" data-calc="÷">÷</button>
+            <button class="calc-key num-key" data-calc="7">7</button>
+            <button class="calc-key num-key" data-calc="8">8</button>
+            <button class="calc-key num-key" data-calc="9">9</button>
+            <button class="calc-key op-key highlight" data-calc="×">×</button>
+            <button class="calc-key num-key" data-calc="4">4</button>
+            <button class="calc-key num-key" data-calc="5">5</button>
+            <button class="calc-key num-key" data-calc="6">6</button>
+            <button class="calc-key op-key highlight" data-calc="-">-</button>
+            <button class="calc-key num-key" data-calc="1">1</button>
+            <button class="calc-key num-key" data-calc="2">2</button>
+            <button class="calc-key num-key" data-calc="3">3</button>
+            <button class="calc-key op-key highlight" data-calc="+">+</button>
+            <button class="calc-key num-key wide" data-calc="0">0</button>
+            <button class="calc-key num-key" data-calc=".">.</button>
+            <button class="calc-key eq-key" data-calc="=">=</button>
+          </div>
+        </section>
+
+        <!-- Scratchpad Widget -->
+        <section id="widget-scratchpad" class="widget-scratchpad card-panel" aria-label="Quick Scratchpad">
+          <div class="card-header">
+            <div class="card-title-wrap">
+              <h2 class="card-title">Scratchpad</h2>
+              <span class="status-indicator" id="scratchpadStatus">Saved</span>
+            </div>
+            <button id="clearScratchpadBtn" class="text-button" title="Clear Scratchpad">Clear</button>
+          </div>
+          <div class="scratchpad-body">
+            <label for="scratchpadTextarea" class="sr-only">Scratchpad notes</label>
+            <textarea
+              id="scratchpadTextarea"
+              class="scratchpad-textarea"
+              placeholder="Quick thoughts, clipboard notes, links..."
+              spellcheck="false"
+            ></textarea>
+          </div>
+          <div class="scratchpad-footer">
+            <span id="scratchpadStats">0 characters</span>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Shortcut Add / Edit Modal -->
+  <dialog id="shortcutModal" class="modal-dialog" aria-labelledby="shortcutModalTitle">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="shortcutModalTitle" class="modal-title">Add Shortcut</h3>
+        <button type="button" class="modal-close-btn" id="closeShortcutModalBtn" aria-label="Close dialog">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <form id="shortcutForm" class="modal-form">
+        <input type="hidden" id="shortcutEditId" value="">
+        <div class="form-group">
+          <label for="shortcutTitleInput">Name</label>
+          <input type="text" id="shortcutTitleInput" class="form-input" placeholder="e.g. GitHub" required>
+        </div>
+        <div class="form-group">
+          <label for="shortcutUrlInput">Web URL</label>
+          <input type="text" id="shortcutUrlInput" class="form-input" placeholder="https://example.com" required>
+        </div>
+        <div class="form-group">
+          <label>Badge Color</label>
+          <div class="color-palette-picker" id="colorPickerList" role="radiogroup" aria-label="Select badge color">
+            <!-- Rendered in JS -->
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="cancelShortcutModalBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="saveShortcutBtn">Save Shortcut</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Add Habit Modal -->
+  <dialog id="habitModal" class="modal-dialog" aria-labelledby="habitModalTitle">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="habitModalTitle" class="modal-title">Add Daily Habit</h3>
+        <button type="button" class="modal-close-btn" id="closeHabitModalBtn" aria-label="Close dialog">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <form id="habitForm" class="modal-form">
+        <div class="form-group">
+          <label for="habitTitleInput">Habit Goal</label>
+          <input type="text" id="habitTitleInput" class="form-input" placeholder="e.g. Read 20 mins, Drink 2L water" required>
+        </div>
+        <div class="form-group">
+          <label for="habitEmojiInput">Icon Emoji</label>
+          <input type="text" id="habitEmojiInput" class="form-input form-input-sm" value="🔥" maxlength="4">
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="cancelHabitModalBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="saveHabitBtn">Create Habit</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Settings & Templates Modal -->
+  <dialog id="settingsModal" class="modal-dialog modal-large" aria-labelledby="settingsModalTitle">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <h3 id="settingsModalTitle" class="modal-title">Settings & Customization</h3>
+          <p class="modal-subtitle">Personalize your NewTab Pro experience</p>
+        </div>
+        <button type="button" class="modal-close-btn" id="closeSettingsModalBtn" aria-label="Close settings">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="settings-body">
+        <!-- Settings Tabs Navigation -->
+        <nav class="settings-tabs" role="tablist" aria-label="Settings Categories">
+          <button class="settings-tab-btn active" data-tab="tab-templates" role="tab" aria-selected="true">Templates</button>
+          <button class="settings-tab-btn" data-tab="tab-general" role="tab" aria-selected="false">General</button>
+          <button class="settings-tab-btn" data-tab="tab-appearance" role="tab" aria-selected="false">Appearance</button>
+          <button class="settings-tab-btn" data-tab="tab-widgets" role="tab" aria-selected="false">Widgets</button>
+          <button class="settings-tab-btn" data-tab="tab-weather" role="tab" aria-selected="false">Weather</button>
+          <button class="settings-tab-btn" data-tab="tab-data" role="tab" aria-selected="false">Data & Storage</button>
+          <button class="settings-tab-btn" data-tab="tab-about" role="tab" aria-selected="false">About</button>
+        </nav>
+
+        <!-- Tab Contents -->
+        <div class="settings-panels">
+          <!-- 0. Templates Tab -->
+          <div id="tab-templates" class="settings-panel active" role="tabpanel">
+            <h4 class="panel-heading">Workspace Templates</h4>
+            <p class="setting-desc mb-3">Instantly configure themes, layout, and widgets tailored for your workflow.</p>
+            <div class="template-cards-grid" id="templateCardsGrid">
+              <!-- Rendered in JS -->
+            </div>
+            <div class="template-options-row">
+              <label class="checkbox-label">
+                <input type="checkbox" id="tplReplaceShortcutsCheck">
+                <span>Also replace shortcuts with template curated websites</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- 1. General Tab -->
+          <div id="tab-general" class="settings-panel" role="tabpanel" hidden>
+            <h4 class="panel-heading">General Preferences</h4>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <label for="prefUserName" class="setting-label">Display Name</label>
+                <p class="setting-desc">Shown in the greeting (leave blank for standard greeting)</p>
+              </div>
+              <input type="text" id="prefUserName" class="form-input form-input-sm" placeholder="e.g. Alex">
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <label for="prefTimeFormat" class="setting-label">Time Format</label>
+                <p class="setting-desc">Choose 12-hour (AM/PM) or 24-hour military format</p>
+              </div>
+              <select id="prefTimeFormat" class="form-select">
+                <option value="12h">12-Hour (e.g. 2:30 PM)</option>
+                <option value="24h">24-Hour (e.g. 14:30)</option>
+              </select>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <label for="prefShowSeconds" class="setting-label">Display Seconds</label>
+                <p class="setting-desc">Show running seconds on the clock</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="prefShowSeconds">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <label for="prefSearchEngine" class="setting-label">Default Search Engine</label>
+                <p class="setting-desc">Validated search provider for web queries</p>
+              </div>
+              <select id="prefSearchEngine" class="form-select">
+                <option value="google">Google</option>
+                <option value="duckduckgo">DuckDuckGo</option>
+                <option value="bing">Bing</option>
+                <option value="brave">Brave Search</option>
+              </select>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <label for="prefOpenInNewTab" class="setting-label">Open Shortcuts in New Tab</label>
+                <p class="setting-desc">When enabled, clicking a shortcut opens a fresh tab instead of navigating current tab</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="prefOpenInNewTab">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- 2. Appearance Tab -->
+          <div id="tab-appearance" class="settings-panel" role="tabpanel" hidden>
+            <h4 class="panel-heading">Theme & Colors</h4>
+
+            <div class="setting-item vertical">
+              <span class="setting-label">Theme Preset</span>
+              <div class="theme-cards-grid" id="themeCardsList">
+                <!-- Rendered in JS -->
+              </div>
+            </div>
+
+            <h4 class="panel-heading mt-4">Background Surface</h4>
+            <div class="setting-item vertical">
+              <span class="setting-label">Preset Gradients</span>
+              <div class="bg-presets-grid" id="bgPresetsList">
+                <!-- Rendered in JS -->
+              </div>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <label for="prefCustomBg" class="setting-label">Custom Background CSS</label>
+                <p class="setting-desc">Optional CSS color or gradient (e.g. #090d16 or linear-gradient(...))</p>
+              </div>
+              <input type="text" id="prefCustomBg" class="form-input form-input-sm" placeholder="e.g. #0a0e17">
+            </div>
+          </div>
+
+          <!-- 3. Widgets Tab -->
+          <div id="tab-widgets" class="settings-panel" role="tabpanel" hidden>
+            <h4 class="panel-heading">Dashboard Widgets</h4>
+            <p class="setting-desc mb-3">Enable, disable, or reorder any of the 13 dashboard widgets.</p>
+            <div class="widget-config-list" id="widgetConfigList">
+              <!-- Rendered in JS -->
+            </div>
+          </div>
+
+          <!-- 4. Weather Tab -->
+          <div id="tab-weather" class="settings-panel" role="tabpanel" hidden>
+            <h4 class="panel-heading">Weather Preferences</h4>
+            <p class="setting-desc mb-3">Powered by Open-Meteo. No API keys required, zero telemetry, fully private.</p>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <label for="weatherEnabledToggle" class="setting-label">Enable Weather Widget</label>
+                <p class="setting-desc">Display current temperature and conditions in the top bar</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="weatherEnabledToggle">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <label for="weatherCityInput" class="setting-label">City Name</label>
+                <p class="setting-desc">Search for your city manually</p>
+              </div>
+              <div class="input-with-btn">
+                <input type="text" id="weatherCityInput" class="form-input form-input-sm" placeholder="e.g. London, Tokyo, New York">
+                <button type="button" id="searchCityBtn" class="btn btn-secondary btn-sm">Lookup</button>
+              </div>
+            </div>
+            <div id="weatherLookupStatus" class="lookup-status" aria-live="polite"></div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <label for="weatherUnitSelect" class="setting-label">Temperature Unit</label>
+                <p class="setting-desc">Choose Celsius or Fahrenheit</p>
+              </div>
+              <select id="weatherUnitSelect" class="form-select">
+                <option value="c">Celsius (°C)</option>
+                <option value="f">Fahrenheit (°F)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 5. Data & Storage Tab -->
+          <div id="tab-data" class="settings-panel" role="tabpanel" hidden>
+            <h4 class="panel-heading">Data Management & Backup</h4>
+            <p class="setting-desc mb-3">All your shortcuts, tasks, and settings are stored locally on this computer.</p>
+
+            <div class="data-actions-card">
+              <div class="data-action-row">
+                <div>
+                  <strong>Export Dashboard Configuration</strong>
+                  <p class="setting-desc">Download your preferences, shortcuts, and tasks as a JSON file.</p>
+                </div>
+                <button type="button" id="exportDataBtn" class="btn btn-secondary btn-sm">Export JSON</button>
+              </div>
+
+              <hr class="divider">
+
+              <div class="data-action-row">
+                <div>
+                  <strong>Import Dashboard Configuration</strong>
+                  <p class="setting-desc">Restore settings from a previously exported JSON file.</p>
+                </div>
+                <label class="btn btn-secondary btn-sm file-upload-btn">
+                  Import JSON
+                  <input type="file" id="importDataInput" accept=".json" hidden>
+                </label>
+              </div>
+
+              <hr class="divider">
+
+              <div class="data-action-row">
+                <div>
+                  <strong class="text-danger">Reset to Factory Defaults</strong>
+                  <p class="setting-desc">Restores the default shortcuts, theme, widgets, and clears scratchpad.</p>
+                </div>
+                <button type="button" id="resetDefaultsBtn" class="btn btn-danger btn-sm">Reset All</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. About Tab -->
+          <div id="tab-about" class="settings-panel" role="tabpanel" hidden>
+            <div class="about-hero">
+              <div class="about-logo">
+                <img src="assets/icon48.png" alt="NewTab Pro Logo" width="48" height="48">
+              </div>
+              <h4>NewTab Pro</h4>
+              <span class="about-badge">Version 1.1.0</span>
+              <p class="about-tagline">Your browser. Your space. Your flow.</p>
+            </div>
+
+            <div class="about-details">
+              <div class="about-row">
+                <strong>Platform</strong>
+                <span>Google Chrome (Manifest V3)</span>
+              </div>
+              <div class="about-row">
+                <strong>Privacy Policy</strong>
+                <span>100% Local-First. Zero telemetry. No tracking.</span>
+              </div>
+              <div class="about-row">
+                <strong>License</strong>
+                <span>MIT License</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Live Toast Feedback -->
+  <div id="toastMessage" class="toast-message" role="status" aria-live="polite" hidden></div>
+
+  <!-- Main Controller Entry Point -->
+  <script type="module" src="newtab.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "newtab-pro",
+  "version": "1.0.0",
+  "description": "NewTab Pro — Your browser. Your space. Your flow. Premium customizable new-tab dashboard for Google Chrome.",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/run-all.js"
+  },
+  "keywords": [
+    "chrome-extension",
+    "new-tab",
+    "dashboard",
+    "productivity",
+    "shortcuts",
+    "tasks",
+    "scratchpad",
+    "manifest-v3",
+    "local-first"
+  ],
+  "author": "Antigravity Engineering",
+  "license": "MIT"
+}
