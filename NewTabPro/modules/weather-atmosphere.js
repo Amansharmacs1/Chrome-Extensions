@@ -10,7 +10,7 @@ export const ATMOSPHERE_CONDITIONS = {
     label: 'Clear & Sunny',
     css: 'radial-gradient(ellipse at 50% -10%, #38bdf8 0%, #0284c7 35%, #0369a1 70%, #0c4a6e 100%)',
     accent: '#F59E0B',
-    accentCyan: '#38BDF8',
+    accentCyan: '#FDE047',
     fxClass: 'fx-sunbeam'
   },
   clearNight: {
@@ -25,24 +25,24 @@ export const ATMOSPHERE_CONDITIONS = {
     id: 'cloudy-day',
     label: 'Partly Cloudy',
     css: 'linear-gradient(180deg, #38bdf8 0%, #64748b 45%, #334155 85%, #1e293b 100%)',
-    accent: '#06B6D4',
-    accentCyan: '#94A3B8',
+    accent: '#0284C7',
+    accentCyan: '#FDE047',
     fxClass: 'fx-clouds'
   },
   cloudyNight: {
     id: 'cloudy-night',
     label: 'Cloudy Night',
     css: 'linear-gradient(180deg, #1e293b 0%, #0f172a 60%, #020617 100%)',
-    accent: '#64748B',
-    accentCyan: '#38BDF8',
+    accent: '#38BDF8',
+    accentCyan: '#93C5FD',
     fxClass: 'fx-clouds-night'
   },
   overcast: {
     id: 'overcast',
     label: 'Overcast & Gloomy',
     css: 'linear-gradient(180deg, #475569 0%, #334155 50%, #1e293b 100%)',
-    accent: '#94A3B8',
-    accentCyan: '#64748B',
+    accent: '#38BDF8',
+    accentCyan: '#E2E8F0',
     fxClass: 'fx-overcast'
   },
   rain: {
@@ -50,14 +50,14 @@ export const ATMOSPHERE_CONDITIONS = {
     label: 'Rainy Atmosphere',
     css: 'radial-gradient(circle at 50% 10%, #0369a1 0%, #0f172a 50%, #020617 100%)',
     accent: '#38BDF8',
-    accentCyan: '#06B6D4',
+    accentCyan: '#67E8F9',
     fxClass: 'fx-rain'
   },
   thunderstorm: {
     id: 'thunderstorm',
     label: 'Thunderstorm & Tempest',
     css: 'radial-gradient(circle at 60% 15%, #4338ca 0%, #1e1b4b 35%, #090d16 85%)',
-    accent: '#A855F7',
+    accent: '#C084FC',
     accentCyan: '#38BDF8',
     fxClass: 'fx-storm'
   },
@@ -65,7 +65,7 @@ export const ATMOSPHERE_CONDITIONS = {
     id: 'snow',
     label: 'Frost & Snowfall',
     css: 'linear-gradient(180deg, #1e293b 0%, #334155 35%, #60a5fa 75%, #dbeafe 100%)',
-    accent: '#93C5FD',
+    accent: '#38BDF8',
     accentCyan: '#E0F2FE',
     fxClass: 'fx-snow'
   },
@@ -73,8 +73,8 @@ export const ATMOSPHERE_CONDITIONS = {
     id: 'fog',
     label: 'Misty Fog',
     css: 'linear-gradient(180deg, #334155 0%, #475569 45%, #64748b 100%)',
-    accent: '#CBD5E1',
-    accentCyan: '#94A3B8',
+    accent: '#38BDF8',
+    accentCyan: '#F8FAFC',
     fxClass: 'fx-fog'
   }
 };

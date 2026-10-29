@@ -387,7 +387,7 @@ function renderShortcuts() {
     const badge = document.createElement('div');
     badge.className = 'shortcut-badge';
     if (shortcut.color) {
-      badge.style.boxShadow = `0 4px 14px ${shortcut.color}33`;
+      badge.style.boxShadow = `0 4px 16px ${shortcut.color}40, 0 2px 6px rgba(0, 0, 0, 0.25)`;
     }
 
     const faviconUrl = getFaviconUrl(shortcut.url, 64);
@@ -416,11 +416,13 @@ function renderShortcuts() {
 
       img.style.display = 'none';
       badge.style.backgroundColor = shortcut.color || '#3B82F6';
+      badge.classList.add('has-fallback-initials');
       fallbackInitials.style.display = 'block';
     });
 
     img.addEventListener('load', () => {
       img.style.display = 'block';
+      badge.classList.remove('has-fallback-initials');
       fallbackInitials.style.display = 'none';
     });
 

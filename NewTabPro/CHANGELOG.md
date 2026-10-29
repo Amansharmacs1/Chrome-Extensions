@@ -6,6 +6,23 @@ The project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
+## [1.2.1] - 2026-10-29
+
+### Added & Improved
+- **Evenly Spaced Shortcuts Board:**
+  - Transitioned `.shortcuts-grid` to fluid flex distribution with `justify-content: space-evenly`, balancing space across the entire board (eliminates lopsided left clustering and empty right voids).
+  - Perfect responsive auto-centering and balanced wrapping across all desktop, tablet, and mobile screens.
+- **Universal Background Visibility & Contrast System:**
+  - Elevated `.shortcut-badge` with a crisp, high-contrast base (`#ffffff`) ensuring all dark, transparent, and colorful website favicons (e.g., GitHub, X, Apple, Notion, Wikipedia, YouTube) are 100% visible against any background.
+  - Added subtle brand-colored ambient halo (`0 4px 16px ${shortcut.color}40`) around each badge.
+  - Enhanced `.shortcut-fallback-initials` and `.shortcut-title` with drop shadows for legibility on all color accents.
+  - Increased theme panel opacity (`--surface-panel` 0.85-0.94) and tuned `--text-secondary` and `--text-muted` values to comfortably exceed WCAG AA contrast standards.
+  - Added dynamic readability scrim to `.dashboard-bg` preventing text wash-out over sunny, snow, and bright weather backgrounds.
+  - Corrected weather condition accent and cyan variables in `modules/weather-atmosphere.js` to ensure clock AM/PM, buttons, and icons never blend into atmospheric skies.
+  - Added high-contrast Light Theme keypad and display styling for the Quick Calculator.
+
+---
+
 ## [1.2.0] - 2026-10-29
 
 ### Added
