@@ -377,13 +377,15 @@
     try {
       chrome.storage.local.get(['snapEnabled', 'snapSensitivity', 'savedBackgroundDataUrl', 'backgroundMetadata'], (data) => {
         if (chrome.runtime.lastError || !data) return;
-        if (data.snapEnabled && snapToggle) {
-          snapToggle.checked = true;
-          if (snapSettingsBody) snapSettingsBody.style.display = 'flex';
+        const snapEnabled = data.snapEnabled !== undefined ? !!data.snapEnabled : true;
+        if (snapToggle) {
+          snapToggle.checked = snapEnabled;
+          if (snapSettingsBody) snapSettingsBody.style.display = snapEnabled ? 'flex' : 'none';
         }
-        if (data.snapSensitivity && snapSensitivitySlider) {
-          snapSensitivitySlider.value = data.snapSensitivity;
-          if (snapSensitivityVal) snapSensitivityVal.textContent = data.snapSensitivity;
+        const sensitivity = data.snapSensitivity !== undefined ? Number(data.snapSensitivity) : 7;
+        if (snapSensitivitySlider) {
+          snapSensitivitySlider.value = sensitivity;
+          if (snapSensitivityVal) snapSensitivityVal.textContent = sensitivity;
         }
         if (data.savedBackgroundDataUrl) {
           showCapturedBackground(data.savedBackgroundDataUrl, data.backgroundMetadata);

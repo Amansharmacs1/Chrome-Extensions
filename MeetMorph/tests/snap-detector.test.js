@@ -53,7 +53,25 @@ function run() {
 
   assert.strictEqual(snapTriggered, true, 'Finger snap transient must be detected');
 
-  // 4. Cooldown Enforcement: Immediate second transient within cooldown period must be ignored
+  // 4. Realistic subtle finger snap at natural desk distance (peak = 0.16)
+  detector.lastSnapTime = -100000;
+  detector.ambientEnergy = 0.005;
+  const naturalSnapBuffer = new Float32Array(512);
+  for (let i = 0; i < naturalSnapBuffer.length; i++) naturalSnapBuffer[i] = 0.004;
+  naturalSnapBuffer[120] = 0.16;
+  naturalSnapBuffer[121] = 0.10;
+  naturalSnapBuffer[122] = 0.04;
+
+  snapTriggered = false;
+  detector._processAudio({
+    inputBuffer: {
+      length: 512,
+      getChannelData: () => naturalSnapBuffer
+    }
+  });
+  assert.strictEqual(snapTriggered, true, 'Natural arm-length finger snap must be detected');
+
+  // 5. Cooldown Enforcement: Immediate second transient within cooldown period must be ignored
   snapTriggered = false;
   detector._processAudio({
     inputBuffer: {
@@ -63,7 +81,7 @@ function run() {
   });
   assert.strictEqual(snapTriggered, false, 'Second transient within cooldown must be suppressed');
 
-  // 5. Speech / Low Crest Factor Noise Rejection
+  // 6. Speech / Low Crest Factor Noise Rejection
   // Continuous sinewave or white noise has low crest factor (crest < 2.0)
   const speechBuffer = new Float32Array(512);
   for (let i = 0; i < speechBuffer.length; i++) {

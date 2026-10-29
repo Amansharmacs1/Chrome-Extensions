@@ -22,12 +22,13 @@
       console.log('[MeetMorph] Found stored background image, sending to page bridge...');
       postToPage('LOAD_BACKGROUND', { dataUrl: data.savedBackgroundDataUrl });
     }
-    if (data.snapEnabled !== undefined || data.snapSensitivity !== undefined) {
-      postToPage('SET_SNAP_CONFIG', {
-        enabled: data.snapEnabled,
-        sensitivity: data.snapSensitivity
-      });
-    }
+    // Default snapEnabled to true if not explicitly set to false in storage
+    const snapEnabled = data.snapEnabled !== undefined ? !!data.snapEnabled : true;
+    const snapSensitivity = data.snapSensitivity !== undefined ? Number(data.snapSensitivity) : 7;
+    postToPage('SET_SNAP_CONFIG', {
+      enabled: snapEnabled,
+      sensitivity: snapSensitivity
+    });
     if (data.hudMinimized !== undefined) {
       isHudMinimized = !!data.hudMinimized;
     }
@@ -65,8 +66,14 @@
         break;
 
       case 'SNAP_TRIGGERED':
-        flashFloatingSnap();
+        flashFloatingSnap(true);
         chrome.runtime.sendMessage({ type: 'SNAP_TRIGGERED', payload }).catch(() => {});
+        break;
+
+      case 'SNAP_NO_BACKGROUND':
+        flashFloatingSnap(false);
+        showFloatingToast('⚠️ Snap detected! Click "Capture" first to set your empty room.', 'error');
+        chrome.runtime.sendMessage({ type: 'ERROR', payload: { message: 'Capture an empty background first to vanish.' } }).catch(() => {});
         break;
 
       case 'ERROR':
@@ -391,6 +398,20 @@
     let startX = 0, startY = 0;
     let initialLeft = 0, initialTop = 0;
 
+    // Toggle snap detection when clicking snap icon directly in HUD
+    const snapIndicator = document.getElementById('hud-snap-indicator');
+    if (snapIndicator) {
+      snapIndicator.style.cursor = 'pointer';
+      snapIndicator.addEventListener('click', () => {
+        const currentlyActive = snapIndicator.classList.contains('active');
+        const nextState = !currentlyActive;
+        snapIndicator.classList.toggle('active', nextState);
+        postToPage('SET_SNAP_CONFIG', { enabled: nextState });
+        chrome.storage.local.set({ snapEnabled: nextState });
+        showFloatingToast(nextState ? '🫰 Snap detection enabled!' : '🫰 Snap detection paused', 'info');
+      });
+    }
+
     dragHandle.addEventListener('mousedown', (e) => {
       isDragging = true;
       floatingHudElement.classList.add('dragging');
@@ -445,8 +466,12 @@
 
     if (status.snapEnabled) {
       snapIcon.classList.add('active');
+      snapIcon.title = status.snapListening
+        ? 'Snap Detection: ACTIVE & Listening (Click to toggle)'
+        : 'Snap Detection: Enabled (Waiting for mic stream)';
     } else {
       snapIcon.classList.remove('active');
+      snapIcon.title = 'Snap Detection: OFF (Click to toggle)';
     }
 
     if (status.state === 'COUNTDOWN') {
@@ -492,13 +517,15 @@
     }
   }
 
-  function flashFloatingSnap() {
+  function flashFloatingSnap(showToast = true) {
     const snapIcon = document.getElementById('hud-snap-indicator');
     if (snapIcon) {
       snapIcon.classList.add('flash');
-      setTimeout(() => snapIcon.classList.remove('flash'), 300);
+      setTimeout(() => snapIcon.classList.remove('flash'), 500);
     }
-    showFloatingToast('Snap detected! Toggled.', 'info');
+    if (showToast) {
+      showFloatingToast('🫰 Snap detected! Toggled.', 'info');
+    }
   }
 
   function showFloatingToast(message, type = 'info') {

@@ -25,13 +25,14 @@
       });
 
       this.snapDetector = new window.SnapDetector({
-        enabled: false,
-        sensitivity: 6
+        enabled: true,
+        sensitivity: 7
       });
 
       // Active state
       this.isHooked = false;
       this.rawMediaStream = null;
+      this.capturedAudioStream = null;
       this.compositeMediaStream = null;
       this.activePeerConnections = new Set();
       this.activeVideoSenders = new Map(); // sender -> { pc, originalTrack, processedTrack }
@@ -79,14 +80,62 @@
 
     _setupSnapDetectorListeners() {
       this.snapDetector.on('snap', (details) => {
-        this._logDiagnostic('Finger snap detected! Toggling vanish mode...');
+        this._logDiagnostic('Finger snap detected! Details:', details);
         this._postToContent('SNAP_TRIGGERED', details);
+
+        // Check if empty background has been captured
+        if (!this.videoEngine.backgroundImage) {
+          this._logDiagnostic('Snap detected but no background image captured yet.');
+          this._postToContent('SNAP_NO_BACKGROUND');
+          return;
+        }
+
         this.toggle();
       });
 
       this.snapDetector.on('energy', (energy) => {
         this._postToContent('AUDIO_ENERGY', energy);
       });
+
+      // Resume Web Audio AudioContext on any user interaction with the window (Autoplay Policy)
+      const resumeAudio = () => {
+        if (this.snapDetector.audioCtx && this.snapDetector.audioCtx.state === 'suspended') {
+          this.snapDetector.audioCtx.resume().catch(() => {});
+        }
+      };
+      window.addEventListener('click', resumeAudio, { passive: true });
+      window.addEventListener('keydown', resumeAudio, { passive: true });
+    }
+
+    async _initSnapWithStream(stream) {
+      if (!stream) return;
+      const audioTracks = stream.getAudioTracks ? stream.getAudioTracks() : [];
+      if (!audioTracks || audioTracks.length === 0) return;
+
+      try {
+        await this.snapDetector.init(stream);
+        this._logDiagnostic('Snap detector successfully initialized with audio stream.');
+        this._notifyStatus();
+      } catch (err) {
+        console.warn('[MeetMorph] Snap detector init warning:', err);
+      }
+    }
+
+    async _ensureAudioListening() {
+      if (this.snapDetector.isListening) return;
+      if (this.capturedAudioStream && this.capturedAudioStream.active && this.capturedAudioStream.getAudioTracks().some(t => t.readyState === 'live')) {
+        await this._initSnapWithStream(this.capturedAudioStream);
+        return;
+      }
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        try {
+          const micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          this.capturedAudioStream = micStream;
+          await this._initSnapWithStream(micStream);
+        } catch (e) {
+          console.warn('[MeetMorph] Could not auto-acquire mic for snap detector:', e.message);
+        }
+      }
     }
 
     /**
@@ -109,23 +158,33 @@
           (typeof constraints.video === 'object' && constraints.video !== null)
         );
 
-        // If video not requested, pass through untouched
+        const audioRequested = constraints && (
+          constraints.audio === true ||
+          (typeof constraints.audio === 'object' && constraints.audio !== null)
+        );
+
+        // Case 1: Audio-only requested (e.g. Google Meet microphone initialization)
         if (!videoRequested) {
-          return originalGetUserMedia(constraints);
+          const audioStream = await originalGetUserMedia(constraints);
+          if (audioRequested && audioStream && audioStream.getAudioTracks().length > 0) {
+            self.capturedAudioStream = audioStream;
+            self._initSnapWithStream(audioStream);
+          }
+          return audioStream;
         }
 
+        // Case 2: Video requested (with or without audio)
         try {
           // Acquire native stream from hardware
           const realStream = await originalGetUserMedia(constraints);
           self.rawMediaStream = realStream;
 
-          // Initialize snap detector if audio track present
+          // Initialize snap detector if audio track present in this call
           if (realStream.getAudioTracks().length > 0) {
-            try {
-              await self.snapDetector.init(realStream);
-            } catch (snapErr) {
-              console.warn('[MeetMorph] Snap detector init warning:', snapErr);
-            }
+            self.capturedAudioStream = realStream;
+            self._initSnapWithStream(realStream);
+          } else if (self.capturedAudioStream && !self.snapDetector.isListening) {
+            self._initSnapWithStream(self.capturedAudioStream);
           }
 
           // Initialize VideoEngine with real camera stream
@@ -193,6 +252,18 @@
         const originalAddTrack = pc.addTrack.bind(pc);
         pc.addTrack = function (track, ...streams) {
           self._logDiagnostic(`pc.addTrack called for track kind: ${track ? track.kind : 'unknown'}`);
+
+          // If adding an audio track, tap it for snap detection if detector is not yet listening
+          if (track && track.kind === 'audio' && !self.snapDetector.isListening) {
+            try {
+              const audioTrackToUse = track.clone ? track.clone() : track;
+              const audioStream = new MediaStream([audioTrackToUse]);
+              self.capturedAudioStream = audioStream;
+              self._initSnapWithStream(audioStream);
+            } catch (e) {
+              console.warn('[MeetMorph] Failed to init snap detector from pc.addTrack audio track:', e);
+            }
+          }
 
           // If adding a video track, ensure it's our processed canvas track
           if (track && track.kind === 'video') {
@@ -305,6 +376,9 @@
             if (payload) {
               if (payload.enabled !== undefined) {
                 this.snapDetector.setEnabled(payload.enabled);
+                if (payload.enabled) {
+                  this._ensureAudioListening();
+                }
               }
               if (payload.sensitivity !== undefined) {
                 this.snapDetector.setSensitivity(payload.sensitivity);

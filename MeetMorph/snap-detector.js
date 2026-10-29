@@ -15,13 +15,14 @@
 
   class SnapDetector {
     constructor(options = {}) {
-      this.enabled = options.enabled || false;
-      this.sensitivity = options.sensitivity || 6; // 1 (least sensitive) to 10 (most sensitive)
-      this.cooldownMs = options.cooldownMs || 750; // ms between allowable triggers
+      this.enabled = options.enabled !== undefined ? !!options.enabled : true;
+      this.sensitivity = options.sensitivity !== undefined ? options.sensitivity : 7; // 1 (least sensitive) to 10 (most sensitive)
+      this.cooldownMs = options.cooldownMs || 650; // ms between allowable triggers
 
       // Audio Nodes & Context
       this.audioCtx = null;
       this.sourceNode = null;
+      this.inputGain = null;
       this.highpassFilter = null;
       this.bandpassFilter = null;
       this.analyser = null;
@@ -108,17 +109,21 @@
         // Connect source from the stream
         this.sourceNode = this.audioCtx.createMediaStreamSource(mediaStream);
 
-        // Highpass filter at 2200 Hz to cut human speech fundamentals & low rumble
+        // Input pre-gain to reliably pick up finger snaps at normal desk distances
+        this.inputGain = this.audioCtx.createGain();
+        this.inputGain.gain.value = 1.6;
+
+        // Highpass filter at 1200 Hz to cut human speech fundamentals & low rumble
         this.highpassFilter = this.audioCtx.createBiquadFilter();
         this.highpassFilter.type = 'highpass';
-        this.highpassFilter.frequency.value = 2200;
-        this.highpassFilter.Q.value = 1.0;
+        this.highpassFilter.frequency.value = 1200;
+        this.highpassFilter.Q.value = 0.7;
 
-        // Bandpass filter centered at 4200 Hz (characteristic snap transient peak)
+        // Bandpass filter centered at 2800 Hz (characteristic human finger snap acoustic peak)
         this.bandpassFilter = this.audioCtx.createBiquadFilter();
         this.bandpassFilter.type = 'bandpass';
-        this.bandpassFilter.frequency.value = 4200;
-        this.bandpassFilter.Q.value = 1.5;
+        this.bandpassFilter.frequency.value = 2800;
+        this.bandpassFilter.Q.value = 1.0;
 
         // Analyser for real-time time-domain and frequency data
         this.analyser = this.audioCtx.createAnalyser();
@@ -130,8 +135,9 @@
         this.processor = this.audioCtx.createScriptProcessor(512, 1, 1);
         this.processor.onaudioprocess = this._processAudio;
 
-        // Chain nodes: Source -> Highpass -> Bandpass -> Analyser -> Processor -> Destination (muted)
-        this.sourceNode.connect(this.highpassFilter);
+        // Chain nodes: Source -> InputGain -> Highpass -> Bandpass -> Analyser -> Processor -> Destination (muted)
+        this.sourceNode.connect(this.inputGain);
+        this.inputGain.connect(this.highpassFilter);
         this.highpassFilter.connect(this.bandpassFilter);
         this.bandpassFilter.connect(this.analyser);
         this.analyser.connect(this.processor);
@@ -173,8 +179,13 @@
       // Crest factor: peak-to-RMS ratio (snaps have high crest factor > 3.5)
       const crestFactor = rms > 0.0001 ? peakValue / rms : 0;
 
-      // Track ambient baseline noise with slow exponential decay
-      this.ambientEnergy = this.ambientEnergy * 0.96 + rms * 0.04;
+      // Only track ambient baseline when signal is quiet (prevents snap energy from raising noise floor)
+      if (peakValue < 0.08) {
+        this.ambientEnergy = this.ambientEnergy * 0.95 + rms * 0.05;
+      }
+      if (this.ambientEnergy < 0.002) {
+        this.ambientEnergy = 0.002;
+      }
 
       // Emit energy metric for UI visualization
       this.emit('energy', { rms, peak: peakValue, ambient: this.ambientEnergy, crestFactor });
@@ -182,21 +193,22 @@
       if (!this.enabled) return;
 
       // Determine sensitivity threshold:
-      // sensitivity 1 -> threshold 0.35 (harder snap required)
-      // sensitivity 10 -> threshold 0.05 (subtle snap detected)
-      const threshold = 0.38 - (this.sensitivity / 10) * 0.32;
+      // sensitivity 1 -> threshold 0.22 (harder snap required)
+      // sensitivity 7 -> threshold 0.10 (natural finger snap)
+      // sensitivity 10 -> threshold 0.04 (subtle snap detected)
+      const threshold = 0.24 - (this.sensitivity / 10) * 0.20;
 
       const now = performance.now();
       const timeSinceLastSnap = now - this.lastSnapTime;
 
       // Transient Detection Criteria:
       // 1. Peak value must exceed sensitivity threshold
-      // 2. High crest factor (> 3.2), distinguishing snap from broad noise/applause
-      // 3. Significant burst over ambient noise (peak > 4.5 * ambient)
+      // 2. High crest factor (> 2.2), distinguishing snap from sustained speech
+      // 3. Significant burst over ambient noise (peak > 2.8 * ambient)
       // 4. Respect cooldown period
       const isTransientSpike = peakValue > threshold &&
-                               crestFactor > 3.2 &&
-                               peakValue > (this.ambientEnergy * 4.2);
+                               crestFactor > 2.2 &&
+                               peakValue > (this.ambientEnergy * 2.8);
 
       if (isTransientSpike && timeSinceLastSnap > this.cooldownMs) {
         this.lastSnapTime = now;
@@ -227,6 +239,10 @@
       if (this.highpassFilter) {
         this.highpassFilter.disconnect();
         this.highpassFilter = null;
+      }
+      if (this.inputGain) {
+        this.inputGain.disconnect();
+        this.inputGain = null;
       }
       if (this.sourceNode) {
         this.sourceNode.disconnect();
