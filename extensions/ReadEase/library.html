@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="paper">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReadEase — Reading Library</title>
+  <link rel="stylesheet" href="library.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icon32.png">
+</head>
+<body>
+  <div class="library-app">
+    <!-- Top Header -->
+    <header class="library-header">
+      <div class="header-container">
+        <div class="header-brand">
+          <img src="assets/icon32.png" alt="ReadEase Logo" class="brand-icon">
+          <div class="brand-titles">
+            <h1 class="brand-name">ReadEase Library</h1>
+            <span id="libraryStatsSummary" class="brand-subtitle">Loading your reading collection...</span>
+          </div>
+        </div>
+
+        <!-- Global Search Bar -->
+        <div class="search-box-wrap">
+          <div class="search-input-box">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="searchInput" placeholder="Search by title, author, domain, tags, or notes..." autocomplete="off">
+            <button id="btnClearSearch" class="clear-search-btn" title="Clear search" hidden>×</button>
+          </div>
+        </div>
+
+        <!-- Top Right Utilities -->
+        <div class="header-actions">
+          <button id="btnBackupModal" class="btn btn-secondary btn-sm" title="Backup or Restore Library">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Backup / Import</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="library-main">
+      <!-- Controls Bar: Category Tabs & Sort -->
+      <section class="controls-section">
+        <div class="filter-tabs" role="tablist">
+          <button class="filter-tab active" data-filter="all" role="tab">All Articles <span class="tab-badge" id="badgeAll">0</span></button>
+          <button class="filter-tab" data-filter="unread" role="tab">Unread <span class="tab-badge" id="badgeUnread">0</span></button>
+          <button class="filter-tab" data-filter="in-progress" role="tab">In Progress <span class="tab-badge" id="badgeInProgress">0</span></button>
+          <button class="filter-tab" data-filter="completed" role="tab">Completed <span class="tab-badge" id="badgeCompleted">0</span></button>
+          <button class="filter-tab" data-filter="favorites" role="tab">Favorites <span class="tab-badge" id="badgeFavorites">0</span></button>
+        </div>
+
+        <div class="sort-controls">
+          <label for="sortSelect" class="sort-label">Sort by:</label>
+          <select id="sortSelect" class="sort-select">
+            <option value="recent-saved">Recently Saved</option>
+            <option value="recent-read">Recently Read</option>
+            <option value="time-asc">Reading Time (Shortest)</option>
+            <option value="time-desc">Reading Time (Longest)</option>
+            <option value="title-asc">Alphabetical (A-Z)</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Dynamic Tag Filter Bar -->
+      <section id="tagFilterBar" class="tag-filter-bar" hidden>
+        <span class="tags-label">Tags:</span>
+        <div class="tag-pills-list" id="tagPillsList">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+
+      <!-- Articles Grid -->
+      <section class="articles-grid-container">
+        <div id="articlesGrid" class="articles-grid">
+          <!-- Rendered dynamically in library.js -->
+        </div>
+
+        <!-- Empty State Container -->
+        <div id="emptyState" class="empty-state-card" hidden>
+          <div class="empty-icon-wrap" id="emptyIcon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+          </div>
+          <h3 id="emptyTitle" class="empty-title">No articles saved yet</h3>
+          <p id="emptyDesc" class="empty-desc">
+            Whenever you visit a blog, news story, or tutorial, click the ReadEase icon in your Chrome toolbar and select "Save to Library".
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Backup & Restore Modal -->
+    <div id="backupModal" class="modal-overlay" hidden>
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3 class="modal-title">Library Backup & Restore</h3>
+          <button id="btnCloseModal" class="modal-close-btn" aria-label="Close modal">×</button>
+        </div>
+        <div class="modal-body">
+          <!-- Export Section -->
+          <div class="backup-section">
+            <h4 class="section-heading">Export Reading Library</h4>
+            <p class="section-desc">Download a versioned JSON backup containing all your saved articles, offline content, highlights, personal notes, and preferences.</p>
+            <button id="btnExportJSON" class="btn btn-primary btn-sm">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Download Backup (JSON)</span>
+            </button>
+          </div>
+
+          <hr class="modal-divider">
+
+          <!-- Import Section -->
+          <div class="backup-section">
+            <h4 class="section-heading">Restore from Backup</h4>
+            <p class="section-desc">Select a previously exported ReadEase JSON backup file.</p>
+
+            <input type="file" id="importFileInput" accept=".json" class="file-input">
+
+            <!-- Import Preview Box -->
+            <div id="importPreviewBox" class="import-preview-box" hidden>
+              <div class="preview-item">
+                <span class="preview-label">Articles Found:</span>
+                <strong id="previewCount">0</strong>
+              </div>
+              <div class="preview-item">
+                <span class="preview-label">Export Date:</span>
+                <span id="previewDate">—</span>
+              </div>
+              <div class="import-mode-options">
+                <label class="radio-label">
+                  <input type="radio" name="importMode" value="merge" checked>
+                  <span>Merge with existing library (recommended)</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="importMode" value="replace">
+                  <span>Replace entire library</span>
+                </label>
+              </div>
+              <button id="btnConfirmImport" class="btn btn-primary btn-sm mt-2">Complete Import</button>
+            </div>
+
+            <!-- Import status feedback -->
+            <div id="importStatus" class="status-msg" hidden></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="library.js"></script>
+</body>
+</html>

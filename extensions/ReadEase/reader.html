@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="paper">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReadEase Reader</title>
+  <link rel="stylesheet" href="reader.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icon32.png">
+</head>
+<body>
+  <!-- Reading Progress Bar -->
+  <div id="readingProgressBar" class="reading-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <div id="progressFill" class="progress-fill"></div>
+  </div>
+
+  <!-- Sticky Top Reading Toolbar -->
+  <header id="readerHeader" class="reader-header">
+    <div class="header-left">
+      <button id="btnBackToSource" class="toolbar-btn back-btn" title="Return to Original Webpage">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Original Page</span>
+      </button>
+      <span id="headerSiteBadge" class="header-domain-badge">Article</span>
+    </div>
+
+    <div class="header-center">
+      <div id="readingProgressPill" class="progress-pill">
+        <span id="readingProgressText">0% read</span>
+        <span class="pill-dot">•</span>
+        <span id="readingTimeRemainingText">Calculating...</span>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <!-- Typography Settings Button -->
+      <button id="btnTypography" class="toolbar-btn" title="Customize Typography & Appearance" aria-label="Typography Settings">
+        <span class="btn-aa-icon">Aa</span>
+      </button>
+
+      <!-- Highlights Panel Toggle -->
+      <button id="btnHighlightsToggle" class="toolbar-btn" title="View Highlights & Notes" aria-label="View Highlights">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 20h9"></path>
+          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+        </svg>
+        <span id="highlightsCountBadge" class="badge-count" hidden>0</span>
+      </button>
+
+      <!-- Favorite Button -->
+      <button id="btnFavoriteToggle" class="toolbar-btn" title="Favorite this Article" aria-label="Favorite Article">
+        <svg id="favIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+      </button>
+
+      <!-- Save Article Button -->
+      <button id="btnSaveArticle" class="toolbar-btn primary-action-btn" title="Save to Reading Library">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <span id="btnSaveLabel">Save</span>
+      </button>
+
+      <!-- Focus Mode Button -->
+      <button id="btnFocusMode" class="toolbar-btn" title="Focus Mode (Distraction-Free) [F]" aria-label="Toggle Focus Mode">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Resume Reading Banner -->
+  <div id="resumeBanner" class="resume-banner" hidden>
+    <div class="resume-content">
+      <span id="resumeText">Resumed reading from 45%</span>
+      <button id="btnRestartTop" class="btn-text-link">Restart from beginning</button>
+    </div>
+    <button id="btnCloseResumeBanner" class="banner-close" aria-label="Dismiss banner">×</button>
+  </div>
+
+  <!-- Typography & Settings Popover Dropdown -->
+  <div id="typographyPopover" class="popover-panel" hidden>
+    <div class="popover-header">
+      <span class="popover-title">Reading Preferences</span>
+      <button id="btnCloseTypography" class="popover-close-btn" aria-label="Close preferences">×</button>
+    </div>
+
+    <!-- Theme Selection -->
+    <div class="setting-group">
+      <label class="setting-label">Theme</label>
+      <div class="theme-button-grid">
+        <button class="theme-select-btn active" data-theme="paper">
+          <span class="theme-swatch" style="background:#FAF6ED; border-color:#E8DDCF;"></span>
+          <span>Paper</span>
+        </button>
+        <button class="theme-select-btn" data-theme="light">
+          <span class="theme-swatch" style="background:#FFFFFF; border-color:#CBD5E1;"></span>
+          <span>Light</span>
+        </button>
+        <button class="theme-select-btn" data-theme="sepia">
+          <span class="theme-swatch" style="background:#F5EBDC; border-color:#DECEB5;"></span>
+          <span>Sepia</span>
+        </button>
+        <button class="theme-select-btn" data-theme="dark">
+          <span class="theme-swatch" style="background:#121824; border-color:#2E3A52;"></span>
+          <span>Dark</span>
+        </button>
+        <button class="theme-select-btn" data-theme="contrast">
+          <span class="theme-swatch" style="background:#000000; border-color:#444444;"></span>
+          <span>OLED</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Font Family Selection -->
+    <div class="setting-group">
+      <label class="setting-label">Typeface</label>
+      <div class="pill-group" id="fontFamilyGroup">
+        <button class="pill-option active" data-font="serif">Serif</button>
+        <button class="pill-option" data-font="sans">Sans</button>
+        <button class="pill-option" data-font="georgia">Georgia</button>
+        <button class="pill-option" data-font="mono">Mono</button>
+      </div>
+    </div>
+
+    <!-- Font Size Slider -->
+    <div class="setting-group">
+      <div class="setting-label-row">
+        <label class="setting-label">Font Size</label>
+        <span id="fontSizeDisplay" class="setting-val">18px</span>
+      </div>
+      <div class="stepper-row">
+        <button id="btnFontDec" class="stepper-btn" aria-label="Decrease font size">A-</button>
+        <input type="range" id="fontSizeSlider" min="14" max="28" step="1" value="18" class="setting-slider">
+        <button id="btnFontInc" class="stepper-btn" aria-label="Increase font size">A+</button>
+      </div>
+    </div>
+
+    <!-- Content Width -->
+    <div class="setting-group">
+      <label class="setting-label">Reading Width</label>
+      <div class="pill-group" id="contentWidthGroup">
+        <button class="pill-option" data-width="narrow">Narrow</button>
+        <button class="pill-option active" data-width="comfortable">Comfortable</button>
+        <button class="pill-option" data-width="wide">Wide</button>
+      </div>
+    </div>
+
+    <!-- Line Spacing -->
+    <div class="setting-group">
+      <label class="setting-label">Line Spacing</label>
+      <div class="pill-group" id="lineSpacingGroup">
+        <button class="pill-option" data-spacing="compact">Compact</button>
+        <button class="pill-option active" data-spacing="normal">Normal</button>
+        <button class="pill-option" data-spacing="spacious">Spacious</button>
+      </div>
+    </div>
+
+    <!-- Text Alignment -->
+    <div class="setting-group">
+      <label class="setting-label">Alignment</label>
+      <div class="pill-group" id="textAlignGroup">
+        <button class="pill-option active" data-align="left">Left</button>
+        <button class="pill-option" data-align="justify">Justify</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Article Sanctuary Container -->
+  <main class="reader-container" id="readerContainer">
+    <!-- Article Header -->
+    <article class="article-document" id="articleDocument">
+      <header class="article-meta-header">
+        <h1 id="articleHeading" class="article-heading">Loading Article...</h1>
+        
+        <div class="article-byline-bar">
+          <div class="byline-left">
+            <span id="articleAuthor" class="author-name"></span>
+            <span id="articleDateDot" class="byline-dot" hidden>•</span>
+            <time id="articleDate" class="pub-date"></time>
+          </div>
+          <div class="byline-right">
+            <span id="articleStats" class="article-stats"></span>
+          </div>
+        </div>
+
+        <div id="articleTagsBar" class="article-tags-bar">
+          <div class="tags-container" id="articleTagsList"></div>
+          <button id="btnAddTagBtn" class="add-tag-btn">+ Tag</button>
+        </div>
+
+        <hr class="article-divider">
+      </header>
+
+      <!-- Sanitized Clean Article Body -->
+      <div id="readerBody" class="reader-body">
+        <!-- Rendered by reader.js -->
+      </div>
+
+      <!-- Article Footer -->
+      <footer class="article-footer">
+        <hr class="article-divider">
+        <div class="footer-actions-row">
+          <button id="btnFooterBack" class="footer-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span>Back to Original Page</span>
+          </button>
+          <button id="btnFooterLibrary" class="footer-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+            <span>Go to Library</span>
+          </button>
+        </div>
+      </footer>
+    </article>
+  </main>
+
+  <!-- Floating Text Selection Highlight Toolbar -->
+  <div id="highlightToolbar" class="floating-highlight-toolbar" hidden>
+    <div class="highlight-colors-row">
+      <button class="hl-color-btn" data-color="yellow" style="background: #fef08a;" title="Yellow highlight"></button>
+      <button class="hl-color-btn" data-color="green" style="background: #bbf7d0;" title="Green highlight"></button>
+      <button class="hl-color-btn" data-color="blue" style="background: #bae6fd;" title="Blue highlight"></button>
+      <button class="hl-color-btn" data-color="pink" style="background: #fbcfe8;" title="Pink highlight"></button>
+      <button class="hl-color-btn" data-color="orange" style="background: #fed7aa;" title="Orange highlight"></button>
+    </div>
+    <div class="hl-divider"></div>
+    <button id="btnHlAddNote" class="hl-action-btn" title="Add personal note to highlight">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 20h9"></path>
+        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+      </svg>
+      <span>Note</span>
+    </button>
+  </div>
+
+  <!-- Inline Note Composer Popover -->
+  <div id="noteComposer" class="note-composer-card" hidden>
+    <div class="note-composer-header">
+      <span>Personal Note</span>
+      <button id="btnCloseComposer" class="btn-icon-xs">×</button>
+    </div>
+    <textarea id="noteInput" placeholder="Add your reflection, summary, or reminder..." rows="3"></textarea>
+    <div class="note-composer-footer">
+      <button id="btnSaveNote" class="btn btn-primary btn-xs">Save Highlight & Note</button>
+    </div>
+  </div>
+
+  <!-- Slide-out Highlights & Notes Panel -->
+  <aside id="highlightsDrawer" class="highlights-drawer" aria-label="Highlights and Annotations" hidden>
+    <div class="drawer-header">
+      <div class="drawer-title-row">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 20h9"></path>
+          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+        </svg>
+        <h3 class="drawer-heading">Highlights & Notes</h3>
+      </div>
+      <button id="btnCloseDrawer" class="drawer-close-btn" aria-label="Close highlights drawer">×</button>
+    </div>
+    <div id="drawerList" class="drawer-content-list">
+      <!-- Rendered dynamically -->
+      <div class="empty-highlights-state">
+        <p>No highlights yet.</p>
+        <span class="empty-hint">Select any passage in the article to highlight or add a note.</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Focus Mode Exit Pill -->
+  <div id="focusExitPill" class="focus-exit-pill" hidden>
+    <span>Focus Mode</span>
+    <button id="btnExitFocus" class="exit-focus-btn">Exit (Esc)</button>
+  </div>
+
+  <script type="module" src="reader.js"></script>
+</body>
+</html>

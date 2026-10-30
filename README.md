@@ -10,11 +10,11 @@ From focused study sessions and personalized new-tab experiences to website desi
 
 | Extension | Description | Status |
 |---|---|---|
-| [**MeetMorph**](./MeetMorph) | Vanish and reappear on Google Meet by switching your outgoing WebRTC webcam feed to an empty room image. | Completed & Tested |
-| [**FocusFlow**](./FocusFlow) | Improve productivity with focus sessions, distraction blocking, and analytics. | Completed & Tested |
-| [**WebNotes**](./WebNotes) | Take and organize notes directly on websites, capture quotes, and manage research. | Completed & Tested |
-| [**NewTab Pro**](./NewTabPro) | Turn every new tab into a personalized productivity dashboard with shortcuts, tasks, search, scratchpad, and themes. | Completed & Tested |
-| **ReadEase** | Enjoy a cleaner, distraction-free reading experience. | Planned |
+| [**MeetMorph**](./extensions/MeetMorph) | Vanish and reappear on Google Meet by switching your outgoing WebRTC webcam feed to an empty room image. | Completed & Tested |
+| [**FocusFlow**](./extensions/FocusFlow) | Improve productivity with focus sessions, distraction blocking, and analytics. | Completed & Tested |
+| [**WebNotes**](./extensions/WebNotes) | Take and organize notes directly on websites, capture quotes, and manage research. | Completed & Tested |
+| [**NewTab Pro**](./extensions/NewTabPro) | Turn every new tab into a personalized productivity dashboard with shortcuts, tasks, search, scratchpad, and themes. | Completed & Tested |
+| [**ReadEase**](./extensions/ReadEase) | Enjoy a cleaner, distraction-free reading experience with customizable typography, offline library, highlights, and focus mode. | Completed & Tested |
 | **ColorPeek** | Pick website colors and copy HEX, RGB, and HSL values. | Planned |
 | **FontLens** | Inspect website typography and copy CSS font properties. | Planned |
 | **LinkShield** | Check URLs for known threats and suspicious patterns before opening them. | Planned |
@@ -50,20 +50,24 @@ Each extension includes its own self-contained directory, documentation, and aut
 Chrome-Extensions/
 ├── README.md
 ├── .gitignore
-├── MeetMorph/
-│   ├── manifest.json
-│   ├── popup.html / popup.js / popup.css
-│   ├── background.js
-│   ├── content.js
-│   ├── page-bridge.js
-│   ├── video-engine.js
-│   ├── snap-detector.js
-│   ├── permissions.js
-│   ├── test-room.html / test-room.js
-│   ├── tests/
-│   ├── screenshots/
-│   └── README.md (Full documentation suite)
-└── ...
+└── extensions/
+    ├── FocusFlow/
+    ├── MeetMorph/
+    │   ├── manifest.json
+    │   ├── popup.html / popup.js / popup.css
+    │   ├── background.js
+    │   ├── content.js
+    │   ├── page-bridge.js
+    │   ├── video-engine.js
+    │   ├── snap-detector.js
+    │   ├── permissions.js
+    │   ├── test-room.html / test-room.js
+    │   ├── tests/
+    │   ├── screenshots/
+    │   └── README.md
+    ├── NewTabPro/
+    ├── ReadEase/
+    └── WebNotes/
 ```
 
 The structure will evolve as the collection grows. Each extension includes its own README, source files, automated tests, and relevant documentation.
@@ -77,7 +81,7 @@ The structure will evolve as the collection grows. Each extension includes its o
 2. Open `chrome://extensions` in Google Chrome.
 3. Enable **Developer mode** (toggle in the top-right corner).
 4. Click **Load unpacked** (button in top-left).
-5. Select the directory of the extension you want to run (e.g., the `MeetMorph` folder).
+5. Select the directory of the extension you want to run (e.g., the `extensions/MeetMorph` folder).
 6. Follow any extension-specific setup steps outlined in its local README.
 
 ## 🔒 Security and Privacy

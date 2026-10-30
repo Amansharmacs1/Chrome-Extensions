@@ -1,0 +1,23 @@
+{
+  "name": "readease",
+  "version": "1.0.0",
+  "description": "ReadEase — Less clutter. More clarity. Premium distraction-free reading extension for Google Chrome.",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/run-all.js"
+  },
+  "keywords": [
+    "chrome-extension",
+    "reader-mode",
+    "distraction-free",
+    "reading",
+    "typography",
+    "readability",
+    "highlights",
+    "annotations",
+    "manifest-v3",
+    "local-first"
+  ],
+  "author": "Antigravity Engineering",
+  "license": "MIT"
+}

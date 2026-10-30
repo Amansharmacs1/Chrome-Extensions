@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Building Distributed Caches with Consistent Hashing</title>
+  <meta name="author" content="Marcus Vance">
+  <meta property="article:published_time" content="2026-09-20T14:30:00Z">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">DevEngineering</div>
+  </header>
+
+  <main>
+    <article>
+      <h1>Building Distributed Caches with Consistent Hashing</h1>
+      <p class="author">By Marcus Vance</p>
+
+      <p>When scaling stateful caching tiers across dynamic clusters, traditional modular hashing schemes create severe operational headaches during node churn. Adding or removing a single node forces nearly all keys to remap, triggering cache stampedes.</p>
+
+      <h2>The Consistent Hashing Ring</h2>
+      <p>Consistent hashing solves this remapping catastrophe by mapping both cache nodes and data keys to a circular numeric space, typically represented as a 32-bit or 64-bit integer ring.</p>
+
+      <pre><code>// Example Hash Ring in JavaScript
+class ConsistentHashRing {
+  constructor(virtualNodes = 100) {
+    this.virtualNodes = virtualNodes;
+    this.ring = new Map();
+    this.sortedKeys = [];
+  }
+
+  addNode(node) {
+    for (let i = 0; i &lt; this.virtualNodes; i++) {
+      const hash = this.hashKey(`\${node}:\${i}`);
+      this.ring.set(hash, node);
+      this.sortedKeys.push(hash);
+    }
+    this.sortedKeys.sort((a, b) =&gt; a - b);
+  }
+}</code></pre>
+
+      <p>By distributing virtual nodes uniformly around the ring, traffic remains balanced even when physical hardware nodes join or leave the topology dynamically.</p>
+
+      <figure>
+        <img src="https://example.com/ring-diagram.png" alt="Consistent Hashing Virtual Node Ring Architecture">
+        <figcaption>Figure 1: Virtual node ring balancing key distribution across three physical servers.</figcaption>
+      </figure>
+
+      <p>In production workloads, consistent hashing maintains an average hit ratio above 96 percent during active node replacement, safeguarding database storage layers from sudden request spikes.</p>
+    </article>
+  </main>
+</body>
+</html>

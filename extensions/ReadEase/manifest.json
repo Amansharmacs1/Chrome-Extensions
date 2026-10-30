@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "ReadEase — Distraction-Free Reader & Library",
+  "version": "1.0.0",
+  "description": "Less clutter. More clarity. Turn cluttered web articles into clean, distraction-free reading with customizable typography, offline library, highlights, and notes.",
+  "icons": {
+    "16": "assets/icon16.png",
+    "32": "assets/icon32.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "ReadEase",
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "32": "assets/icon32.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ]
+}
