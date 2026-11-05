@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ViewPortX — Auto Responsive Engine Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body class="viewportx-dashboard">
+  <!-- Sidebar Navigation -->
+  <aside class="dashboard-sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+          <line x1="8" y1="21" x2="16" y2="21"></line>
+          <line x1="12" y1="17" x2="12" y2="21"></line>
+        </svg>
+      </div>
+      <div class="brand-info">
+        <h1 class="brand-title">ViewPort<span>X</span></h1>
+        <span class="brand-sub">Workstation</span>
+      </div>
+    </div>
+
+    <!-- Active Target Badge -->
+    <div class="target-card">
+      <div class="target-label">Connected Target</div>
+      <div class="target-url" id="sidebar-target-url">No page connected</div>
+      <div class="target-status">
+        <span class="status-dot online"></span>
+        <span id="sidebar-connection-status">Ready</span>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="sidebar-nav">
+      <button class="nav-tab active" data-tab="tab-overview">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+        <span>Overview</span>
+      </button>
+
+      <button class="nav-tab" data-tab="tab-inspector">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span>DOM Inspector</span>
+      </button>
+
+      <button class="nav-tab" data-tab="tab-preview">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+          <line x1="12" y1="18" x2="12.01" y2="18"></line>
+        </svg>
+        <span>Responsive Preview</span>
+      </button>
+
+      <button class="nav-tab" data-tab="tab-issues">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        <span>Detected Issues</span>
+        <span class="nav-counter" id="nav-issues-count">0</span>
+      </button>
+
+      <button class="nav-tab" data-tab="tab-editor">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+        <span>CSS Transformations</span>
+      </button>
+
+      <button class="nav-tab" data-tab="tab-settings">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+        <span>Settings</span>
+      </button>
+    </nav>
+
+    <!-- Sidebar Quick Actions -->
+    <div class="sidebar-footer">
+      <button id="sidebar-btn-make-responsive" class="btn btn-primary full-width">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+        </svg>
+        <span>Make Responsive</span>
+      </button>
+      <button id="sidebar-btn-restore" class="btn btn-secondary full-width" disabled>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="1 4 1 10 7 10"></polyline>
+          <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+        </svg>
+        <span>Restore Original</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Workstation Canvas -->
+  <main class="dashboard-main">
+    <!-- Top Action Bar -->
+    <header class="main-header">
+      <div class="header-left">
+        <h2 id="section-title">Overview</h2>
+        <span class="header-breadcrumb" id="header-breadcrumb">Comprehensive Health Analysis</span>
+      </div>
+      <div class="header-right">
+        <button id="btn-refresh-scan" class="btn btn-secondary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+          <span>Re-scan Webpage</span>
+        </button>
+        <button id="btn-export-css" class="btn btn-secondary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Export CSS</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Tab 1: Overview -->
+    <section class="tab-pane active" id="tab-overview">
+      <div class="overview-grid">
+        <!-- Hero Health Card -->
+        <div class="card hero-health-card">
+          <div class="health-gauge-col">
+            <div class="radial-gauge" id="overview-radial">
+              <span class="radial-score" id="overview-score-val">--</span>
+              <span class="radial-grade" id="overview-grade-val">-</span>
+            </div>
+          </div>
+          <div class="health-meta-col">
+            <div class="health-badge-row">
+              <span class="badge-status" id="overview-health-badge">Analyzing</span>
+              <span class="meta-tested" id="overview-tested-count">-- Elements Tested</span>
+            </div>
+            <h3 class="health-headline" id="overview-headline">Calculating Responsive Health</h3>
+            <p class="health-description" id="overview-desc">Inspecting document layout, viewport boundaries, media scaling, and interactive target dimensions.</p>
+          </div>
+        </div>
+
+        <!-- Metric Stat Cards -->
+        <div class="card stat-card">
+          <div class="stat-icon red">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <polyline points="9 21 3 21 3 15"></polyline>
+              <line x1="21" y1="3" x2="14" y2="10"></line>
+              <line x1="3" y1="21" x2="10" y2="14"></line>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <span class="stat-label">Horizontal Overflow</span>
+            <span class="stat-value" id="stat-overflow">0 px</span>
+            <span class="stat-sub" id="stat-overflow-sub">0% viewport spill</span>
+          </div>
+        </div>
+
+        <div class="card stat-card">
+          <div class="stat-icon amber">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <span class="stat-label">Defects Identified</span>
+            <span class="stat-value" id="stat-issues-count">0</span>
+            <span class="stat-sub" id="stat-critical-count">0 critical flaws</span>
+          </div>
+        </div>
+
+        <div class="card stat-card">
+          <div class="stat-icon indigo">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <span class="stat-label">Viewport Geometry</span>
+            <span class="stat-value" id="stat-viewport-dims">-- x --</span>
+            <span class="stat-sub" id="stat-elements-scanned">0 elements inspected</span>
+          </div>
+        </div>
+
+        <div class="card stat-card">
+          <div class="stat-icon green">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <span class="stat-label">Verification Rate</span>
+            <span class="stat-value" id="stat-verification">-- %</span>
+            <span class="stat-sub" id="stat-mode-sub">Mode: Original</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Breakdown Grid (10 categories) -->
+      <div class="card category-section">
+        <div class="card-header">
+          <h3>Category Diagnostic Breakdown</h3>
+          <span class="card-header-sub">W3C & Google Responsive Heuristics Evaluation</span>
+        </div>
+        <div class="category-grid" id="category-cards-container">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 2: DOM Inspector -->
+    <section class="tab-pane" id="tab-inspector">
+      <div class="card inspector-card">
+        <div class="card-toolbar">
+          <div class="toolbar-search">
+            <input type="text" id="inspector-search" placeholder="Filter by tag, ID, or class selector..." />
+          </div>
+          <div class="toolbar-filters">
+            <select id="inspector-filter-tag">
+              <option value="all">All Tags</option>
+              <option value="div">div</option>
+              <option value="img">img</option>
+              <option value="table">table</option>
+              <option value="nav">nav</option>
+              <option value="input">input</option>
+              <option value="header">header</option>
+              <option value="section">section</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-container">
+          <table class="data-table" id="inspector-table">
+            <thead>
+              <tr>
+                <th>Element Selector</th>
+                <th>Tag</th>
+                <th>Bounding Rect</th>
+                <th>Computed Width</th>
+                <th>Max-Width</th>
+                <th>Display</th>
+                <th>Overflow-X</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="inspector-table-body">
+              <tr>
+                <td colspan="8" class="text-center">Scan page to inspect DOM elements.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 3: Responsive Preview -->
+    <section class="tab-pane" id="tab-preview">
+      <div class="preview-layout">
+        <!-- Device Control Toolbar -->
+        <div class="card preview-controls">
+          <div class="device-presets" id="device-presets-bar">
+            <button class="preset-btn" data-width="320" data-height="568" title="Small Mobile">iPhone SE (320px)</button>
+            <button class="preset-btn active" data-width="390" data-height="844" title="Modern Mobile">iPhone 14 (390px)</button>
+            <button class="preset-btn" data-width="414" data-height="896" title="Large Mobile">iPhone XR (414px)</button>
+            <button class="preset-btn" data-width="768" data-height="1024" title="Tablet Portrait">iPad (768px)</button>
+            <button class="preset-btn" data-width="1024" data-height="768" title="Tablet Landscape">iPad Air (1024px)</button>
+            <button class="preset-btn" data-width="1280" data-height="800" title="Laptop">Laptop (1280px)</button>
+          </div>
+          <div class="custom-dims-group">
+            <label>Width: <input type="number" id="preview-input-width" value="390" min="280" max="1920" />px</label>
+            <label>Height: <input type="number" id="preview-input-height" value="844" min="400" max="1440" />px</label>
+            <button id="btn-rotate-preview" class="btn btn-secondary icon-only" title="Rotate Orientation">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+              </svg>
+            </button>
+            <button id="btn-preview-toggle-mode" class="btn btn-primary">
+              <span id="preview-mode-label">Preview Adapted</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Preview Stage & Device Frame -->
+        <div class="preview-stage">
+          <div class="device-mockup" id="device-mockup-frame" style="width: 390px; height: 844px;">
+            <div class="device-notch"></div>
+            <iframe id="preview-iframe" class="device-iframe" sandbox="allow-same-origin allow-scripts" src="about:blank"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 4: Detected Issues -->
+    <section class="tab-pane" id="tab-issues">
+      <div class="card issues-card">
+        <div class="card-toolbar">
+          <div class="toolbar-search">
+            <input type="text" id="issues-search" placeholder="Search issues by description, selector, or rule..." />
+          </div>
+          <div class="toolbar-filters">
+            <select id="filter-severity">
+              <option value="all">All Severities</option>
+              <option value="critical">Critical</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+            <select id="filter-category">
+              <option value="all">All Categories</option>
+              <option value="overflow">Overflow</option>
+              <option value="container">Container</option>
+              <option value="image">Image</option>
+              <option value="navigation">Navigation</option>
+              <option value="typography">Typography</option>
+              <option value="flex-grid">Flex & Grid</option>
+              <option value="form">Form</option>
+              <option value="table">Table</option>
+              <option value="touch-target">Touch Target</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Issues Table -->
+        <div class="table-container">
+          <table class="data-table" id="issues-table">
+            <thead>
+              <tr>
+                <th>Severity</th>
+                <th>Category</th>
+                <th>Target Selector</th>
+                <th>Issue Description</th>
+                <th>Current Evidence</th>
+                <th>Recommended Fix</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="issues-table-body">
+              <tr>
+                <td colspan="7" class="text-center">No issues detected or scan not performed yet.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 5: CSS Transformations Editor -->
+    <section class="tab-pane" id="tab-editor">
+      <div class="editor-layout">
+        <div class="card editor-card">
+          <div class="editor-header">
+            <div class="editor-meta">
+              <h3>Generated Responsive Override Rules</h3>
+              <span class="editor-sub">Live CSS syntax stylesheet injected into page</span>
+            </div>
+            <div class="editor-actions">
+              <button id="btn-copy-css" class="btn btn-secondary">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Copy CSS</span>
+              </button>
+              <button id="btn-apply-editor-css" class="btn btn-primary">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Apply to Page</span>
+              </button>
+            </div>
+          </div>
+          <textarea id="css-editor-textarea" class="css-code-editor" spellcheck="false" placeholder="/* CSS overrides will be compiled here after scanning */"></textarea>
+        </div>
+
+        <!-- Transformations Rule List Sidebar -->
+        <div class="card rules-sidebar">
+          <div class="card-header">
+            <h3>Active Transformation Rules</h3>
+            <span class="card-header-sub" id="rules-count-label">0 rules active</span>
+          </div>
+          <div class="rules-list" id="rules-toggle-list">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 6: Settings -->
+    <section class="tab-pane" id="tab-settings">
+      <div class="settings-grid">
+        <div class="card settings-card">
+          <div class="card-header">
+            <h3>Automation & Engine Behavior</h3>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <span class="setting-title">Auto Scan on Page Load</span>
+              <span class="setting-desc">Automatically inspects loaded web pages for mobile layout defects</span>
+            </div>
+            <input type="checkbox" id="setting-auto-scan" class="toggle-checkbox" />
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <span class="setting-title">Auto-Apply Safe Fixes</span>
+              <span class="setting-desc">Injects verified fluid media and overflow containment rules upon detection</span>
+            </div>
+            <input type="checkbox" id="setting-auto-apply" class="toggle-checkbox" />
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <span class="setting-title">Remember Per-Site Preferences</span>
+              <span class="setting-desc">Persists applied responsive transformations across browser sessions</span>
+            </div>
+            <input type="checkbox" id="setting-remember-site" class="toggle-checkbox" checked />
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <span class="setting-title">Interactive Element Highlighting</span>
+              <span class="setting-desc">Highlights inspected DOM nodes with high-visibility indigo outlines</span>
+            </div>
+            <input type="checkbox" id="setting-highlight-issues" class="toggle-checkbox" checked />
+          </div>
+        </div>
+
+        <div class="card settings-card">
+          <div class="card-header">
+            <h3>Workstation Configuration</h3>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <span class="setting-title">Max Elements Scanned</span>
+              <span class="setting-desc">Safety ceiling for DOM node traversal depth on complex pages</span>
+            </div>
+            <select id="setting-max-elements" class="setting-select">
+              <option value="250">250 elements</option>
+              <option value="500" selected>500 elements</option>
+              <option value="1000">1000 elements</option>
+            </select>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <span class="setting-title">Color Theme</span>
+              <span class="setting-desc">Workstation user interface color scheme</span>
+            </div>
+            <select id="setting-theme" class="setting-select">
+              <option value="dark" selected>Obsidian Dark</option>
+              <option value="midnight">Midnight Indigo</option>
+              <option value="contrast">High Contrast</option>
+            </select>
+          </div>
+          <div class="setting-actions">
+            <button id="btn-save-settings" class="btn btn-primary">Save Settings</button>
+            <button id="btn-reset-settings" class="btn btn-secondary">Restore Defaults</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>

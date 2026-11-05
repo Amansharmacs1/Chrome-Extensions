@@ -16,6 +16,7 @@ From focused study sessions and personalized new-tab experiences to website desi
 | [**NewTab Pro**](./extensions/NewTabPro) | Turn every new tab into a personalized productivity dashboard with shortcuts, tasks, search, scratchpad, and themes. | Completed & Tested |
 | [**ReadEase**](./extensions/ReadEase) | Enjoy a cleaner, distraction-free reading experience with customizable typography, offline library, highlights, and focus mode. | Completed & Tested |
 | [**ColorPeek**](./extensions/ColorPeek) | Pick, inspect, convert, organize, and export colors from websites with native Eyedropper, WCAG contrast engine, and design tokens. | Completed & Tested |
+| [**ViewPortX**](./extensions/ViewPortX) | Make every website responsive. Automatically detects layout flaws, horizontal overflow, and fixed-width containers, generating targeted local CSS overrides. | Completed & Tested |
 | **FontLens** | Inspect website typography and copy CSS font properties. | Planned |
 | **LinkShield** | Check URLs for known threats and suspicious patterns before opening them. | Planned |
 
@@ -68,6 +69,7 @@ Chrome-Extensions/
     │   └── README.md
     ├── NewTabPro/
     ├── ReadEase/
+    ├── ViewPortX/
     └── WebNotes/
 ```
 

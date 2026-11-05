@@ -1,0 +1,20 @@
+{
+  "name": "viewportx",
+  "version": "1.0.0",
+  "description": "ViewPortX – Auto Responsive Engine. Transform non-responsive and legacy websites into mobile-friendly layouts directly inside the browser.",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/run-all.js",
+    "icons": "node generate-icons.cjs"
+  },
+  "keywords": [
+    "chrome-extension",
+    "responsive-design",
+    "mobile-friendly",
+    "css-transformations",
+    "viewport",
+    "web-inspector"
+  ],
+  "author": "Aman Sharma",
+  "license": "MIT"
+}
