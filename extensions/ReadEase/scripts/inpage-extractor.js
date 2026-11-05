@@ -68,14 +68,22 @@
     const metaDesc = doc.querySelector('meta[name="description"]')?.getAttribute('content');
     let rawExcerpt = (ogDesc || metaDesc || '').trim();
 
+    function isCoordinateNoise(str = '') {
+      return /^\s*coordinates:/i.test(str) ||
+             /^\s*\d+°\d+['′]/i.test(str) ||
+             /^\s*[\d.]+\s*;\s*[\d.]+/i.test(str);
+    }
+
     // If description is missing, empty, or coordinates/noise (e.g. Wikipedia geohacks), fall back to lead paragraph
-    if (!rawExcerpt || /^\s*coordinates:/i.test(rawExcerpt) || /^\d+°\d+['′]/.test(rawExcerpt)) {
+    if (!rawExcerpt || isCoordinateNoise(rawExcerpt)) {
       try {
-        const leadP = doc.querySelector('p');
-        if (leadP) {
-          const pText = (leadP.textContent || '').trim().replace(/\s+/g, ' ');
-          if (pText.length > 40 && !/^\s*coordinates:/i.test(pText) && !/^\d+°\d+['′]/.test(pText)) {
+        const paragraphs = doc.querySelectorAll ? doc.querySelectorAll('p') : (doc.querySelector('p') ? [doc.querySelector('p')] : []);
+        for (const p of paragraphs) {
+          if (p.closest && p.closest('.mw-empty-elt, .infobox, .metadata, #coordinates, .navbox, aside')) continue;
+          const pText = (p.textContent || '').trim().replace(/\s+/g, ' ');
+          if (pText.length > 40 && !isCoordinateNoise(pText)) {
             rawExcerpt = pText.slice(0, 180) + (pText.length > 180 ? '...' : '');
+            break;
           }
         }
       } catch {}
@@ -337,9 +345,10 @@
   const cleanHtml = sanitize(rawHtml);
 
   let finalExcerpt = metadata.excerpt || '';
-  if (!finalExcerpt || /^\s*coordinates:/i.test(finalExcerpt) || /^\d+°\d+['′]/.test(finalExcerpt)) {
+  if (!finalExcerpt || /^\s*coordinates:/i.test(finalExcerpt) || /^\d+°\d+['′]/.test(finalExcerpt) || /^\s*[\d.]+\s*;\s*[\d.]+/i.test(finalExcerpt)) {
     if (rawText) {
-      finalExcerpt = rawText.slice(0, 180).trim() + (rawText.length > 180 ? '...' : '');
+      const cleanRaw = rawText.replace(/coordinates:\s*[\d\s°′"NSEW/.;]+/gi, '').trim();
+      finalExcerpt = cleanRaw.slice(0, 180).trim() + (cleanRaw.length > 180 ? '...' : '');
     }
   }
 

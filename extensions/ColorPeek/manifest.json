@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "ColorPeek — Pick, Inspect & Convert Colors",
+  "version": "1.0.0",
+  "description": "Pick, inspect, convert, and organize colors from websites with native Eyedropper, CSS element inspection, WCAG contrast checker, and palette exports.",
+  "icons": {
+    "16": "assets/icon16.png",
+    "32": "assets/icon32.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "ColorPeek — Pick, Inspect & Convert",
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "32": "assets/icon32.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+C",
+        "mac": "Alt+Shift+C"
+      },
+      "description": "Open ColorPeek"
+    }
+  }
+}

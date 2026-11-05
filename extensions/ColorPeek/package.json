@@ -1,0 +1,22 @@
+{
+  "name": "colorpeek",
+  "version": "1.0.0",
+  "description": "Pick, inspect, convert, and organize colors from websites with native Eyedropper, CSS element inspection, WCAG contrast checker, and palette exports.",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/run-all.js",
+    "icons": "node generate-icons.cjs"
+  },
+  "keywords": [
+    "chrome-extension",
+    "manifest-v3",
+    "color-picker",
+    "eyedropper",
+    "wcag",
+    "contrast-checker",
+    "css-generator",
+    "palettes"
+  ],
+  "author": "Aman Sharma",
+  "license": "MIT"
+}

@@ -210,14 +210,17 @@ async function initPopup() {
   function showArticleState(article) {
     if (stateScanning) {
       stateScanning.hidden = true;
+      stateScanning.style.display = 'none';
       stateScanning.classList.remove('active');
     }
     if (stateUnsupported) {
       stateUnsupported.hidden = true;
+      stateUnsupported.style.display = 'none';
       stateUnsupported.classList.remove('active');
     }
     if (stateArticle) {
       stateArticle.hidden = false;
+      stateArticle.style.display = 'flex';
       stateArticle.classList.add('active');
     }
 
@@ -230,14 +233,17 @@ async function initPopup() {
   function showUnsupportedState(reason) {
     if (stateScanning) {
       stateScanning.hidden = true;
+      stateScanning.style.display = 'none';
       stateScanning.classList.remove('active');
     }
     if (stateArticle) {
       stateArticle.hidden = true;
+      stateArticle.style.display = 'none';
       stateArticle.classList.remove('active');
     }
     if (stateUnsupported) {
       stateUnsupported.hidden = false;
+      stateUnsupported.style.display = 'flex';
       stateUnsupported.classList.add('active');
     }
     if (unsupportedDesc) unsupportedDesc.textContent = reason;

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ColorPeek</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body class="colorpeek-popup">
+  <!-- Main Header -->
+  <header class="popup-header">
+    <div class="brand-group">
+      <div class="brand-logo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#06B6D4" stroke="#06B6D4" opacity="0.2"/>
+          <path d="m19 11-8-8-8.5 8.5a5 5 0 0 0 7.07 7.07L11 17"/>
+          <path d="m13 13 4 4"/>
+          <path d="m15 9 2 2"/>
+        </svg>
+      </div>
+      <div>
+        <h1 class="brand-title">ColorPeek</h1>
+        <p class="brand-tagline">Pick. Inspect. Copy.</p>
+      </div>
+    </div>
+
+    <div class="header-tools">
+      <!-- Native Eyedropper Button -->
+      <button id="btnPickEyedropper" class="tool-btn primary-tool" title="Sample any pixel from webpage (Eyedropper)" aria-label="Sample pixel with Eyedropper">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m19 11-8-8-8.5 8.5a5 5 0 0 0 7.07 7.07L11 17"></path>
+          <path d="m13 13 4 4"></path>
+          <path d="m15 9 2 2"></path>
+        </svg>
+        <span>Pick</span>
+      </button>
+
+      <!-- Webpage Element Inspector Button -->
+      <button id="btnInspectElement" class="tool-btn" title="Inspect computed CSS colors of webpage elements" aria-label="Inspect Element CSS">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="9" y1="3" x2="9" y2="21"></line>
+        </svg>
+        <span>Inspect</span>
+      </button>
+
+      <!-- Open Full Workstation Dashboard -->
+      <button id="btnOpenDashboard" class="tool-btn icon-only" title="Open Full Dashboard Workstation" aria-label="Open Full Dashboard">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Color Hero Card -->
+  <section class="color-hero-card">
+    <div class="hero-left">
+      <div id="activeColorPreview" class="color-swatch-large" title="Click to copy HEX">
+        <span class="swatch-copy-hint">Copy</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="input-row">
+        <span class="input-prefix">#</span>
+        <input type="text" id="colorHexInput" class="hex-text-input" value="3B82F6" maxlength="9" spellcheck="false" aria-label="Active HEX Color">
+        <span id="inputValidationBadge" class="validation-badge valid" title="Valid color">✓</span>
+      </div>
+      <div class="source-tag-row">
+        <span id="colorSourceBadge" class="source-badge">Sampled Color</span>
+        <button id="btnSaveToActivePalette" class="btn-text-action" title="Save this color to current palette">+ Save to Palette</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formats Grid -->
+  <section class="formats-section">
+    <div class="format-card" data-format="hex">
+      <div class="format-meta">
+        <span class="format-label">HEX</span>
+        <span id="valHex" class="format-value">#3B82F6</span>
+      </div>
+      <button class="btn-copy-format" data-target="valHex" title="Copy HEX to clipboard">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      </button>
+    </div>
+
+    <div class="format-card" data-format="rgb">
+      <div class="format-meta">
+        <span class="format-label">RGB</span>
+        <span id="valRgb" class="format-value">rgb(59, 130, 246)</span>
+      </div>
+      <button class="btn-copy-format" data-target="valRgb" title="Copy RGB to clipboard">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      </button>
+    </div>
+
+    <div class="format-card" data-format="hsl">
+      <div class="format-meta">
+        <span class="format-label">HSL</span>
+        <span id="valHsl" class="format-value">hsl(217, 91%, 60%)</span>
+      </div>
+      <button class="btn-copy-format" data-target="valHsl" title="Copy HSL to clipboard">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      </button>
+    </div>
+
+    <div class="format-card" data-format="css-var">
+      <div class="format-meta">
+        <span class="format-label">CSS Var</span>
+        <span id="valCssVar" class="format-value">--color-primary: #3B82F6;</span>
+      </div>
+      <button class="btn-copy-format" data-target="valCssVar" title="Copy CSS variable to clipboard">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- Navigation Tabs -->
+  <nav class="popup-tabs" role="tablist">
+    <button class="tab-btn active" data-tab="tabPalettes" role="tab" aria-selected="true">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+      <span>Palettes</span>
+    </button>
+    <button class="tab-btn" data-tab="tabContrast" role="tab" aria-selected="false">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a10 10 0 0 0 0 20z" fill="currentColor"></path></svg>
+      <span>Contrast</span>
+    </button>
+    <button class="tab-btn" data-tab="tabHarmonies" role="tab" aria-selected="false">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="12 6 12 12 16 14"></polygon></svg>
+      <span>Harmonies</span>
+    </button>
+  </nav>
+
+  <!-- Tab Panels -->
+  <main class="popup-tab-content">
+    <!-- Tab 1: Palettes & Recent History -->
+    <div id="tabPalettes" class="tab-panel active" role="tabpanel">
+      <!-- Recent Colors Strip -->
+      <div class="panel-subhead">
+        <span>Recent Picks</span>
+        <button id="btnClearRecents" class="btn-subtle-link">Clear</button>
+      </div>
+      <div id="recentColorsList" class="swatch-strip">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Palette Selector & Actions -->
+      <div class="palette-control-bar">
+        <select id="paletteSelect" class="palette-dropdown" aria-label="Select Palette">
+          <!-- Populated dynamically -->
+        </select>
+        <button id="btnNewPalette" class="btn-icon-subtle" title="Create New Palette" aria-label="Create Palette">+</button>
+        <button id="btnExportPalette" class="btn-icon-subtle" title="Export Palette (CSS/HEX/JSON)" aria-label="Export Palette">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        </button>
+      </div>
+
+      <!-- Current Palette Swatches Grid -->
+      <div id="paletteSwatchesGrid" class="palette-grid">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- Tab 2: WCAG Contrast Checker -->
+    <div id="tabContrast" class="tab-panel" role="tabpanel" hidden>
+      <div class="contrast-selector-row">
+        <div class="contrast-picker-box">
+          <label class="contrast-label">Text (Foreground)</label>
+          <div class="contrast-input-wrap">
+            <span id="contrastFgSwatch" class="swatch-xs"></span>
+            <input type="text" id="contrastFgInput" class="contrast-hex-input" value="#FFFFFF" maxlength="9">
+          </div>
+        </div>
+
+        <button id="btnSwapContrast" class="btn-swap-colors" title="Swap Foreground and Background" aria-label="Swap Colors">
+          ⇄
+        </button>
+
+        <div class="contrast-picker-box">
+          <label class="contrast-label">Background</label>
+          <div class="contrast-input-wrap">
+            <span id="contrastBgSwatch" class="swatch-xs"></span>
+            <input type="text" id="contrastBgInput" class="contrast-hex-input" value="#3B82F6" maxlength="9">
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Text Simulation Preview -->
+      <div id="contrastLiveCard" class="contrast-preview-card">
+        <p class="preview-large-text">Large Heading (Bold 18pt)</p>
+        <p class="preview-normal-text">Readable body text preview demonstrating real-world WCAG contrast.</p>
+      </div>
+
+      <!-- Score & Badges Grid -->
+      <div class="contrast-score-bar">
+        <div class="score-ratio-group">
+          <span class="ratio-label">Contrast Ratio</span>
+          <span id="contrastRatioDisplay" class="ratio-number">4.62:1</span>
+        </div>
+        <div id="contrastOverallBadge" class="contrast-badge pass">AA Normal</div>
+      </div>
+
+      <div class="compliance-grid">
+        <div class="compliance-item" id="compAaNormal">
+          <span class="comp-title">AA Normal Text</span>
+          <span class="comp-req">min 4.5:1</span>
+          <span class="comp-status pass">Pass</span>
+        </div>
+        <div class="compliance-item" id="compAaLarge">
+          <span class="comp-title">AA Large Text</span>
+          <span class="comp-req">min 3.0:1</span>
+          <span class="comp-status pass">Pass</span>
+        </div>
+        <div class="compliance-item" id="compAaaNormal">
+          <span class="comp-title">AAA Normal Text</span>
+          <span class="comp-req">min 7.0:1</span>
+          <span class="comp-status fail">Fail</span>
+        </div>
+        <div class="compliance-item" id="compAaaLarge">
+          <span class="comp-title">AAA Large Text</span>
+          <span class="comp-req">min 4.5:1</span>
+          <span class="comp-status pass">Pass</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 3: Harmonies & Shading Scale -->
+    <div id="tabHarmonies" class="tab-panel" role="tabpanel" hidden>
+      <div class="harmony-group">
+        <div class="harmony-head">
+          <span class="harmony-title">Complementary</span>
+          <span class="harmony-desc">180° Opposite</span>
+        </div>
+        <div id="harmonyComplementary" class="harmony-swatches-row"></div>
+      </div>
+
+      <div class="harmony-group">
+        <div class="harmony-head">
+          <span class="harmony-title">Analogous</span>
+          <span class="harmony-desc">±30° Adjacent</span>
+        </div>
+        <div id="harmonyAnalogous" class="harmony-swatches-row"></div>
+      </div>
+
+      <div class="harmony-group">
+        <div class="harmony-head">
+          <span class="harmony-title">Triadic</span>
+          <span class="harmony-desc">120° Even Spacing</span>
+        </div>
+        <div id="harmonyTriadic" class="harmony-swatches-row"></div>
+      </div>
+
+      <div class="harmony-group">
+        <div class="harmony-head">
+          <span class="harmony-title">Design System Scale</span>
+          <span class="harmony-desc">10-step Tints & Shades</span>
+        </div>
+        <div id="harmonyShades" class="harmony-shades-row"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Quick Guide -->
+  <footer class="popup-footer">
+    <span class="shortcut-tip">Shortcut: <kbd>Alt+Shift+C</kbd></span>
+    <button id="btnSettingsLink" class="footer-link">Options</button>
+  </footer>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

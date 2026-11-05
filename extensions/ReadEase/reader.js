@@ -129,6 +129,12 @@ async function initReader() {
   const btnSaveNote = document.getElementById('btnSaveNote');
   const btnCloseComposer = document.getElementById('btnCloseComposer');
 
+  // Font size slider & steppers
+  const fontSizeSlider = document.getElementById('fontSizeSlider');
+  const fontSizeDisplay = document.getElementById('fontSizeDisplay');
+  const btnFontDec = document.getElementById('btnFontDec');
+  const btnFontInc = document.getElementById('btnFontInc');
+
   // 1. Load user settings and apply them to the document
   try {
     currentSettings = await getSettings();
@@ -167,37 +173,47 @@ async function initReader() {
   }
 
   // 3. Render the article content IMMEDIATELY
-  renderArticle(article);
+  try {
+    renderArticle(article);
+  } catch (renderErr) {
+    console.error('[ReadEase Reader] Immediate render error:', renderErr);
+  }
 
   // 4. Attach reading progress tracking
-  attachReadingProgressListener({
-    totalMinutes: article.readingTime || 1,
-    onProgressUpdate: ({ progress, remainingMinutes, scrollY }) => {
-      progressFill.style.width = `${progress}%`;
-      readingProgressText.textContent = `${progress}% read`;
-      readingTimeRemainingText.textContent = formatRemainingTime(remainingMinutes);
+  try {
+    attachReadingProgressListener({
+      totalMinutes: article.readingTime || 1,
+      onProgressUpdate: ({ progress, remainingMinutes, scrollY }) => {
+        if (progressFill) progressFill.style.width = `${progress}%`;
+        if (readingProgressText) readingProgressText.textContent = `${progress}% read`;
+        if (readingTimeRemainingText) readingTimeRemainingText.textContent = formatRemainingTime(remainingMinutes);
 
-      // Debounce saving progress to storage if saved article
-      if (article.id && article.id !== DEMO_ARTICLE.id) {
-        updateArticleProgress(article.id, progress, scrollY).catch(() => {});
+        // Debounce saving progress to storage if saved article
+        if (article?.id && article.id !== DEMO_ARTICLE.id) {
+          updateArticleProgress(article.id, progress, scrollY).catch(() => {});
+        }
       }
-    }
-  });
+    });
+  } catch (progErr) {
+    console.warn('[ReadEase Reader] Progress listener error:', progErr);
+  }
 
   // 5. Check resume reading position
-  if (currentSettings.autoResume && article.scrollY && article.progress < 95) {
+  if (currentSettings?.autoResume && article?.scrollY && (article?.progress || 0) < 95) {
     resumeReadingPosition(article.scrollY, article.progress, ({ savedProgress, restart }) => {
-      resumeBanner.hidden = false;
-      resumeText.textContent = `Resumed reading from ${savedProgress}%`;
-      btnRestartTop.onclick = () => {
-        restart();
-        resumeBanner.hidden = true;
-      };
+      if (resumeBanner) resumeBanner.hidden = false;
+      if (resumeText) resumeText.textContent = `Resumed reading from ${savedProgress}%`;
+      if (btnRestartTop) {
+        btnRestartTop.onclick = () => {
+          restart();
+          if (resumeBanner) resumeBanner.hidden = true;
+        };
+      }
     });
   }
 
-  btnCloseResumeBanner.addEventListener('click', () => {
-    resumeBanner.hidden = true;
+  btnCloseResumeBanner?.addEventListener('click', () => {
+    if (resumeBanner) resumeBanner.hidden = true;
   });
 
   // 6. Navigation Buttons
@@ -229,8 +245,12 @@ async function initReader() {
 
   // Check if article is currently saved in library
   try {
-    const existingSaved = await getArticle(article.id);
-    updateSaveButtonState(Boolean(existingSaved));
+    if (article?.id) {
+      const existingSaved = await getArticle(article.id);
+      updateSaveButtonState(Boolean(existingSaved));
+    } else {
+      updateSaveButtonState(false);
+    }
   } catch (err) {
     console.warn('[ReadEase Reader] Saved state check warning:', err);
     updateSaveButtonState(false);
@@ -356,29 +376,24 @@ async function initReader() {
   });
 
   // Font size slider & steppers
-  const fontSizeSlider = document.getElementById('fontSizeSlider');
-  const fontSizeDisplay = document.getElementById('fontSizeDisplay');
-  const btnFontDec = document.getElementById('btnFontDec');
-  const btnFontInc = document.getElementById('btnFontInc');
-
   const updateFontSize = async (newSize) => {
     const clamped = Math.max(14, Math.min(28, Number(newSize)));
-    fontSizeSlider.value = clamped;
-    fontSizeDisplay.textContent = `${clamped}px`;
+    if (fontSizeSlider) fontSizeSlider.value = clamped;
+    if (fontSizeDisplay) fontSizeDisplay.textContent = `${clamped}px`;
     currentSettings = await saveSettings({ fontSize: clamped });
     applySettingsToDOM(currentSettings);
   };
 
-  fontSizeSlider.addEventListener('input', (ev) => {
+  fontSizeSlider?.addEventListener('input', (ev) => {
     updateFontSize(ev.target.value);
   });
 
-  btnFontDec.addEventListener('click', () => {
-    updateFontSize(Number(fontSizeSlider.value) - 1);
+  btnFontDec?.addEventListener('click', () => {
+    updateFontSize(Number(fontSizeSlider?.value || 18) - 1);
   });
 
-  btnFontInc.addEventListener('click', () => {
-    updateFontSize(Number(fontSizeSlider.value) + 1);
+  btnFontInc?.addEventListener('click', () => {
+    updateFontSize(Number(fontSizeSlider?.value || 18) + 1);
   });
 
   // 11. Text Selection & Floating Highlight Toolbar
@@ -625,46 +640,61 @@ async function initReader() {
 
   // Helper: Render full article
   function renderArticle(art) {
+    if (!art) art = DEMO_ARTICLE;
     document.title = `${art.title || 'Article'} — ReadEase`;
-    headerSiteBadge.textContent = art.siteName || 'Web Article';
-    articleHeading.textContent = art.title || 'Untitled Article';
+    if (headerSiteBadge) headerSiteBadge.textContent = art.siteName || 'Web Article';
+    if (articleHeading) articleHeading.textContent = art.title || 'Untitled Article';
 
-    if (art.byline) {
-      articleAuthor.textContent = `By ${art.byline}`;
-      articleAuthor.hidden = false;
-    } else {
-      articleAuthor.hidden = true;
+    if (articleAuthor) {
+      if (art.byline) {
+        articleAuthor.textContent = `By ${art.byline}`;
+        articleAuthor.hidden = false;
+      } else {
+        articleAuthor.hidden = true;
+      }
     }
 
-    if (art.publishedTime) {
-      articleDate.textContent = formatDate(art.publishedTime);
-      articleDateDot.hidden = !art.byline;
-    } else {
-      articleDateDot.hidden = true;
+    if (articleDate) {
+      if (art.publishedTime) {
+        articleDate.textContent = formatDate(art.publishedTime);
+        if (articleDateDot) articleDateDot.hidden = !art.byline;
+      } else {
+        if (articleDateDot) articleDateDot.hidden = true;
+      }
     }
 
-    articleStats.textContent = `${art.wordCount || 0} words • ${formatReadingTime(art.readingTime || 1)}`;
+    if (articleStats) {
+      articleStats.textContent = `${art.wordCount || 0} words • ${formatReadingTime(art.readingTime || 1)}`;
+    }
 
     // Render HTML content
-    readerBody.innerHTML = art.contentHtml || '<p>No readable content available.</p>';
+    if (readerBody) {
+      readerBody.innerHTML = art.contentHtml || '<p>No readable content available.</p>';
 
-    // Restore highlights onto article DOM
-    if (Array.isArray(art.highlights) && art.highlights.length > 0) {
-      restoreAllHighlights(readerBody, art.highlights);
+      // Restore highlights onto article DOM
+      if (Array.isArray(art.highlights) && art.highlights.length > 0) {
+        try {
+          restoreAllHighlights(readerBody, art.highlights);
+        } catch (hlErr) {
+          console.warn('[ReadEase Reader] Highlight restore error:', hlErr);
+        }
+      }
     }
-    updateHighlightsBadge();
+
+    try {
+      updateHighlightsBadge();
+    } catch {}
 
     // Render tags
-    renderTags(art.tags);
+    try {
+      renderTags(art.tags);
+    } catch {}
   }
 }
 
 function startReader() {
   initReader().catch(err => {
     console.error('[ReadEase Reader] Top-level initialization error:', err);
-    if (!article) {
-      renderArticle(DEMO_ARTICLE);
-    }
   });
 }
 

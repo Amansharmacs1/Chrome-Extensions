@@ -15,7 +15,7 @@ From focused study sessions and personalized new-tab experiences to website desi
 | [**WebNotes**](./extensions/WebNotes) | Take and organize notes directly on websites, capture quotes, and manage research. | Completed & Tested |
 | [**NewTab Pro**](./extensions/NewTabPro) | Turn every new tab into a personalized productivity dashboard with shortcuts, tasks, search, scratchpad, and themes. | Completed & Tested |
 | [**ReadEase**](./extensions/ReadEase) | Enjoy a cleaner, distraction-free reading experience with customizable typography, offline library, highlights, and focus mode. | Completed & Tested |
-| **ColorPeek** | Pick website colors and copy HEX, RGB, and HSL values. | Planned |
+| [**ColorPeek**](./extensions/ColorPeek) | Pick, inspect, convert, organize, and export colors from websites with native Eyedropper, WCAG contrast engine, and design tokens. | Completed & Tested |
 | **FontLens** | Inspect website typography and copy CSS font properties. | Planned |
 | **LinkShield** | Check URLs for known threats and suspicious patterns before opening them. | Planned |
 
@@ -51,6 +51,7 @@ Chrome-Extensions/
 ├── README.md
 ├── .gitignore
 └── extensions/
+    ├── ColorPeek/
     ├── FocusFlow/
     ├── MeetMorph/
     │   ├── manifest.json
