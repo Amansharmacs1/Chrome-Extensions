@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BugShot — Bug Report Editor</title>
+  <link rel="stylesheet" href="report.css">
+</head>
+<body class="bugshot-report-app">
+  <!-- Top Navigation Bar -->
+  <header class="report-header">
+    <div class="header-left">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"></circle>
+            <circle cx="12" cy="12" r="2.5" fill="#ef4444"></circle>
+            <line x1="12" y1="3" x2="12" y2="7"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+            <line x1="3" y1="12" x2="7" y2="12"></line>
+            <line x1="17" y1="12" x2="21" y2="12"></line>
+          </svg>
+        </div>
+        <div class="brand-meta">
+          <span class="brand-title">Bug<span>Shot</span></span>
+          <span class="brand-subtitle">Report Generator</span>
+        </div>
+      </div>
+      <span class="report-id-pill" id="report-id-pill">NEW REPORT</span>
+    </div>
+
+    <!-- Header Right Action Group -->
+    <div class="header-right">
+      <button id="btn-copy-summary" class="btn btn-secondary btn-sm" title="Copy quick summary to clipboard">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        <span>Copy Summary</span>
+      </button>
+
+      <button id="btn-export-markdown" class="btn btn-secondary btn-sm" title="Export as GitHub/Jira Markdown">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        <span>Export MD</span>
+      </button>
+
+      <button id="btn-export-json" class="btn btn-secondary btn-sm" title="Export structured JSON report">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+        <span>Export JSON</span>
+      </button>
+
+      <button id="btn-print-pdf" class="btn btn-secondary btn-sm" title="Print-ready layout to save as PDF">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        <span>Print / PDF</span>
+      </button>
+
+      <button id="btn-save-report" class="btn btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+          <polyline points="17 21 17 13 7 13 7 21"></polyline>
+          <polyline points="7 3 7 8 15 8"></polyline>
+        </svg>
+        <span>Save Report</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Report Form Container -->
+  <main class="report-content-grid">
+    <!-- Left Column: Core Form Fields -->
+    <section class="form-column">
+      <!-- Title -->
+      <div class="card form-card">
+        <div class="field-group">
+          <label for="input-title">Bug Title <span class="required">*</span></label>
+          <input type="text" id="input-title" class="input-text title-input" placeholder="e.g. Navigation dropdown clips on Safari iOS" />
+        </div>
+
+        <div class="form-row">
+          <!-- Severity -->
+          <div class="field-group flex-1">
+            <label>Severity Level</label>
+            <div class="severity-selector">
+              <button type="button" class="sev-btn" data-sev="critical">Critical</button>
+              <button type="button" class="sev-btn" data-sev="high">High</button>
+              <button type="button" class="sev-btn active" data-sev="medium">Medium</button>
+              <button type="button" class="sev-btn" data-sev="low">Low</button>
+            </div>
+          </div>
+
+          <!-- Priority -->
+          <div class="field-group">
+            <label for="select-priority">Priority</label>
+            <select id="select-priority" class="input-select">
+              <option value="P0">P0 — Blocker</option>
+              <option value="P1">P1 — Urgent</option>
+              <option value="P2" selected>P2 — Normal</option>
+              <option value="P3">P3 — Low</option>
+            </select>
+          </div>
+
+          <!-- Category -->
+          <div class="field-group">
+            <label for="select-category">Category</label>
+            <select id="select-category" class="input-select">
+              <option value="ui-ux" selected>UI / UX</option>
+              <option value="functional">Functional</option>
+              <option value="performance">Performance</option>
+              <option value="responsive">Responsive Design</option>
+              <option value="accessibility">Accessibility</option>
+              <option value="javascript">JavaScript Error</option>
+              <option value="network">Network / API</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="field-group">
+          <label for="input-desc">Description</label>
+          <textarea id="input-desc" class="input-textarea" rows="4" placeholder="Detailed explanation of the problem, conditions, and visible defects..."></textarea>
+        </div>
+
+        <!-- Steps to Reproduce -->
+        <div class="field-group">
+          <label for="input-steps">Steps to Reproduce <span class="field-hint">(Enter each step on a new line)</span></label>
+          <textarea id="input-steps" class="input-textarea" rows="4" placeholder="1. Navigate to /checkout&#10;2. Click on 'Apply Coupon'&#10;3. Observe unresponsive submit button"></textarea>
+        </div>
+
+        <!-- Expected vs Actual Result -->
+        <div class="form-row">
+          <div class="field-group flex-1">
+            <label for="input-expected">Expected Result</label>
+            <textarea id="input-expected" class="input-textarea" rows="3" placeholder="What should happen under normal conditions..."></textarea>
+          </div>
+          <div class="field-group flex-1">
+            <label for="input-actual">Actual Result</label>
+            <textarea id="input-actual" class="input-textarea" rows="3" placeholder="What actually happened instead..."></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Column: Diagnostics, Screenshots & Metadata -->
+    <aside class="sidebar-column">
+      <!-- Screenshot Attachment Card -->
+      <div class="card attachment-card">
+        <div class="card-header">
+          <h3>Annotated Screenshot</h3>
+          <div class="header-tools">
+            <button id="btn-re-edit" class="btn btn-secondary btn-xs" title="Open screenshot back in Annotation Editor">Re-Annotate</button>
+            <button id="btn-download-thumb" class="btn btn-secondary btn-xs" title="Download Image">Download</button>
+          </div>
+        </div>
+        <div class="screenshot-preview-box" id="screenshot-preview-container">
+          <img id="screenshot-preview-img" src="" alt="Bug Screenshot Preview" />
+        </div>
+      </div>
+
+      <!-- Technical Metadata Card -->
+      <div class="card diagnostic-card">
+        <div class="card-header">
+          <h3>Technical Environment</h3>
+          <span class="card-sub">Auto-collected</span>
+        </div>
+        <div class="meta-table-wrap">
+          <table class="meta-table" id="metadata-display-table">
+            <tbody>
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Console Logs Card -->
+      <div class="card diagnostic-card">
+        <div class="card-header">
+          <h3>Console Errors</h3>
+          <span class="count-pill" id="console-logs-count">0</span>
+        </div>
+        <div class="log-list" id="console-logs-container">
+          <div class="empty-hint">No console errors captured.</div>
+        </div>
+      </div>
+
+      <!-- Network Insights Card -->
+      <div class="card diagnostic-card">
+        <div class="card-header">
+          <h3>Network Failures</h3>
+          <span class="count-pill" id="network-insights-count">0</span>
+        </div>
+        <div class="log-list" id="network-insights-container">
+          <div class="empty-hint">No failed requests captured.</div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <script type="module" src="report.js"></script>
+</body>
+</html>

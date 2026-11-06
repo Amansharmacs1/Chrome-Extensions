@@ -17,6 +17,7 @@ From focused study sessions and personalized new-tab experiences to website desi
 | [**ReadEase**](./extensions/ReadEase) | Enjoy a cleaner, distraction-free reading experience with customizable typography, offline library, highlights, and focus mode. | Completed & Tested |
 | [**ColorPeek**](./extensions/ColorPeek) | Pick, inspect, convert, organize, and export colors from websites with native Eyedropper, WCAG contrast engine, and design tokens. | Completed & Tested |
 | [**ViewPortX**](./extensions/ViewPortX) | Make every website responsive. Automatically detects layout flaws, horizontal overflow, and fixed-width containers, generating targeted local CSS overrides. | Completed & Tested |
+| [**BugShot**](./extensions/BugShot) | Capture website bugs, annotate screenshots with vector tools and pixel blur, record console/network diagnostics, and export professional reports in JSON, Markdown, PNG, and PDF. | Completed & Tested |
 | **FontLens** | Inspect website typography and copy CSS font properties. | Planned |
 | **LinkShield** | Check URLs for known threats and suspicious patterns before opening them. | Planned |
 
@@ -52,6 +53,7 @@ Chrome-Extensions/
 ├── README.md
 ├── .gitignore
 └── extensions/
+    ├── BugShot/
     ├── ColorPeek/
     ├── FocusFlow/
     ├── MeetMorph/

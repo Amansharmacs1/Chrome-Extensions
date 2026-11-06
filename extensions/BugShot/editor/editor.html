@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BugShot — Screenshot Annotation Editor</title>
+  <link rel="stylesheet" href="editor.css">
+</head>
+<body class="bugshot-editor-app">
+  <!-- Top App Navigation Bar -->
+  <header class="editor-header">
+    <div class="header-left">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"></circle>
+            <circle cx="12" cy="12" r="2.5" fill="#ef4444"></circle>
+            <line x1="12" y1="3" x2="12" y2="7"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+            <line x1="3" y1="12" x2="7" y2="12"></line>
+            <line x1="17" y1="12" x2="21" y2="12"></line>
+          </svg>
+        </div>
+        <div class="brand-meta">
+          <span class="brand-title">Bug<span>Shot</span></span>
+          <span class="brand-subtitle">Annotation Editor</span>
+        </div>
+      </div>
+      <div class="session-badge" id="session-type-badge">Viewport Capture</div>
+    </div>
+
+    <!-- Center Zoom Controls -->
+    <div class="header-center">
+      <div class="zoom-toolbar">
+        <button id="btn-zoom-out" class="icon-btn" title="Zoom Out (-)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+          </svg>
+        </button>
+        <span class="zoom-level" id="zoom-level-text">100%</span>
+        <button id="btn-zoom-in" class="icon-btn" title="Zoom In (+)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            <line x1="11" y1="8" x2="11" y2="14"></line>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+          </svg>
+        </button>
+        <button id="btn-zoom-fit" class="btn btn-secondary btn-sm" title="Fit to Screen">Fit</button>
+        <button id="btn-zoom-reset" class="btn btn-secondary btn-sm" title="Reset to 100%">1:1</button>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- History Controls -->
+      <div class="history-controls">
+        <button id="btn-undo" class="icon-btn" title="Undo (Ctrl+Z)" disabled>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="1 4 1 10 7 10"></polyline>
+            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+          </svg>
+        </button>
+        <button id="btn-redo" class="icon-btn" title="Redo (Ctrl+Y)" disabled>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+          </svg>
+        </button>
+        <button id="btn-clear" class="btn btn-secondary btn-sm" title="Clear all annotations">Clear</button>
+      </div>
+    </div>
+
+    <!-- Right Actions -->
+    <div class="header-right">
+      <button id="btn-download-png" class="btn btn-secondary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        <span>Download PNG</span>
+      </button>
+      <button id="btn-create-report" class="btn btn-primary">
+        <span>Create Bug Report</span>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Editor Body -->
+  <div class="editor-body">
+    <!-- Left Floating Toolbar -->
+    <aside class="editor-toolbar">
+      <!-- Tools -->
+      <div class="tool-group">
+        <span class="group-label">Tools</span>
+        <button id="tool-arrow" class="tool-btn active" data-tool="arrow" title="Vector Arrow (A)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="19" x2="19" y2="5"></line>
+            <polyline points="9 5 19 5 19 15"></polyline>
+          </svg>
+        </button>
+        <button id="tool-rectangle" class="tool-btn" data-tool="rectangle" title="Rectangle (R)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          </svg>
+        </button>
+        <button id="tool-circle" class="tool-btn" data-tool="circle" title="Circle / Ellipse (C)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+          </svg>
+        </button>
+        <button id="tool-brush" class="tool-btn" data-tool="brush" title="Freehand Pen (P)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
+            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
+            <path d="M2 2l7.586 7.586"></path>
+            <circle cx="11" cy="11" r="2"></circle>
+          </svg>
+        </button>
+        <button id="tool-text" class="tool-btn" data-tool="text" title="Text Annotation (T)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="4 7 4 4 20 4 20 7"></polyline>
+            <line x1="9" y1="20" x2="15" y2="20"></line>
+            <line x1="12" y1="4" x2="12" y2="20"></line>
+          </svg>
+        </button>
+        <button id="tool-highlight" class="tool-btn" data-tool="highlight" title="Highlighter (H)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 11-6 6v3h3l6-6"></path>
+            <path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"></path>
+          </svg>
+        </button>
+        <button id="tool-blur" class="tool-btn" data-tool="blur" title="Blur / Redact Sensitive Data (B)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+        </button>
+      </div>
+
+      <div class="toolbar-separator"></div>
+
+      <!-- Colors -->
+      <div class="tool-group">
+        <span class="group-label">Color</span>
+        <div class="color-palette">
+          <button class="color-swatch active" data-color="#ef4444" style="background-color: #ef4444;" title="Crimson Red"></button>
+          <button class="color-swatch" data-color="#3b82f6" style="background-color: #3b82f6;" title="Electric Blue"></button>
+          <button class="color-swatch" data-color="#10b981" style="background-color: #10b981;" title="Emerald Green"></button>
+          <button class="color-swatch" data-color="#f59e0b" style="background-color: #f59e0b;" title="Amber Orange"></button>
+          <button class="color-swatch" data-color="#a855f7" style="background-color: #a855f7;" title="Purple"></button>
+          <button class="color-swatch" data-color="#ffffff" style="background-color: #ffffff;" title="White"></button>
+          <button class="color-swatch" data-color="#0f172a" style="background-color: #0f172a; border-color: #64748b;" title="Slate Black"></button>
+        </div>
+      </div>
+
+      <div class="toolbar-separator"></div>
+
+      <!-- Stroke Width -->
+      <div class="tool-group">
+        <span class="group-label">Stroke</span>
+        <div class="stroke-options">
+          <button class="stroke-btn" data-stroke="2" title="Thin (2px)"><span class="stroke-line w2"></span></button>
+          <button class="stroke-btn active" data-stroke="4" title="Medium (4px)"><span class="stroke-line w4"></span></button>
+          <button class="stroke-btn" data-stroke="8" title="Thick (8px)"><span class="stroke-line w8"></span></button>
+          <button class="stroke-btn" data-stroke="14" title="Heavy (14px)"><span class="stroke-line w14"></span></button>
+        </div>
+      </div>
+
+      <div class="toolbar-separator"></div>
+
+      <!-- Text Size -->
+      <div class="tool-group">
+        <span class="group-label">Text Size</span>
+        <div class="text-size-options">
+          <button class="size-btn" data-size="14" title="Small (14px)">S</button>
+          <button class="size-btn active" data-size="20" title="Medium (20px)">M</button>
+          <button class="size-btn" data-size="32" title="Large (32px)">L</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Center Canvas Stage -->
+    <main class="canvas-stage" id="canvas-stage">
+      <div class="canvas-viewport" id="canvas-viewport">
+        <div class="canvas-layers-wrapper" id="canvas-wrapper">
+          <canvas id="canvas-bg"></canvas>
+          <canvas id="canvas-overlay"></canvas>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="editor.js"></script>
+</body>
+</html>

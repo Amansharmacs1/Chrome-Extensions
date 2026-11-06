@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="128" y2="128" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="20" y1="20" x2="108" y2="108" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#bgGrad)"/>
+  <rect x="1.5" y="1.5" width="125" height="125" rx="26.5" stroke="#334155" stroke-width="2"/>
+  <!-- Corner capture brackets -->
+  <path d="M 28 42 L 28 28 L 42 28" stroke="url(#blueGrad)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 100 42 L 100 28 L 86 28" stroke="url(#blueGrad)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 28 86 L 28 100 L 42 100" stroke="url(#blueGrad)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 100 86 L 100 100 L 86 100" stroke="url(#blueGrad)" stroke-width="4" stroke-linecap="round"/>
+  <!-- Viewfinder circle -->
+  <circle cx="64" cy="64" r="28" stroke="url(#blueGrad)" stroke-width="4" fill="none" opacity="0.9"/>
+  <!-- Reticle crosshair -->
+  <line x1="26" y1="64" x2="44" y2="64" stroke="url(#blueGrad)" stroke-width="4" stroke-linecap="round"/>
+  <line x1="84" y1="64" x2="102" y2="64" stroke="url(#blueGrad)" stroke-width="4" stroke-linecap="round"/>
+  <line x1="64" y1="26" x2="64" y2="44" stroke="url(#blueGrad)" stroke-width="4" stroke-linecap="round"/>
+  <line x1="64" y1="84" x2="64" y2="102" stroke="url(#blueGrad)" stroke-width="4" stroke-linecap="round"/>
+  <!-- Target bug core -->
+  <circle cx="64" cy="64" r="8" fill="#ef4444"/>
+</svg>

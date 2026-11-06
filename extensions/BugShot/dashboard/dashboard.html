@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BugShot — Bug Reports Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body class="bugshot-dashboard-app">
+  <!-- Top Navigation Bar -->
+  <header class="dash-header">
+    <div class="header-left">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"></circle>
+            <circle cx="12" cy="12" r="2.5" fill="#ef4444"></circle>
+            <line x1="12" y1="3" x2="12" y2="7"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+            <line x1="3" y1="12" x2="7" y2="12"></line>
+            <line x1="17" y1="12" x2="21" y2="12"></line>
+          </svg>
+        </div>
+        <div class="brand-meta">
+          <h1 class="brand-title">Bug<span>Shot</span></h1>
+          <span class="brand-subtitle">QA & Developer Workstation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header Actions -->
+    <div class="header-right">
+      <button id="btn-toggle-settings" class="btn btn-secondary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+        <span>Preferences</span>
+      </button>
+
+      <button id="btn-create-manual-report" class="btn btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        <span>New Bug Report</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Dashboard Workspace -->
+  <main class="dash-content">
+    <!-- Statistics Cards Grid -->
+    <section class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon blue">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+        </div>
+        <div class="stat-content">
+          <span class="stat-label">Total Reports</span>
+          <span class="stat-val" id="stat-total">0</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon red">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+        </div>
+        <div class="stat-content">
+          <span class="stat-label">Critical Defects</span>
+          <span class="stat-val" id="stat-critical">0</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon amber">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+        </div>
+        <div class="stat-content">
+          <span class="stat-label">P0 / P1 Urgent</span>
+          <span class="stat-val" id="stat-urgent">0</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon green">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+        </div>
+        <div class="stat-content">
+          <span class="stat-label">This Week</span>
+          <span class="stat-val" id="stat-week">0</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon purple">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+          </svg>
+        </div>
+        <div class="stat-content">
+          <span class="stat-label">Storage In Use</span>
+          <span class="stat-val" id="stat-storage">0 KB</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter & Search Toolbar -->
+    <section class="toolbar-card">
+      <div class="search-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="input-search" placeholder="Search by bug title, URL, or keyword..." />
+      </div>
+
+      <div class="filter-controls">
+        <select id="filter-severity" class="filter-select">
+          <option value="all">All Severities</option>
+          <option value="critical">Critical</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+
+        <select id="filter-category" class="filter-select">
+          <option value="all">All Categories</option>
+          <option value="ui-ux">UI / UX</option>
+          <option value="functional">Functional</option>
+          <option value="performance">Performance</option>
+          <option value="responsive">Responsive Design</option>
+          <option value="accessibility">Accessibility</option>
+          <option value="javascript">JavaScript</option>
+          <option value="network">Network</option>
+          <option value="other">Other</option>
+        </select>
+
+        <select id="filter-sort" class="filter-select">
+          <option value="newest" selected>Sort: Newest First</option>
+          <option value="oldest">Sort: Oldest First</option>
+          <option value="severity">Sort: Highest Severity</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Bug Reports List -->
+    <section class="reports-container">
+      <div class="reports-table-wrap">
+        <table class="reports-table" id="reports-table">
+          <thead>
+            <tr>
+              <th style="width: 80px;">Thumbnail</th>
+              <th>Bug Title & Target URL</th>
+              <th style="width: 110px;">Severity</th>
+              <th style="width: 100px;">Priority</th>
+              <th style="width: 140px;">Category</th>
+              <th style="width: 140px;">Report Date</th>
+              <th style="width: 160px; text-align: right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="reports-tbody">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-dashboard-state" id="empty-dashboard" style="display: none;">
+        <div class="empty-icon">🐛</div>
+        <h3>No Bug Reports Found</h3>
+        <p>Capture screenshots or create a manual bug report to get started.</p>
+        <button id="btn-empty-create" class="btn btn-primary">Create Your First Report</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Settings & Privacy Modal -->
+  <div class="modal-backdrop" id="modal-settings" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Preferences & Privacy Settings</h3>
+        <button id="btn-close-settings" class="icon-btn">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="setting-row">
+          <div class="setting-meta">
+            <span class="setting-title">Color Palette Theme</span>
+            <span class="setting-desc">Workstation user interface appearance</span>
+          </div>
+          <select id="pref-theme" class="filter-select">
+            <option value="dark" selected>Obsidian Dark</option>
+            <option value="midnight">Midnight Navy</option>
+            <option value="contrast">High Contrast</option>
+          </select>
+        </div>
+
+        <div class="setting-row">
+          <div class="setting-meta">
+            <span class="setting-title">Auto-Capture Console Diagnostics</span>
+            <span class="setting-desc">Collects active tab runtime errors during capture</span>
+          </div>
+          <input type="checkbox" id="pref-auto-console" class="checkbox" checked />
+        </div>
+
+        <div class="setting-row">
+          <div class="setting-meta">
+            <span class="setting-title">Auto-Capture Network Failures</span>
+            <span class="setting-desc">Records HTTP 4xx/5xx resource failures from Performance API</span>
+          </div>
+          <input type="checkbox" id="pref-auto-network" class="checkbox" checked />
+        </div>
+
+        <div class="setting-row">
+          <div class="setting-meta">
+            <span class="setting-title">Sanitize URL Query Tokens</span>
+            <span class="setting-desc">Automatically strips tokens, auth keys, and passwords from URLs</span>
+          </div>
+          <input type="checkbox" id="pref-sanitize-url" class="checkbox" checked />
+        </div>
+
+        <div class="setting-row">
+          <div class="setting-meta">
+            <span class="setting-title">Max Stored Reports</span>
+            <span class="setting-desc">Storage ceiling to keep browser storage fast</span>
+          </div>
+          <select id="pref-max-reports" class="filter-select">
+            <option value="25">25 reports</option>
+            <option value="50" selected>50 reports</option>
+            <option value="100">100 reports</option>
+          </select>
+        </div>
+
+        <div class="danger-zone">
+          <span class="danger-title">Danger Zone</span>
+          <p class="danger-desc">Permanently purge all saved bug reports, screenshots, and local settings from this browser.</p>
+          <button id="btn-delete-all-data" class="btn btn-danger">Purge All BugShot Data</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-save-prefs" class="btn btn-primary">Save Preferences</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>

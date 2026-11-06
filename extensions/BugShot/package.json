@@ -1,0 +1,21 @@
+{
+  "name": "bugshot",
+  "version": "1.0.0",
+  "description": "Capture website bugs, annotate screenshots, record technical diagnostics, and export professional bug reports.",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/run-all.js",
+    "icons": "node generate-icons.cjs"
+  },
+  "keywords": [
+    "chrome-extension",
+    "manifest-v3",
+    "screenshot",
+    "annotation",
+    "bug-report",
+    "qa",
+    "developer-tools"
+  ],
+  "author": "BugShot Team",
+  "license": "MIT"
+}
