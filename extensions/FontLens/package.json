@@ -1,0 +1,22 @@
+{
+  "name": "fontlens",
+  "version": "1.0.0",
+  "description": "Inspect, identify, analyze, live-edit, and compare web typography.",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/run-all.js",
+    "icons": "node generate-icons.cjs"
+  },
+  "keywords": [
+    "chrome-extension",
+    "manifest-v3",
+    "typography",
+    "fonts",
+    "inspector",
+    "css",
+    "web-design",
+    "developer-tools"
+  ],
+  "author": "FontLens Team",
+  "license": "MIT"
+}

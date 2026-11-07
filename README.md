@@ -18,7 +18,7 @@ From focused study sessions and personalized new-tab experiences to website desi
 | [**ColorPeek**](./extensions/ColorPeek) | Pick, inspect, convert, organize, and export colors from websites with native Eyedropper, WCAG contrast engine, and design tokens. | Completed & Tested |
 | [**ViewPortX**](./extensions/ViewPortX) | Make every website responsive. Automatically detects layout flaws, horizontal overflow, and fixed-width containers, generating targeted local CSS overrides. | Completed & Tested |
 | [**BugShot**](./extensions/BugShot) | Capture website bugs, annotate screenshots with vector tools and pixel blur, record console/network diagnostics, and export professional reports in JSON, Markdown, PNG, and PDF. | Completed & Tested |
-| **FontLens** | Inspect website typography and copy CSS font properties. | Planned |
+| [**FontLens**](./extensions/FontLens) | Inspect, identify, analyze, live-edit, and compare web typography with Shadow DOM isolation, WCAG contrast, and page scanner. | Completed & Tested |
 | **LinkShield** | Check URLs for known threats and suspicious patterns before opening them. | Planned |
 
 *Extension statuses will be updated as each project is implemented and tested.*
@@ -56,6 +56,7 @@ Chrome-Extensions/
     ├── BugShot/
     ├── ColorPeek/
     ├── FocusFlow/
+    ├── FontLens/
     ├── MeetMorph/
     │   ├── manifest.json
     │   ├── popup.html / popup.js / popup.css

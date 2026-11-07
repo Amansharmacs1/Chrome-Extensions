@@ -1,0 +1,201 @@
+/**
+ * FontLens - Page Typography Scanner Styles
+ * Encapsulated Shadow DOM or modal styling for the scanner overlay
+ */
+
+:host {
+  all: initial;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.fontlens-scanner-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 720px;
+  max-width: 92vw;
+  max-height: 85vh;
+  background: #0B0F19;
+  border: 1px solid #2E384D;
+  border-radius: 14px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(139, 92, 246, 0.25);
+  z-index: 2147483647;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: #F1F5F9;
+  animation: fontlensFadeIn 0.2s ease-out;
+}
+
+@keyframes fontlensFadeIn {
+  from { opacity: 0; transform: translate(-50%, -48%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+.fontlens-scanner-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 15, 25, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 2147483646;
+}
+
+.fontlens-scanner-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: #111827;
+  border-bottom: 1px solid #1F2937;
+}
+
+.fontlens-scanner-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fontlens-scanner-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #F8FAFC;
+}
+
+.fontlens-scanner-meta {
+  font-size: 11px;
+  color: #94A3B8;
+}
+
+/* Metric Cards Row */
+.fontlens-scanner-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 14px 18px;
+  background: #0F172A;
+  border-bottom: 1px solid #1E293B;
+}
+
+.fontlens-metric-card {
+  background: #111827;
+  border: 1px solid #1E293B;
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.fontlens-metric-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #64748B;
+  font-weight: 700;
+}
+
+.fontlens-metric-val {
+  font-size: 18px;
+  font-weight: 800;
+  color: #A78BFA;
+  margin-top: 2px;
+}
+
+/* Categories Filter Bar */
+.fontlens-filter-bar {
+  display: flex;
+  gap: 6px;
+  padding: 8px 18px;
+  background: #0B0F19;
+  border-bottom: 1px solid #1F2937;
+  overflow-x: auto;
+}
+
+.fontlens-filter-btn {
+  background: #111827;
+  border: 1px solid #1E293B;
+  color: #94A3B8;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+
+.fontlens-filter-btn:hover {
+  color: #F8FAFC;
+  background: #1F2937;
+}
+
+.fontlens-filter-btn.active {
+  background: rgba(139, 92, 246, 0.2);
+  border-color: #8B5CF6;
+  color: #DDD6FE;
+}
+
+/* Table Area */
+.fontlens-scanner-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 18px;
+}
+
+.fontlens-scan-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.fontlens-scan-table th {
+  text-align: left;
+  padding: 8px 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #64748B;
+  border-bottom: 1px solid #1E293B;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.fontlens-scan-table td {
+  padding: 10px;
+  border-bottom: 1px solid rgba(30, 41, 59, 0.6);
+  vertical-align: middle;
+}
+
+.fontlens-scan-row {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.fontlens-scan-row:hover {
+  background: rgba(139, 92, 246, 0.1);
+}
+
+.fontlens-scan-row.highlighted {
+  background: rgba(6, 182, 212, 0.15);
+}
+
+/* Scanner Footer */
+.fontlens-scanner-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: #111827;
+  border-top: 1px solid #1F2937;
+}
+
+/* On-Page Scanner Highlights */
+.fontlens-scan-element-highlight {
+  position: fixed;
+  pointer-events: none;
+  z-index: 2147483630;
+  outline: 2px solid #06B6D4;
+  background: rgba(6, 182, 212, 0.12);
+  border-radius: 2px;
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.4);
+  transition: opacity 0.2s;
+}

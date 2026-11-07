@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FontLens — Typography Workstation</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="dashboard-layout">
+    <!-- Top Header -->
+    <header class="dash-header">
+      <div class="brand">
+        <img src="../assets/icons/icon48.png" alt="FontLens" class="brand-logo">
+        <div>
+          <h1 class="brand-title">FontLens <span class="badge">Workstation</span></h1>
+          <p class="brand-tagline">Inspect. Identify. Understand.</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <a href="../comparison/comparison.html" class="btn btn-secondary" target="_blank" title="Launch Comparison Studio">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="12" y1="3" x2="12" y2="21"></line>
+          </svg>
+          Font Comparison Studio
+        </a>
+      </div>
+    </header>
+
+    <div class="dash-body">
+      <!-- Sidebar Navigation -->
+      <aside class="dash-sidebar">
+        <nav class="sidebar-nav">
+          <button class="nav-item active" data-tab="tab-presets">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            <span>Typography Presets</span>
+          </button>
+
+          <button class="nav-item" data-tab="tab-favorites">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <span>Favorite Fonts</span>
+            <span class="nav-pill" id="favCountPill">0</span>
+          </button>
+
+          <button class="nav-item" data-tab="tab-comparisons">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="12" y1="3" x2="12" y2="21"></line>
+            </svg>
+            <span>Saved Studios</span>
+            <span class="nav-pill" id="compCountPill">0</span>
+          </button>
+
+          <button class="nav-item" data-tab="tab-history">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span>Recent History</span>
+            <span class="nav-pill" id="recentCountPill">0</span>
+          </button>
+
+          <button class="nav-item" data-tab="tab-settings">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+            <span>Settings</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="local-storage-indicator">
+            <span class="indicator-dot"></span>
+            <span>Local Storage Active</span>
+          </div>
+          <span class="version-label">FontLens v1.0.0</span>
+        </div>
+      </aside>
+
+      <!-- Main Tab Content Area -->
+      <main class="dash-content">
+        <!-- TAB 1: Typography Presets -->
+        <section id="tab-presets" class="tab-panel active">
+          <div class="section-title-bar">
+            <div>
+              <h2 class="section-heading">Typography Presets</h2>
+              <p class="section-subtext">Manage pre-configured typographic formulas for fast design experimentation.</p>
+            </div>
+            <div class="action-btn-group">
+              <input type="file" id="importPresetFile" accept=".json" style="display: none;">
+              <button id="btnImportPresets" class="btn btn-secondary" title="Import Presets from JSON">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Import
+              </button>
+              <button id="btnExportPresets" class="btn btn-secondary" title="Export Presets to JSON">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="17 8 12 3 7 8"></polyline>
+                  <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                Export
+              </button>
+              <button id="btnOpenNewPresetModal" class="btn btn-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                New Preset
+              </button>
+            </div>
+          </div>
+
+          <div id="presetsGrid" class="cards-grid">
+            <!-- Dynamically populated -->
+          </div>
+        </section>
+
+        <!-- TAB 2: Favorite Fonts -->
+        <section id="tab-favorites" class="tab-panel">
+          <div class="section-title-bar">
+            <div>
+              <h2 class="section-heading">Favorite Fonts</h2>
+              <p class="section-subtext">Bookmarked typefaces for rapid prototyping and style reference.</p>
+            </div>
+            <div class="search-wrap">
+              <input type="text" id="favSearchInput" class="dash-search-input" placeholder="Search favorites...">
+            </div>
+          </div>
+
+          <div id="favoritesGrid" class="cards-grid">
+            <!-- Dynamically populated -->
+          </div>
+        </section>
+
+        <!-- TAB 3: Saved Comparison Studios -->
+        <section id="tab-comparisons" class="tab-panel">
+          <div class="section-title-bar">
+            <div>
+              <h2 class="section-heading">Saved Comparison Studios</h2>
+              <p class="section-subtext">Snapshots of multi-font comparative setups saved from Font Studio.</p>
+            </div>
+          </div>
+
+          <div id="comparisonsGrid" class="cards-grid">
+            <!-- Dynamically populated -->
+          </div>
+        </section>
+
+        <!-- TAB 4: Recent History -->
+        <section id="tab-history" class="tab-panel">
+          <div class="section-title-bar">
+            <div>
+              <h2 class="section-heading">Recently Inspected Fonts</h2>
+              <p class="section-subtext">Chronological history of typography inspected across websites.</p>
+            </div>
+            <button id="btnClearHistoryBtn" class="btn btn-danger-outline">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+              Clear History
+            </button>
+          </div>
+
+          <div id="historyTableContainer" class="history-container">
+            <!-- Dynamically populated -->
+          </div>
+        </section>
+
+        <!-- TAB 5: Settings -->
+        <section id="tab-settings" class="tab-panel">
+          <div class="section-title-bar">
+            <div>
+              <h2 class="section-heading">Extension Settings</h2>
+              <p class="section-subtext">Customize default behaviors, inspector visual cues, and local storage.</p>
+            </div>
+          </div>
+
+          <form id="settingsForm" class="settings-form">
+            <div class="settings-card">
+              <h3 class="card-title">Inspector & Overlay Preferences</h3>
+              
+              <div class="form-group">
+                <label for="settingSampleText" class="form-label">Default Sample Text</label>
+                <input type="text" id="settingSampleText" class="form-input" placeholder="The quick brown fox jumps over the lazy dog.">
+                <span class="form-hint">Used as default preview text in Font Studio and Preset cards.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="settingHighlightColor" class="form-label">Inspector Highlight Outline Color</label>
+                <div class="color-picker-wrap">
+                  <input type="color" id="settingHighlightColorPicker" class="color-input">
+                  <input type="text" id="settingHighlightColor" class="form-input color-hex-text" placeholder="#8B5CF6">
+                </div>
+                <span class="form-hint">Hex code for the element hover outline during in-page inspection.</span>
+              </div>
+
+              <div class="switch-row">
+                <div>
+                  <div class="switch-title">Hover Tooltip Badges</div>
+                  <div class="switch-desc">Display floating font-family and size badge while hovering over elements.</div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="settingHoverTooltips" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="switch-row">
+                <div>
+                  <div class="switch-title">Auto-Pin on Click</div>
+                  <div class="switch-desc">Lock inspector panel onto the selected element immediately when clicked.</div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="settingAutoPin" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="switch-row">
+                <div>
+                  <div class="switch-title">WCAG Contrast Analysis</div>
+                  <div class="switch-desc">Compute and display AA/AAA readability ratio for inspected text colors.</div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="settingContrastBadges" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="form-group" style="margin-top: 16px;">
+                <label for="settingScanLimit" class="form-label">Scanner Text Node Limit</label>
+                <input type="number" id="settingScanLimit" class="form-input" min="100" max="5000" step="100" value="1500">
+                <span class="form-hint">Maximum number of DOM text elements analyzed during page crawl.</span>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save Settings</button>
+              </div>
+            </div>
+
+            <!-- Danger Zone -->
+            <div class="settings-card danger-zone">
+              <h3 class="card-title text-danger">Danger Zone</h3>
+              <p class="switch-desc">Purge all FontLens data from chrome.storage.local including custom presets, bookmarks, and recent history.</p>
+              <div style="margin-top: 16px;">
+                <button type="button" id="btnPurgeAllData" class="btn btn-danger">Clear All Extension Data</button>
+              </div>
+            </div>
+          </form>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Preset Create / Edit Modal -->
+  <div id="presetModal" class="modal-backdrop hidden">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="presetModalTitle" class="modal-title">Create Typography Preset</h3>
+        <button id="btnPresetModalClose" class="modal-close-btn">&times;</button>
+      </div>
+
+      <form id="presetForm" class="modal-body">
+        <input type="hidden" id="presetIdField">
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label class="form-label" for="presetNameField">Preset Name *</label>
+            <input type="text" id="presetNameField" class="form-input" placeholder="e.g., Elegant Header" required>
+          </div>
+          <div class="form-group flex-1">
+            <label class="form-label" for="presetCategoryField">Category</label>
+            <select id="presetCategoryField" class="form-select">
+              <option value="Editorial">Editorial</option>
+              <option value="Modern">Modern</option>
+              <option value="Code">Code</option>
+              <option value="Headline">Headline</option>
+              <option value="Interface">Interface</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="presetFamilyField">Font Family Stack *</label>
+          <input type="text" id="presetFamilyField" class="form-input" placeholder="'Playfair Display', Georgia, serif" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label class="form-label" for="presetSizeField">Font Size (px)</label>
+            <input type="text" id="presetSizeField" class="form-input" placeholder="24px" value="24px">
+          </div>
+          <div class="form-group flex-1">
+            <label class="form-label" for="presetWeightField">Font Weight</label>
+            <select id="presetWeightField" class="form-select">
+              <option value="300">300 (Light)</option>
+              <option value="400" selected>400 (Regular)</option>
+              <option value="500">500 (Medium)</option>
+              <option value="600">600 (SemiBold)</option>
+              <option value="700">700 (Bold)</option>
+              <option value="800">800 (ExtraBold)</option>
+              <option value="900">900 (Black)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label class="form-label" for="presetLineHeightField">Line Height</label>
+            <input type="text" id="presetLineHeightField" class="form-input" placeholder="1.4" value="1.4">
+          </div>
+          <div class="form-group flex-1">
+            <label class="form-label" for="presetLetterSpacingField">Letter Spacing</label>
+            <input type="text" id="presetLetterSpacingField" class="form-input" placeholder="normal" value="normal">
+          </div>
+        </div>
+
+        <!-- Live Preview inside modal -->
+        <div class="modal-preview-box">
+          <span class="preview-label">Live Preview:</span>
+          <div id="modalPreviewText" class="modal-preview-content">Sphinx of black quartz, judge my vow.</div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="btnCancelPresetModal" class="btn btn-secondary">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Preset</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>

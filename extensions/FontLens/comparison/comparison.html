@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FontLens — Typography Comparison Studio</title>
+  <link rel="stylesheet" href="comparison.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/icon32.png">
+</head>
+<body>
+  <div class="studio-layout">
+    <!-- Header Toolbar -->
+    <header class="studio-header">
+      <div class="header-left">
+        <a href="../dashboard/dashboard.html" class="brand-link" title="Open FontLens Dashboard">
+          <img src="../assets/icons/icon32.png" alt="FontLens" class="brand-icon">
+          <div>
+            <div class="brand-name">FontLens</div>
+            <div class="brand-subtitle">Typography Comparison Studio</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="header-center">
+        <!-- Sample Text Presets -->
+        <div class="sample-preset-row">
+          <button class="sample-preset-btn active" data-sample="The quick brown fox jumps over the lazy dog.">Pangram</button>
+          <button class="sample-preset-btn" data-sample="Typography shapes the experience.">Editorial</button>
+          <button class="sample-preset-btn" data-sample="Pack my box with five dozen liquor jugs.">Alphabet</button>
+          <button class="sample-preset-btn" data-sample="0123456789 (!@#$%^&*)-_=+">Numbers & Symbols</button>
+          <button class="sample-preset-btn" data-sample="Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz">Glyphs</button>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <button id="btnSaveComparison" class="btn btn-secondary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+            <polyline points="7 3 7 8 15 8"></polyline>
+          </svg>
+          <span>Save Studio</span>
+        </button>
+        <button id="btnAddFont" class="btn btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span>Add Font</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Studio Controls Bar -->
+    <div class="studio-controls-bar">
+      <!-- Custom Sample Text Input -->
+      <div class="control-group sample-input-group">
+        <label for="sampleTextInput" class="control-label">Preview Text</label>
+        <input type="text" id="sampleTextInput" class="control-input text-field" value="The quick brown fox jumps over the lazy dog.">
+      </div>
+
+      <!-- Size -->
+      <div class="control-group">
+        <div class="label-with-value">
+          <label class="control-label">Size</label>
+          <span id="labelFontSize" class="val-badge">32px</span>
+        </div>
+        <input type="range" id="sliderFontSize" class="range-slider" min="12" max="96" value="32">
+      </div>
+
+      <!-- Weight -->
+      <div class="control-group">
+        <div class="label-with-value">
+          <label class="control-label">Weight</label>
+          <span id="labelFontWeight" class="val-badge">400</span>
+        </div>
+        <input type="range" id="sliderFontWeight" class="range-slider" min="100" max="900" step="100" value="400">
+      </div>
+
+      <!-- Line Height -->
+      <div class="control-group">
+        <div class="label-with-value">
+          <label class="control-label">Line Height</label>
+          <span id="labelLineHeight" class="val-badge">1.40×</span>
+        </div>
+        <input type="range" id="sliderLineHeight" class="range-slider" min="0.8" max="2.4" step="0.05" value="1.4">
+      </div>
+
+      <!-- Letter Spacing -->
+      <div class="control-group">
+        <div class="label-with-value">
+          <label class="control-label">Letter Spacing</label>
+          <span id="labelLetterSpacing" class="val-badge">0px</span>
+        </div>
+        <input type="range" id="sliderLetterSpacing" class="range-slider" min="-3" max="8" step="0.2" value="0">
+      </div>
+
+      <!-- Text Color -->
+      <div class="control-group color-group">
+        <label class="control-label">Color</label>
+        <div class="color-picker-wrap">
+          <input type="color" id="pickerColor" value="#F8FAFC">
+          <input type="text" id="inputColorHex" class="control-input hex-field" value="#F8FAFC">
+        </div>
+      </div>
+
+      <!-- Case Transform -->
+      <div class="control-group">
+        <label class="control-label">Case</label>
+        <div class="segmented-control" id="caseGroup">
+          <button class="seg-btn active" data-case="none">Aa</button>
+          <button class="seg-btn" data-case="uppercase">AA</button>
+          <button class="seg-btn" data-case="lowercase">aa</button>
+          <button class="seg-btn" data-case="capitalize">Title</button>
+        </div>
+      </div>
+
+      <!-- Style -->
+      <div class="control-group">
+        <label class="control-label">Style</label>
+        <div class="segmented-control" id="styleGroup">
+          <button class="seg-btn active" data-style="normal">Normal</button>
+          <button class="seg-btn" data-style="italic">Italic</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comparison Cards Container -->
+    <main class="studio-main">
+      <div id="comparisonList" class="comparison-grid">
+        <!-- Comparison cards generated dynamically -->
+      </div>
+    </main>
+  </div>
+
+  <!-- Add Font Modal -->
+  <div id="addFontModal" class="modal-backdrop" hidden>
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Add Font to Comparison</h3>
+        <button id="btnCloseModal" class="modal-close-btn">✕</button>
+      </div>
+      <div class="modal-body">
+        <label class="control-label" style="margin-bottom:6px; display:block;">Select Popular Font or Type Custom Family</label>
+        <input type="text" id="inputCustomFont" class="control-input" placeholder="e.g. Inter, Playfair Display, Fira Code, Georgia..." autofocus>
+        
+        <div class="popular-chips-wrap">
+          <span class="control-label">Popular Suggestions:</span>
+          <div id="popularChips" class="chips-row">
+            <!-- Chips rendered dynamically -->
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btnCancelAdd" class="btn btn-secondary">Cancel</button>
+        <button id="btnConfirmAdd" class="btn btn-primary">Add Font</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="comparison.js"></script>
+</body>
+</html>

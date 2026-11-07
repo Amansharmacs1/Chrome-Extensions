@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FontLens</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Top Header -->
+    <header class="popup-header">
+      <div class="brand">
+        <img src="../assets/icons/icon32.png" alt="FontLens" class="logo">
+        <div>
+          <h1 class="app-name">FontLens</h1>
+          <p class="tagline">Inspect. Identify. Understand.</p>
+        </div>
+      </div>
+      <a href="../dashboard/dashboard.html" target="_blank" class="header-icon-btn" title="Open FontLens Dashboard">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+      </a>
+    </header>
+
+    <!-- Active Tab Domain Badge -->
+    <div class="target-domain-bar">
+      <span class="status-indicator" id="statusDot"></span>
+      <span class="domain-text" id="targetDomainText">Scanning active page...</span>
+    </div>
+
+    <!-- Primary Action: Toggle Inspect Mode -->
+    <div class="primary-action-wrap">
+      <button id="btnToggleInspect" class="btn-inspect-action">
+        <svg class="inspect-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          <line x1="11" y1="8" x2="11" y2="14"></line>
+          <line x1="8" y1="11" x2="14" y2="11"></line>
+        </svg>
+        <div class="btn-text-block">
+          <span class="btn-main-title" id="inspectBtnTitle">Inspect Page Typography</span>
+          <span class="btn-shortcut">Shortcut: Alt+Shift+F</span>
+        </div>
+      </button>
+    </div>
+
+    <!-- Quick Tools Grid -->
+    <div class="tools-grid">
+      <button id="btnLaunchScanner" class="tool-tile">
+        <div class="tool-icon-wrap violet">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+        </div>
+        <div class="tool-text">
+          <span class="tool-title">Page Scanner</span>
+          <span class="tool-desc">Crawl all fonts & sizes</span>
+        </div>
+      </button>
+
+      <button id="btnOpenComparison" class="tool-tile">
+        <div class="tool-icon-wrap cyan">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="12" y1="3" x2="12" y2="21"></line>
+          </svg>
+        </div>
+        <div class="tool-text">
+          <span class="tool-title">Font Studio</span>
+          <span class="tool-desc">Side-by-side compare</span>
+        </div>
+      </button>
+    </div>
+
+    <!-- Recent Inspected Fonts -->
+    <section class="recent-section">
+      <div class="section-header">
+        <span class="section-title">Recently Inspected</span>
+        <button id="btnClearRecent" class="text-link-btn">Clear</button>
+      </div>
+      <div id="recentList" class="recent-list">
+        <!-- Rendered dynamically -->
+        <div class="empty-recent-state">No fonts inspected yet. Activate inspection mode to start!</div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="popup-footer">
+      <span class="offline-badge">100% Local & Private</span>
+      <span class="version-label">v1.0.0</span>
+    </footer>
+  </div>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
