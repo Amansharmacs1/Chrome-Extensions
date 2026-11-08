@@ -1,0 +1,419 @@
+/**
+ * WordWise - Popup Interface Stylesheet
+ * Deep navy theme with violet/sky accents, rounded cards, and clean typography.
+ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 380px;
+  background-color: #0B0F19;
+  color: #F8FAFC;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+
+.popup-container {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 14px;
+}
+
+/* Header */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.app-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
+}
+
+.brand-title {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: #FFFFFF;
+}
+
+.brand-tagline {
+  font-size: 11px;
+  color: #94A3B8;
+  font-weight: 500;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.streak-pill {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #FBBF24;
+}
+
+.streak-icon {
+  font-size: 13px;
+}
+
+.icon-btn {
+  background: #1E293B;
+  border: 1px solid #334155;
+  color: #94A3B8;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.icon-btn:hover {
+  background: #334155;
+  color: #FFFFFF;
+}
+
+/* Search Bar */
+.search-section {
+  position: relative;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  background: #111827;
+  border: 1px solid #2E384D;
+  border-radius: 10px;
+  padding: 4px 6px 4px 12px;
+  gap: 8px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-form:focus-within {
+  border-color: #8B5CF6;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+}
+
+.search-icon {
+  color: #64748B;
+  flex-shrink: 0;
+}
+
+.search-input {
+  flex: 1;
+  background: none;
+  border: none;
+  color: #F8FAFC;
+  font-size: 13px;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: #64748B;
+}
+
+.search-submit-btn {
+  background: #8B5CF6;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.search-submit-btn:hover {
+  background: #7C3AED;
+}
+
+/* Daily Word Card */
+.daily-word-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #94A3B8;
+}
+
+.section-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(139, 92, 246, 0.15);
+  color: #C4B5FD;
+}
+
+.daily-card {
+  background: linear-gradient(145deg, #131B2E 0%, #171738 100%);
+  border: 1px solid #2A3352;
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.daily-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.word-flex-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.daily-word-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.2px;
+}
+
+.pos-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #38BDF8;
+  background: rgba(56, 189, 248, 0.15);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.phonetic-text {
+  font-size: 12px;
+  color: #A78BFA;
+  font-family: "Lucida Console", Monaco, monospace;
+  margin-top: 2px;
+}
+
+.audio-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #C4B5FD;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.audio-btn:hover {
+  background: #8B5CF6;
+  color: #FFFFFF;
+  border-color: #8B5CF6;
+}
+
+.daily-definition {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #E2E8F0;
+}
+
+.daily-example-box {
+  background: rgba(11, 15, 25, 0.6);
+  border-left: 3px solid #8B5CF6;
+  border-radius: 4px;
+  padding: 8px 10px;
+  display: flex;
+  gap: 4px;
+}
+
+.example-quote-mark {
+  color: #8B5CF6;
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.example-text {
+  font-size: 12px;
+  color: #CBD5E1;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.daily-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 4px;
+}
+
+.btn-save-daily {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #8B5CF6;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-save-daily:hover {
+  background: #7C3AED;
+}
+
+.btn-save-daily.saved {
+  background: #10B981;
+  cursor: default;
+}
+
+.btn-text-link {
+  background: none;
+  border: none;
+  color: #94A3B8;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.btn-text-link:hover {
+  color: #38BDF8;
+}
+
+/* Stats Section */
+.stats-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.stat-card {
+  background: #111827;
+  border: 1px solid #1E293B;
+  border-radius: 10px;
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stat-card.highlight {
+  border-color: rgba(139, 92, 246, 0.4);
+  background: rgba(139, 92, 246, 0.08);
+}
+
+.stat-num {
+  font-size: 18px;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.stat-card.highlight .stat-num {
+  color: #A78BFA;
+}
+
+.stat-lbl {
+  font-size: 10px;
+  font-weight: 600;
+  color: #94A3B8;
+  margin-top: 2px;
+}
+
+/* Navigation Grid */
+.nav-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #111827;
+  border: 1px solid #1E293B;
+  border-radius: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.nav-btn:hover {
+  background: #1E293B;
+  border-color: #334155;
+  transform: translateY(-1px);
+}
+
+.nav-btn.primary {
+  border-color: rgba(139, 92, 246, 0.4);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(56, 189, 248, 0.05));
+}
+
+.nav-btn.primary:hover {
+  border-color: #8B5CF6;
+}
+
+.nav-btn-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.nav-btn-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.nav-btn-sub {
+  font-size: 10px;
+  color: #94A3B8;
+}

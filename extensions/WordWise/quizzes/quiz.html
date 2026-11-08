@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordWise — Vocabulary Quiz Studio</title>
+  <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+  <div class="quiz-layout">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-inner">
+        <a href="../library/library.html" class="brand-link">
+          <img src="../assets/icons/icon32.png" alt="WordWise" class="brand-icon">
+          <span class="brand-title">WordWise</span>
+          <span class="header-badge">Quiz Studio</span>
+        </a>
+
+        <div class="header-mode-picker">
+          <button class="mode-tab active" data-mode="mixed">Mixed Modes</button>
+          <button class="mode-tab" data-mode="meaning">Meaning</button>
+          <button class="mode-tab" data-mode="word">Word</button>
+          <button class="mode-tab" data-mode="cloze">Fill in Blank</button>
+          <button class="mode-tab" data-mode="synonym">Synonyms</button>
+        </div>
+
+        <nav class="header-nav">
+          <a href="../flashcards/flashcards.html" class="nav-btn">Flashcards</a>
+          <a href="../library/library.html" class="nav-btn">Library</a>
+          <a href="../dashboard/dashboard.html" class="nav-btn">Analytics</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Quiz Content Workspace -->
+    <main class="quiz-main">
+      <!-- Session Tracker / Progress -->
+      <div class="quiz-progress-wrap" id="quizProgressWrap">
+        <div class="quiz-progress-header">
+          <span id="questionCounterText" class="counter-text">Question 1 of 10</span>
+          <div class="score-pill">
+            <span>Score:</span>
+            <strong id="currentScore">0</strong>
+          </div>
+        </div>
+        <div class="quiz-progress-bar">
+          <div id="quizProgressFill" class="quiz-progress-fill" style="width: 10%;"></div>
+        </div>
+      </div>
+
+      <!-- Active Question Box -->
+      <section id="questionCard" class="question-card">
+        <!-- Question Badge (Mode) -->
+        <div class="question-meta-row">
+          <span id="questionModeBadge" class="mode-pill">Meaning Challenge</span>
+          <span id="questionWordTag" class="word-tag" hidden>ephemeral</span>
+        </div>
+
+        <!-- Question Prompt -->
+        <div class="question-prompt-box">
+          <h2 id="questionPrompt" class="question-prompt">What is the meaning of "ephemeral"?</h2>
+        </div>
+
+        <!-- Options Grid -->
+        <div id="optionsGrid" class="options-grid">
+          <!-- 4 option buttons dynamically generated -->
+        </div>
+
+        <!-- Explanation / Feedback Banner (Revealed after selection) -->
+        <div id="feedbackBanner" class="feedback-banner" hidden>
+          <div class="feedback-status-row">
+            <span id="feedbackStatusIcon" class="feedback-icon">✓</span>
+            <strong id="feedbackStatusTitle" class="feedback-title">Correct!</strong>
+          </div>
+          <p id="feedbackExplanation" class="feedback-text">...</p>
+          <button id="btnNextQuestion" class="btn-next">Next Question →</button>
+        </div>
+      </section>
+
+      <!-- Quiz Completion View -->
+      <section id="quizSummaryView" class="quiz-summary-card" hidden>
+        <div class="summary-trophy" id="summaryTrophy">🏆</div>
+        <h2 class="summary-headline" id="summaryHeadline">Quiz Completed!</h2>
+        <p class="summary-sub" id="summarySub">Here is how you performed in this challenge session:</p>
+
+        <div class="score-breakdown-grid">
+          <div class="score-tile">
+            <span id="finalScoreText" class="score-large">8 / 10</span>
+            <span class="score-tile-label">Final Score</span>
+          </div>
+          <div class="score-tile">
+            <span id="finalAccuracyText" class="score-large">80%</span>
+            <span class="score-tile-label">Accuracy</span>
+          </div>
+          <div class="score-tile">
+            <span id="finalStreakText" class="score-large">🔥 4</span>
+            <span class="score-tile-label">Daily Streak</span>
+          </div>
+        </div>
+
+        <div class="summary-actions">
+          <button id="btnRetryQuiz" class="action-btn primary">Play Again</button>
+          <a href="../flashcards/flashcards.html" class="action-btn secondary">Study Flashcards</a>
+          <a href="../library/library.html" class="action-btn secondary">View Vocabulary</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="quiz.js"></script>
+</body>
+</html>

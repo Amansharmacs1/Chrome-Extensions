@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordWise — Flashcards</title>
+  <link rel="stylesheet" href="flashcards.css">
+</head>
+<body>
+  <div class="flashcards-layout">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-inner">
+        <a href="../library/library.html" class="brand-link">
+          <img src="../assets/icons/icon32.png" alt="WordWise" class="brand-icon">
+          <span class="brand-title">WordWise</span>
+          <span class="header-badge">Flashcards</span>
+        </a>
+
+        <div class="session-controls">
+          <label for="selectSessionMode" class="mode-label">Session:</label>
+          <select id="selectSessionMode" class="session-select">
+            <option value="due">Due for Review Today</option>
+            <option value="all">All Saved Vocabulary</option>
+            <option value="learning">Learning Stage Only</option>
+            <option value="favorites">Favorites Only ★</option>
+          </select>
+        </div>
+
+        <nav class="header-nav">
+          <a href="../library/library.html" class="nav-btn">Library</a>
+          <a href="../quizzes/quiz.html" class="nav-btn">Quiz</a>
+          <a href="../dashboard/dashboard.html" class="nav-btn">Analytics</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="flashcards-main">
+      <!-- Progress Bar -->
+      <div class="progress-bar-wrap" id="progressBarWrap">
+        <div class="progress-text-row">
+          <span id="sessionProgressText">Card 1 of 10</span>
+          <span id="sessionDueText" class="due-indicator">10 due today</span>
+        </div>
+        <div class="progress-track">
+          <div id="progressFill" class="progress-fill" style="width: 10%;"></div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div id="emptyStateView" class="state-card" hidden>
+        <div class="state-icon">🎉</div>
+        <h2 class="state-title" id="emptyTitle">All caught up!</h2>
+        <p class="state-sub" id="emptyMessage">You have no flashcards due for review today. Great work maintaining your vocabulary streak!</p>
+        <div class="state-actions">
+          <button id="btnStudyAllAnyway" class="action-btn primary">Study All Saved Words</button>
+          <a href="../lookup/lookup.html" class="action-btn secondary">Discover New Words</a>
+        </div>
+      </div>
+
+      <!-- Active Flashcard Container -->
+      <div id="flashcardContainer" class="card-workspace">
+        <div class="flip-card" id="flipCard">
+          <div class="flip-card-inner" id="flipCardInner">
+            <!-- Front Face -->
+            <div class="card-face card-front">
+              <div class="card-top-meta">
+                <span id="cardPosBadge" class="card-pos-badge">adjective</span>
+                <span id="cardRepetitions" class="card-sm2-badge">Review #0</span>
+              </div>
+
+              <div class="card-front-center">
+                <h2 id="cardWordTitle" class="card-front-word">ephemeral</h2>
+                <div class="card-phonetic-row">
+                  <span id="cardPhonetic" class="card-phonetic">/ɪˈfem.ər.əl/</span>
+                  <button id="btnCardAudio" class="card-audio-btn" title="Pronounce">🔊</button>
+                </div>
+              </div>
+
+              <div class="card-bottom-hint">
+                <span>Click card or press <kbd>Space</kbd> to reveal answer</span>
+              </div>
+            </div>
+
+            <!-- Back Face -->
+            <div class="card-face card-back">
+              <div class="card-top-meta">
+                <span id="backCardPos" class="card-pos-badge">adjective</span>
+                <span id="backCardStatus" class="card-sm2-badge">Learning</span>
+              </div>
+
+              <div class="card-back-body">
+                <h3 id="backWordTitle" class="back-word-title">ephemeral</h3>
+
+                <div class="back-section">
+                  <span class="back-section-label">Definition</span>
+                  <p id="backDefinition" class="back-def-text">Lasting for a very short time; transitory.</p>
+                </div>
+
+                <div class="back-section" id="backExampleSection">
+                  <span class="back-section-label">Example</span>
+                  <p id="backExample" class="back-example-text">“The ephemeral morning mist vanished as soon as the sun crested the hill.”</p>
+                </div>
+
+                <div class="back-section" id="backSynonymsSection" hidden>
+                  <span class="back-section-label">Synonyms</span>
+                  <div id="backSynonymsWrap" class="back-pills-wrap"></div>
+                </div>
+
+                <div class="back-section" id="backNotesSection" hidden>
+                  <span class="back-section-label">Personal Notes</span>
+                  <p id="backNotesText" class="back-notes-text"></p>
+                </div>
+              </div>
+
+              <div class="card-bottom-hint">
+                <span>Rate your recall below:</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rating Buttons (Visible when revealed) -->
+        <div class="rating-controls-wrap" id="ratingControlsWrap">
+          <button id="btnFlipCard" class="btn-reveal-answer">Reveal Answer <kbd>Space</kbd></button>
+
+          <div id="sm2ButtonsRow" class="sm2-buttons-row" hidden>
+            <button class="rating-btn again" data-rating="again" title="Shortcut: Press 1">
+              <span class="rating-lbl">Again</span>
+              <span class="rating-sub">1 day</span>
+              <kbd class="key-hint">1</kbd>
+            </button>
+            <button class="rating-btn hard" data-rating="hard" title="Shortcut: Press 2">
+              <span class="rating-lbl">Hard</span>
+              <span class="rating-sub" id="subHardInterval">1d</span>
+              <kbd class="key-hint">2</kbd>
+            </button>
+            <button class="rating-btn good" data-rating="good" title="Shortcut: Press 3">
+              <span class="rating-lbl">Good</span>
+              <span class="rating-sub" id="subGoodInterval">3d</span>
+              <kbd class="key-hint">3</kbd>
+            </button>
+            <button class="rating-btn easy" data-rating="easy" title="Shortcut: Press 4">
+              <span class="rating-lbl">Easy</span>
+              <span class="rating-sub" id="subEasyInterval">6d</span>
+              <kbd class="key-hint">4</kbd>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Completion View -->
+      <div id="sessionSummaryView" class="state-card summary-card" hidden>
+        <div class="state-icon">🏆</div>
+        <h2 class="state-title">Session Complete!</h2>
+        <p class="state-sub">You have reviewed all cards in this flashcard deck.</p>
+
+        <div class="summary-metrics">
+          <div class="summary-tile">
+            <span id="sumTotalReviewed" class="summary-tile-num">0</span>
+            <span class="summary-tile-lbl">Cards Studied</span>
+          </div>
+          <div class="summary-tile">
+            <span id="sumGoodRate" class="summary-tile-num">0%</span>
+            <span class="summary-tile-lbl">Good / Easy Rate</span>
+          </div>
+          <div class="summary-tile">
+            <span id="sumStreak" class="summary-tile-num">🔥 0</span>
+            <span class="summary-tile-lbl">Learning Streak</span>
+          </div>
+        </div>
+
+        <div class="state-actions">
+          <button id="btnRestartSession" class="action-btn primary">Study Again</button>
+          <a href="../quizzes/quiz.html" class="action-btn secondary">Quiz this Vocabulary</a>
+          <a href="../library/library.html" class="action-btn secondary">Back to Library</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="flashcards.js"></script>
+</body>
+</html>

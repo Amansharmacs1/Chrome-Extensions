@@ -1,0 +1,383 @@
+/**
+ * WordWise - Learning Analytics & Settings Stylesheet
+ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #0B0F19;
+  color: #F8FAFC;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.dashboard-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+.app-header {
+  background: #111827;
+  border-bottom: 1px solid #1E293B;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.brand-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+}
+
+.brand-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.header-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: rgba(139, 92, 246, 0.15);
+  color: #C4B5FD;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-btn {
+  background: #1E293B;
+  border: 1px solid #334155;
+  color: #CBD5E1;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.15s;
+}
+
+.nav-btn:hover {
+  background: #334155;
+  color: #FFFFFF;
+}
+
+/* Main */
+.dashboard-main {
+  flex: 1;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Overview Stat Cards */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+@media (max-width: 860px) {
+  .overview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.stat-card {
+  background: #111827;
+  border: 1px solid #1E293B;
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-card.hero-streak {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(239, 68, 68, 0.08));
+  border-color: rgba(245, 158, 11, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.streak-flame {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+
+.stat-val {
+  font-size: 24px;
+  font-weight: 900;
+  color: #FFFFFF;
+  letter-spacing: -0.3px;
+}
+
+.stat-card.hero-streak .stat-val {
+  color: #FBBF24;
+}
+
+.stat-sub {
+  font-size: 12px;
+  color: #94A3B8;
+  margin-top: 2px;
+  font-weight: 600;
+}
+
+.streak-extra {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #CBD5E1;
+}
+
+.progress-bar-inline {
+  width: 100%;
+  height: 6px;
+  background: #1E293B;
+  border-radius: 3px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.progress-bar-inline .fill {
+  height: 100%;
+  background: #8B5CF6;
+  border-radius: 3px;
+}
+
+.mini-note {
+  font-size: 11px;
+  color: #64748B;
+  margin-top: 6px;
+}
+
+/* Chart Section */
+.chart-section {
+  background: #111827;
+  border: 1px solid #1E293B;
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.section-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.section-sub {
+  font-size: 12px;
+  color: #94A3B8;
+  margin-top: 2px;
+}
+
+.chart-box {
+  width: 100%;
+  background: #0B0F19;
+  border: 1px solid #1E293B;
+  border-radius: 10px;
+  padding: 16px 20px;
+}
+
+/* Breakdown Section */
+.breakdown-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.breakdown-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+@media (max-width: 760px) {
+  .breakdown-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.breakdown-item {
+  background: #111827;
+  border: 1px solid #1E293B;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.breakdown-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stage-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.stage-dot.learning { background: #FBBF24; }
+.stage-dot.review { background: #8B5CF6; }
+.stage-dot.mastered { background: #10B981; }
+
+.stage-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #E2E8F0;
+}
+
+.stage-count {
+  font-size: 18px;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.stage-desc {
+  font-size: 11px;
+  color: #94A3B8;
+  line-height: 1.4;
+}
+
+/* Settings Card */
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.settings-card {
+  background: #111827;
+  border: 1px solid #1E293B;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #1E293B;
+  gap: 16px;
+}
+
+.setting-row:last-child {
+  border-bottom: none;
+}
+
+.setting-row.border-top {
+  border-top: 1px solid #2E384D;
+}
+
+.setting-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.setting-sub {
+  font-size: 12px;
+  color: #94A3B8;
+  margin-top: 2px;
+}
+
+.setting-select {
+  background: #0B0F19;
+  border: 1px solid #2E384D;
+  color: #F8FAFC;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+}
+
+.setting-action-btn {
+  background: #8B5CF6;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.setting-action-btn:hover {
+  background: #7C3AED;
+}
+
+.setting-action-btn.secondary {
+  background: #1E293B;
+  border: 1px solid #334155;
+  color: #CBD5E1;
+}
+
+.setting-action-btn.secondary:hover {
+  background: #334155;
+  color: #FFFFFF;
+}
+
+.setting-action-btn.danger {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #F87171;
+}
+
+.setting-action-btn.danger:hover {
+  background: #EF4444;
+  color: #FFFFFF;
+}

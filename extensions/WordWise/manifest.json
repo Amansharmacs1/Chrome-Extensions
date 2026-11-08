@@ -1,0 +1,60 @@
+{
+  "manifest_version": 3,
+  "name": "WordWise — Vocabulary Builder & Dictionary",
+  "version": "1.0.0",
+  "description": "Discover unfamiliar words while browsing, instant dictionary lookups, save vocabulary, and achieve long-term retention with SM-2 flashcards and quizzes.",
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "32": "assets/icons/icon32.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "WordWise — Vocabulary & Learning Dashboard",
+    "default_icon": {
+      "16": "assets/icons/icon16.png",
+      "32": "assets/icons/icon32.png",
+      "48": "assets/icons/icon48.png",
+      "128": "assets/icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://api.dictionaryapi.dev/*"
+  ],
+  "commands": {
+    "toggle-wordwise": {
+      "suggested_key": {
+        "default": "Alt+Shift+W",
+        "mac": "Alt+Shift+W"
+      },
+      "description": "Look up selected word with WordWise"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "content/content.css",
+        "assets/icons/icon.svg",
+        "data/daily-words.json"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

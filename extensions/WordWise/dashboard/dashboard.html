@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordWise — Learning Analytics & Settings</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="dashboard-layout">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-inner">
+        <a href="../library/library.html" class="brand-link">
+          <img src="../assets/icons/icon32.png" alt="WordWise" class="brand-icon">
+          <span class="brand-title">WordWise</span>
+          <span class="header-badge">Learning Hub</span>
+        </a>
+
+        <nav class="header-nav">
+          <a href="../library/library.html" class="nav-btn">Library</a>
+          <a href="../flashcards/flashcards.html" class="nav-btn">Flashcards</a>
+          <a href="../quizzes/quiz.html" class="nav-btn">Quizzes</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="dashboard-main">
+      <!-- Top Overview Metrics -->
+      <section class="overview-grid">
+        <div class="stat-card hero-streak">
+          <div class="streak-flame">🔥</div>
+          <div>
+            <div class="stat-val" id="valCurrentStreak">0 Days</div>
+            <div class="stat-sub">Current Daily Streak</div>
+          </div>
+          <div class="streak-extra">
+            <span>Longest: <strong id="valLongestStreak">0</strong>d</span>
+            <span>•</span>
+            <span>Active: <strong id="valActiveDays">0</strong>d</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-val" id="valTotalWords">0</div>
+          <div class="stat-sub">Saved Vocabulary</div>
+          <div class="progress-bar-inline">
+            <div id="goalProgressFill" class="fill" style="width: 0%;"></div>
+          </div>
+          <div class="mini-note" id="goalNote">Goal: 0/5 words today</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-val" id="valQuizAccuracy">0%</div>
+          <div class="stat-sub">Overall Quiz Accuracy</div>
+          <div class="mini-note" id="quizCountNote">Across 0 quiz sessions</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-val" id="valMasteryRate">0%</div>
+          <div class="stat-sub">Vocabulary Mastery</div>
+          <div class="mini-note" id="masteryCountNote">0 mastered / 0 review</div>
+        </div>
+      </section>
+
+      <!-- Weekly Activity Chart -->
+      <section class="chart-section">
+        <div class="section-title-row">
+          <div>
+            <h2 class="section-title">Weekly Learning Consistency</h2>
+            <p class="section-sub">Any day you save a word, study flashcards, or take a quiz counts as a learning day.</p>
+          </div>
+        </div>
+
+        <div class="chart-box" id="weeklyChartBox">
+          <!-- Dynamically generated SVG activity bar chart -->
+        </div>
+      </section>
+
+      <!-- Mastery Distribution Breakdown -->
+      <section class="breakdown-section">
+        <h2 class="section-title">Retention & Stage Breakdown</h2>
+        <div class="breakdown-grid">
+          <div class="breakdown-item learning">
+            <div class="breakdown-header">
+              <span class="stage-dot learning"></span>
+              <span class="stage-name">Learning Stage</span>
+            </div>
+            <div class="stage-count" id="countStageLearning">0 words</div>
+            <p class="stage-desc">New words recently added or reset after an "Again" review rating.</p>
+          </div>
+
+          <div class="breakdown-item review">
+            <div class="breakdown-header">
+              <span class="stage-dot review"></span>
+              <span class="stage-name">Active Review Stage</span>
+            </div>
+            <div class="stage-count" id="countStageReview">0 words</div>
+            <p class="stage-desc">Words progressing through SM-2 intervals (1 day to 20 days).</p>
+          </div>
+
+          <div class="breakdown-item mastered">
+            <div class="breakdown-header">
+              <span class="stage-dot mastered"></span>
+              <span class="stage-name">Mastered</span>
+            </div>
+            <div class="stage-count" id="countStageMastered">0 words</div>
+            <p class="stage-desc">Retained with multiple consecutive successful reviews (interval &ge; 21d).</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Settings & Data Management -->
+      <section class="settings-section">
+        <h2 class="section-title">Preferences & Storage</h2>
+
+        <div class="settings-card">
+          <div class="setting-row">
+            <div>
+              <div class="setting-label">Daily Goal Target</div>
+              <div class="setting-sub">Target number of new words to discover or save per day</div>
+            </div>
+            <select id="settingDailyGoal" class="setting-select">
+              <option value="3">3 words / day</option>
+              <option value="5" selected>5 words / day</option>
+              <option value="10">10 words / day</option>
+              <option value="15">15 words / day</option>
+            </select>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <div class="setting-label">Speech Synthesizer Speed</div>
+              <div class="setting-sub">Speed rate when playing browser-generated voice pronunciation</div>
+            </div>
+            <select id="settingSpeechRate" class="setting-select">
+              <option value="0.75">0.75× (Slow)</option>
+              <option value="0.9" selected>0.9× (Standard Natural)</option>
+              <option value="1.0">1.0× (Normal)</option>
+              <option value="1.2">1.2× (Fast)</option>
+            </select>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <div class="setting-label">Theme</div>
+              <div class="setting-sub">Dark charcoal and deep navy interface (optimized for reading)</div>
+            </div>
+            <select id="settingTheme" class="setting-select" disabled>
+              <option value="dark" selected>Deep Charcoal / Navy</option>
+            </select>
+          </div>
+
+          <div class="setting-row border-top">
+            <div>
+              <div class="setting-label">Full Data Backup</div>
+              <div class="setting-sub">Export a complete JSON backup including vocabulary, streaks, and quiz records</div>
+            </div>
+            <button id="btnExportFullBackup" class="setting-action-btn">Export Backup</button>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <div class="setting-label">Clear Dictionary Cache</div>
+              <div class="setting-sub">Frees storage space by purging cached online dictionary responses</div>
+            </div>
+            <button id="btnClearCache" class="setting-action-btn secondary">Clear Cache</button>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <div class="setting-label" style="color: #EF4444;">Erase All Data</div>
+              <div class="setting-sub">Permanently delete all saved vocabulary, quiz history, and streaks</div>
+            </div>
+            <button id="btnDeleteAll" class="setting-action-btn danger">Delete Everything</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>

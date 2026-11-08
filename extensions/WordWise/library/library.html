@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordWise — Vocabulary Library</title>
+  <link rel="stylesheet" href="library.css">
+</head>
+<body>
+  <div class="library-layout">
+    <!-- Top Navigation Header -->
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="brand-group">
+          <img src="../assets/icons/icon32.png" alt="WordWise" class="brand-icon">
+          <div>
+            <h1 class="brand-title">WordWise</h1>
+            <span class="header-badge">Vocabulary Library</span>
+          </div>
+        </div>
+
+        <nav class="header-nav">
+          <a href="../lookup/lookup.html" class="nav-btn primary">+ Look up Word</a>
+          <a href="../flashcards/flashcards.html" class="nav-btn">Flashcards</a>
+          <a href="../quizzes/quiz.html" class="nav-btn">Quizzes</a>
+          <a href="../dashboard/dashboard.html" class="nav-btn">Analytics</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="library-main">
+      <!-- Summary Metric Cards -->
+      <section class="metrics-row">
+        <div class="metric-card">
+          <span class="metric-num" id="metricTotalWords">0</span>
+          <span class="metric-lbl">Total Words Saved</span>
+        </div>
+        <div class="metric-card highlight">
+          <span class="metric-num" id="metricDueToday">0</span>
+          <span class="metric-lbl">Due for Review Today</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-num" id="metricMastered">0</span>
+          <span class="metric-lbl">Mastered Words</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-num" id="metricStreak">🔥 0</span>
+          <span class="metric-lbl">Current Streak</span>
+        </div>
+      </section>
+
+      <!-- Filter & Controls Toolbar -->
+      <section class="toolbar-section">
+        <div class="search-box">
+          <svg class="search-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="libSearchInput" class="lib-search-input" placeholder="Search saved words, definitions, or notes..." autocomplete="off">
+        </div>
+
+        <div class="filter-controls-row">
+          <!-- Status Filter -->
+          <select id="filterStatus" class="control-select">
+            <option value="all">All Stages</option>
+            <option value="learning">Learning</option>
+            <option value="review">Review</option>
+            <option value="mastered">Mastered</option>
+          </select>
+
+          <!-- Tag Filter -->
+          <select id="filterTag" class="control-select">
+            <option value="all">All Tags</option>
+          </select>
+
+          <!-- Favorites Filter -->
+          <button id="btnFilterFavorite" class="toggle-filter-btn" title="Filter Favorites Only">★ Favorites</button>
+
+          <!-- Sort Select -->
+          <select id="sortOrder" class="control-select">
+            <option value="newest">Recently Added</option>
+            <option value="alpha_asc">Alphabetical (A → Z)</option>
+            <option value="alpha_desc">Alphabetical (Z → A)</option>
+            <option value="due_soonest">Next Review (Soonest)</option>
+          </select>
+
+          <!-- Action Dropdown for Export / Import -->
+          <div class="export-actions-group">
+            <button id="btnExportJson" class="tool-btn" title="Export as JSON backup">JSON</button>
+            <button id="btnExportCsv" class="tool-btn" title="Export as CSV spreadsheet">CSV</button>
+            <button id="btnExportMd" class="tool-btn" title="Export as Markdown notes">MD</button>
+            <button id="btnOpenImportModal" class="tool-btn secondary" title="Import JSON backup">Import</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Words List / Grid -->
+      <section class="words-container">
+        <div class="results-meta-row">
+          <span id="resultsCount">Showing 0 words</span>
+        </div>
+
+        <div id="wordsGrid" class="words-grid">
+          <!-- Dynamically populated word cards -->
+        </div>
+
+        <div id="emptyVocabState" class="empty-state-box" hidden>
+          <div class="empty-icon">📖</div>
+          <h2 class="empty-title">No matching vocabulary found</h2>
+          <p class="empty-sub">Try adjusting your filters, or look up and save new words from websites using the context menu.</p>
+          <a href="../lookup/lookup.html" class="tool-btn primary" style="margin-top: 14px;">Look up New Words</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Word Edit / Detail Modal -->
+  <div id="wordModal" class="modal-backdrop" hidden>
+    <div class="modal-window">
+      <div class="modal-header">
+        <h2 id="modalWordTitle" class="modal-title">Word Details</h2>
+        <button id="btnModalClose" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-word-header">
+          <div>
+            <div id="modalWordName" class="modal-word-name">ephemeral</div>
+            <div id="modalPhonetic" class="modal-phonetic">/ɪˈfem.ər.əl/</div>
+          </div>
+          <button id="btnModalAudio" class="modal-audio-btn">🔊 Listen</button>
+        </div>
+
+        <div class="modal-field">
+          <label class="modal-label">Definitions</label>
+          <div id="modalDefinitionsList" class="modal-text-block"></div>
+        </div>
+
+        <div class="modal-field">
+          <label for="modalInputNotes" class="modal-label">Personal Notes & Mnemonic</label>
+          <textarea id="modalInputNotes" class="modal-textarea" placeholder="Add custom notes..."></textarea>
+        </div>
+
+        <div class="modal-field">
+          <label for="modalInputExample" class="modal-label">Custom Example Sentence</label>
+          <textarea id="modalInputExample" class="modal-textarea small" placeholder="Write an example..."></textarea>
+        </div>
+
+        <div class="modal-field">
+          <label for="modalInputTags" class="modal-label">Tags (comma separated)</label>
+          <input type="text" id="modalInputTags" class="modal-input" placeholder="e.g. gre, business">
+        </div>
+
+        <div class="modal-row">
+          <div class="modal-field half">
+            <label for="modalSelectStatus" class="modal-label">Learning Stage</label>
+            <select id="modalSelectStatus" class="modal-select">
+              <option value="learning">Learning</option>
+              <option value="review">Review</option>
+              <option value="mastered">Mastered</option>
+            </select>
+          </div>
+          <div class="modal-field half">
+            <label class="modal-label">Spaced Repetition Status</label>
+            <div id="modalSm2Info" class="modal-info-box">Repetitions: 0 | Interval: 1d</div>
+          </div>
+        </div>
+
+        <div class="modal-checkbox-row">
+          <label class="checkbox-label">
+            <input type="checkbox" id="modalCheckFavorite">
+            <span>Mark as Favorite ★</span>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btnModalDelete" class="action-btn danger">Delete Word</button>
+        <div style="display:flex; gap:8px;">
+          <button id="btnModalCancel" class="action-btn secondary">Cancel</button>
+          <button id="btnModalSave" class="action-btn primary">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Import Modal -->
+  <div id="importModal" class="modal-backdrop" hidden>
+    <div class="modal-window">
+      <div class="modal-header">
+        <h2 class="modal-title">Import Vocabulary Backup</h2>
+        <button id="btnImportClose" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-sub">Upload a previously exported WordWise JSON backup file to restore your vocabulary.</p>
+
+        <div class="file-drop-area" id="dropArea">
+          <input type="file" id="importFileInput" accept=".json" class="file-input-hidden">
+          <div class="drop-text">Click to choose or drag & drop a .json backup file</div>
+        </div>
+
+        <div id="importPreviewBox" class="import-preview-box" hidden>
+          <div class="preview-metric-row">
+            <span id="previewNewCount" class="preview-badge success">+0 New Words</span>
+            <span id="previewDupCount" class="preview-badge warning">0 Duplicates (Skipped)</span>
+          </div>
+          <div class="modal-field" style="margin-top:12px;">
+            <label class="modal-label">Import Mode</label>
+            <select id="selectImportMode" class="modal-select">
+              <option value="merge">Merge with existing vocabulary (Recommended)</option>
+              <option value="overwrite">Overwrite all existing vocabulary</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btnImportCancel" class="action-btn secondary">Cancel</button>
+        <button id="btnExecuteImport" class="action-btn primary" disabled>Import Words</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="library.js"></script>
+</body>
+</html>

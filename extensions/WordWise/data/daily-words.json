@@ -1,0 +1,2262 @@
+[
+  {
+    "word": "ephemeral",
+    "phonetic": "/ɪˈfem.ər.əl/",
+    "partOfSpeech": "adjective",
+    "definition": "Lasting for a very short time; transitory and fleeting.",
+    "example": "The ephemeral morning mist quickly evaporated as the sun ascended.",
+    "synonyms": [
+      "transient",
+      "fleeting",
+      "evanescent",
+      "fugacious"
+    ],
+    "antonyms": [
+      "permanent",
+      "enduring",
+      "perpetual",
+      "eternal"
+    ],
+    "usageTip": "Often used in literary or aesthetic contexts to describe beauty or time that passes quickly."
+  },
+  {
+    "word": "serendipity",
+    "phonetic": "/ˌser.ənˈdɪp.ə.ti/",
+    "partOfSpeech": "noun",
+    "definition": "The occurrence of events by chance in a happy or beneficial way.",
+    "example": "Finding her dream job while browsing a bookstore was pure serendipity.",
+    "synonyms": [
+      "fluke",
+      "fortune",
+      "providence",
+      "coincidence"
+    ],
+    "antonyms": [
+      "misfortune",
+      "adversity",
+      "design",
+      "misfortune"
+    ],
+    "usageTip": "Use serendipity when discovering valuable things unexpectedly while seeking something else."
+  },
+  {
+    "word": "lucid",
+    "phonetic": "/ˈluː.sɪd/",
+    "partOfSpeech": "adjective",
+    "definition": "Expressed clearly and easy to understand; showing ability to think clearly.",
+    "example": "The professor provided a lucid explanation of quantum entanglement.",
+    "synonyms": [
+      "coherent",
+      "articulate",
+      "transparent",
+      "perspicuous"
+    ],
+    "antonyms": [
+      "obscure",
+      "confusing",
+      "vague",
+      "muddled"
+    ],
+    "usageTip": "Commonly applied to writing, speeches, moments of mental clarity, or vivid dreaming."
+  },
+  {
+    "word": "eloquent",
+    "phonetic": "/ˈel.ə.kwənt/",
+    "partOfSpeech": "adjective",
+    "definition": "Fluent or persuasive in speaking or writing; clearly expressing feelings.",
+    "example": "Her eloquent speech moved the entire delegation to a standing ovation.",
+    "synonyms": [
+      "articulate",
+      "expressive",
+      "poignant",
+      "silver-tongued"
+    ],
+    "antonyms": [
+      "inarticulate",
+      "halting",
+      "hesitant",
+      "clumsy"
+    ],
+    "usageTip": "Can describe both spoken language and silent body gestures that communicate powerfully."
+  },
+  {
+    "word": "resilient",
+    "phonetic": "/rɪˈzɪl.jənt/",
+    "partOfSpeech": "adjective",
+    "definition": "Able to withstand or recover quickly from difficult conditions or trauma.",
+    "example": "The resilient local community rebuilt their damaged town within months.",
+    "synonyms": [
+      "tenacious",
+      "buoyant",
+      "adaptable",
+      "durable"
+    ],
+    "antonyms": [
+      "fragile",
+      "vulnerable",
+      "brittle",
+      "delicate"
+    ],
+    "usageTip": "Used for people recovering from hardship or materials returning to their original shape."
+  },
+  {
+    "word": "meticulous",
+    "phonetic": "/məˈtɪk.jə.ləs/",
+    "partOfSpeech": "adjective",
+    "definition": "Showing great attention to detail; very careful and precise.",
+    "example": "The curator was meticulous in preserving ancient parchment manuscripts.",
+    "synonyms": [
+      "scrupulous",
+      "punctilious",
+      "painstaking",
+      "diligent"
+    ],
+    "antonyms": [
+      "careless",
+      "sloppy",
+      "negligent",
+      "hasty"
+    ],
+    "usageTip": "Emphasizes thoroughness and perfectionism, almost always in a positive or rigorous sense."
+  },
+  {
+    "word": "pragmatic",
+    "phonetic": "/præɡˈmæt.ɪk/",
+    "partOfSpeech": "adjective",
+    "definition": "Dealing with things sensibly and realistically based on practical considerations.",
+    "example": "We need a pragmatic solution rather than theoretical ideology.",
+    "synonyms": [
+      "practical",
+      "utilitarian",
+      "hard-headed",
+      "sensible"
+    ],
+    "antonyms": [
+      "idealistic",
+      "impractical",
+      "visionary",
+      "utopian"
+    ],
+    "usageTip": "Ideal for business, governance, and problem-solving where tangible results matter most."
+  },
+  {
+    "word": "ubiquitous",
+    "phonetic": "/juːˈbɪk.wɪ.təs/",
+    "partOfSpeech": "adjective",
+    "definition": "Present, appearing, or found everywhere at the same time.",
+    "example": "Smartphones have become ubiquitous across every modern urban landscape.",
+    "synonyms": [
+      "omnipresent",
+      "pervasive",
+      "universal",
+      "widespread"
+    ],
+    "antonyms": [
+      "rare",
+      "scarce",
+      "infrequent",
+      "uncommon"
+    ],
+    "usageTip": "Useful when discussing pervasive technology, cultural trends, or natural phenomena."
+  },
+  {
+    "word": "cognizant",
+    "phonetic": "/ˈkɒɡ.nɪ.zənt/",
+    "partOfSpeech": "adjective",
+    "definition": "Having knowledge or being fully aware of something.",
+    "example": "Statesmen must remain cognizant of shifting geopolitical balances.",
+    "synonyms": [
+      "conscious",
+      "mindful",
+      "apprised",
+      "informed"
+    ],
+    "antonyms": [
+      "oblivious",
+      "unaware",
+      "ignorant",
+      "unconscious"
+    ],
+    "usageTip": "Formal term typically paired with \"of\", as in \"cognizant of the potential risks\"."
+  },
+  {
+    "word": "prolific",
+    "phonetic": "/prəˈlɪf.ɪk/",
+    "partOfSpeech": "adjective",
+    "definition": "Producing much fruit, foliage, or many artistic and intellectual works.",
+    "example": "The prolific novelist published over forty bestsellers during her career.",
+    "synonyms": [
+      "productive",
+      "fruitful",
+      "fertile",
+      "bountiful"
+    ],
+    "antonyms": [
+      "unproductive",
+      "barren",
+      "sparse",
+      "sterile"
+    ],
+    "usageTip": "Often applied to authors, composers, researchers, and inventors with immense output."
+  },
+  {
+    "word": "audacious",
+    "phonetic": "/ɔːˈdeɪ.ʃəs/",
+    "partOfSpeech": "adjective",
+    "definition": "Showing a willingness to take surprisingly bold risks; daring.",
+    "example": "The architect proposed an audacious design spanning the entire harbor.",
+    "synonyms": [
+      "intrepid",
+      "brazen",
+      "courageous",
+      "fearless"
+    ],
+    "antonyms": [
+      "timid",
+      "cautious",
+      "fearful",
+      "meek"
+    ],
+    "usageTip": "Can be complimentary (courageously creative) or critical (insolent or reckless)."
+  },
+  {
+    "word": "candid",
+    "phonetic": "/ˈkæn.dɪd/",
+    "partOfSpeech": "adjective",
+    "definition": "Truthful and straightforward; frank in expressing one opinion.",
+    "example": "The CEO gave a candid assessment of the quarter financial challenges.",
+    "synonyms": [
+      "frank",
+      "honest",
+      "forthright",
+      "unfiltered"
+    ],
+    "antonyms": [
+      "evasive",
+      "deceitful",
+      "guarded",
+      "disingenuous"
+    ],
+    "usageTip": "Also used in photography to describe unposed, spontaneous portraits."
+  },
+  {
+    "word": "tenacious",
+    "phonetic": "/təˈneɪ.ʃəs/",
+    "partOfSpeech": "adjective",
+    "definition": "Tending to keep a firm hold of something; clinging or adhering closely; persistent.",
+    "example": "Her tenacious defense of civil rights inspired generations of reformers.",
+    "synonyms": [
+      "persistent",
+      "stubborn",
+      "resolute",
+      "unyielding"
+    ],
+    "antonyms": [
+      "vacillating",
+      "irresolute",
+      "yielding",
+      "slack"
+    ],
+    "usageTip": "Highlights perseverance that refuses to surrender in the face of obstacles."
+  },
+  {
+    "word": "superfluous",
+    "phonetic": "/suːˈpɜː.flu.əs/",
+    "partOfSpeech": "adjective",
+    "definition": "Unnecessary, especially through being more than enough; excessive.",
+    "example": "The editor trimmed superfluous adjectives to keep the prose sharp and rhythmic.",
+    "synonyms": [
+      "redundant",
+      "surplus",
+      "excessive",
+      "gratuitous"
+    ],
+    "antonyms": [
+      "essential",
+      "necessary",
+      "indispensable",
+      "vital"
+    ],
+    "usageTip": "Frequently used in design, editing, and engineering to eliminate excess clutter."
+  },
+  {
+    "word": "paradox",
+    "phonetic": "/ˈpær.ə.dɒks/",
+    "partOfSpeech": "noun",
+    "definition": "A seemingly absurd or contradictory statement that when investigated may prove true.",
+    "example": "The paradox of thrift suggests saving more individually can harm overall demand.",
+    "synonyms": [
+      "contradiction",
+      "enigma",
+      "antinomy",
+      "puzzle"
+    ],
+    "antonyms": [
+      "tautology",
+      "certainty",
+      "axiomatic truth",
+      "obviousness"
+    ],
+    "usageTip": "Great for philosophical discussions, scientific mysteries, and poetic observations."
+  },
+  {
+    "word": "altruistic",
+    "phonetic": "/ˌæl.truˈɪs.tɪk/",
+    "partOfSpeech": "adjective",
+    "definition": "Showing a selfless concern for the well-being of others.",
+    "example": "The billionaire spent his later years on altruistic global vaccine initiatives.",
+    "synonyms": [
+      "philanthropic",
+      "benevolent",
+      "unselfish",
+      "charitable"
+    ],
+    "antonyms": [
+      "selfish",
+      "egocentric",
+      "narcissistic",
+      "greedy"
+    ],
+    "usageTip": "Contrast with self-serving or transactional motives."
+  },
+  {
+    "word": "aesthetic",
+    "phonetic": "/esˈθet.ɪk/",
+    "partOfSpeech": "adjective",
+    "definition": "Concerned with beauty or the appreciation of beauty; pleasing in appearance.",
+    "example": "The minimalist café blended Scandinavian timber with clean aesthetic lines.",
+    "synonyms": [
+      "artistic",
+      "tasteful",
+      "harmonious",
+      "pleasing"
+    ],
+    "antonyms": [
+      "unsightly",
+      "grotesque",
+      "drab",
+      "unappealing"
+    ],
+    "usageTip": "Commonly used as both adjective (\"aesthetic appeal\") and noun (\"a retro aesthetic\")."
+  },
+  {
+    "word": "catalyst",
+    "phonetic": "/ˈkæt.əl.ɪst/",
+    "partOfSpeech": "noun",
+    "definition": "A person or thing that precipitates an event or accelerates change.",
+    "example": "The publication of the investigative report acted as a catalyst for legislative reform.",
+    "synonyms": [
+      "spark",
+      "impetus",
+      "stimulus",
+      "accelerator"
+    ],
+    "antonyms": [
+      "inhibitor",
+      "deterrent",
+      "obstacle",
+      "brake"
+    ],
+    "usageTip": "Borrowed from chemistry to metaphorically denote any spark driving transformation."
+  },
+  {
+    "word": "disparate",
+    "phonetic": "/ˈdɪs.pər.ət/",
+    "partOfSpeech": "adjective",
+    "definition": "Essentially different in kind; not allowing comparison.",
+    "example": "The project united experts from disparate fields including linguistics and neuroscience.",
+    "synonyms": [
+      "divergent",
+      "contrasting",
+      "heterogeneous",
+      "dissimilar"
+    ],
+    "antonyms": [
+      "similar",
+      "homogeneous",
+      "uniform",
+      "identical"
+    ],
+    "usageTip": "Use when differences are structural or fundamental rather than superficial."
+  },
+  {
+    "word": "empathy",
+    "phonetic": "/ˈem.pə.θi/",
+    "partOfSpeech": "noun",
+    "definition": "The ability to understand and share the feelings and perspective of another.",
+    "example": "Effective negotiators demonstrate deep empathy for their counterpart anxieties.",
+    "synonyms": [
+      "compassion",
+      "understanding",
+      "sensitivity",
+      "affinity"
+    ],
+    "antonyms": [
+      "callousness",
+      "apathy",
+      "detachment",
+      "indifference"
+    ],
+    "usageTip": "Distinguish from sympathy (feeling sorrow for another) by emphasizing shared feeling."
+  },
+  {
+    "word": "fastidious",
+    "phonetic": "/fæsˈtɪd.i.əs/",
+    "partOfSpeech": "adjective",
+    "definition": "Very attentive to and concerned about accuracy and detail; very hard to please.",
+    "example": "He maintained a fastidious wardrobe where every collar was pressed to perfection.",
+    "synonyms": [
+      "finicky",
+      "fussy",
+      "punctilious",
+      "demanding"
+    ],
+    "antonyms": [
+      "undemanding",
+      "lax",
+      "easygoing",
+      "uncritical"
+    ],
+    "usageTip": "Often implies an exacting standard or cleanliness that can border on obsessive."
+  },
+  {
+    "word": "garrulous",
+    "phonetic": "/ˈɡær.əl.əs/",
+    "partOfSpeech": "adjective",
+    "definition": "Excessively talkative, especially on trivial matters.",
+    "example": "The garrulous cab driver narrated thirty years of neighborhood gossip.",
+    "synonyms": [
+      "loquacious",
+      "voluble",
+      "chatty",
+      "verbose"
+    ],
+    "antonyms": [
+      "taciturn",
+      "reticent",
+      "laconic",
+      "quiet"
+    ],
+    "usageTip": "Slightly pejorative; implies someone who talks too much about unimportant topics."
+  },
+  {
+    "word": "harbinger",
+    "phonetic": "/ˈhɑː.bɪn.dʒər/",
+    "partOfSpeech": "noun",
+    "definition": "A person or thing that announces or signals the approach of another.",
+    "example": "The sudden flock of swallows was seen as a harbinger of spring.",
+    "synonyms": [
+      "herald",
+      "fore-runner",
+      "omen",
+      "precursor"
+    ],
+    "antonyms": [
+      "sequel",
+      "consequence",
+      "aftermath",
+      "result"
+    ],
+    "usageTip": "Commonly used for signs or warnings heralding major political or seasonal transitions."
+  },
+  {
+    "word": "immutable",
+    "phonetic": "/ɪˈmjuː.tə.bəl/",
+    "partOfSpeech": "adjective",
+    "definition": "Unchanging over time or unable to be changed.",
+    "example": "The laws of thermodynamic physics remain immutable across the known universe.",
+    "synonyms": [
+      "unalterable",
+      "fixed",
+      "permanent",
+      "rigid"
+    ],
+    "antonyms": [
+      "fluid",
+      "mutable",
+      "variable",
+      "changeable"
+    ],
+    "usageTip": "Pairs naturally with fundamental principles, mathematical truths, or natural laws."
+  },
+  {
+    "word": "juxtaposition",
+    "phonetic": "/ˌdʒʌk.stə.pəˈzɪʃ.ən/",
+    "partOfSpeech": "noun",
+    "definition": "The fact of two things being placed close together with contrasting effect.",
+    "example": "The juxtaposition of gothic arches alongside sleek steel skyscrapers was striking.",
+    "synonyms": [
+      "contrast",
+      "comparison",
+      "adjacency",
+      "proximity"
+    ],
+    "antonyms": [
+      "separation",
+      "distance",
+      "isolation",
+      "disconnection"
+    ],
+    "usageTip": "Widely used in art critique, literary analysis, and cinematic scene composition."
+  },
+  {
+    "word": "kinetic",
+    "phonetic": "/kɪˈnet.ɪk/",
+    "partOfSpeech": "adjective",
+    "definition": "Relating to or resulting from motion; energetic and dynamic.",
+    "example": "The dancers delivered a kinetic performance full of athletic leaps.",
+    "synonyms": [
+      "dynamic",
+      "active",
+      "animated",
+      "mobile"
+    ],
+    "antonyms": [
+      "static",
+      "dormant",
+      "motionless",
+      "quiescent"
+    ],
+    "usageTip": "Beyond physics, frequently denotes lively music, storytelling, or visual energy."
+  },
+  {
+    "word": "laconic",
+    "phonetic": "/ləˈkɒn.ɪk/",
+    "partOfSpeech": "adjective",
+    "definition": "Using very few words; concise to the point of seeming blunt.",
+    "example": "His laconic reply of \"Proceed\" ended a three-hour presentation.",
+    "synonyms": [
+      "terse",
+      "succinct",
+      "pithy",
+      "brief"
+    ],
+    "antonyms": [
+      "verbose",
+      "garrulous",
+      "loquacious",
+      "effusive"
+    ],
+    "usageTip": "Derived from ancient Sparta (Laconia), known for stern and brief communication."
+  },
+  {
+    "word": "magnanimous",
+    "phonetic": "/mæɡˈnæn.ɪ.məs/",
+    "partOfSpeech": "adjective",
+    "definition": "Generous or forgiving, especially toward a rival or less powerful person.",
+    "example": "In a magnanimous gesture, the victor invited his opponent to join the cabinet.",
+    "synonyms": [
+      "benevolent",
+      "big-hearted",
+      "forgiving",
+      "noble"
+    ],
+    "antonyms": [
+      "petty",
+      "vindictive",
+      "spiteful",
+      "grudging"
+    ],
+    "usageTip": "Conveys moral greatness and an absence of pettiness or rancor after a triumph."
+  },
+  {
+    "word": "nebulous",
+    "phonetic": "/ˈneb.jə.ləs/",
+    "partOfSpeech": "adjective",
+    "definition": "In the form of a cloud or haze; hazy; vague, indistinct, or ill-defined.",
+    "example": "The startup business plan remained nebulous regarding path to profitability.",
+    "synonyms": [
+      "vague",
+      "indistinct",
+      "ambiguous",
+      "hazy"
+    ],
+    "antonyms": [
+      "clear",
+      "defined",
+      "concrete",
+      "precise"
+    ],
+    "usageTip": "Originates from astronomy (\"nebula\") and describes thoughts or outlines that lack clarity."
+  },
+  {
+    "word": "obfuscate",
+    "phonetic": "/ˈɒb.fʌs.keɪt/",
+    "partOfSpeech": "verb",
+    "definition": "Render obscure, unclear, or unintelligible; deliberately bewilder someone.",
+    "example": "The spokesperson attempted to obfuscate the real issues with technical jargon.",
+    "synonyms": [
+      "confuse",
+      "blur",
+      "muddy",
+      "cloud"
+    ],
+    "antonyms": [
+      "clarify",
+      "elucidate",
+      "simplify",
+      "illuminate"
+    ],
+    "usageTip": "Commonly used when politicians or corporations make language needlessly complicated."
+  },
+  {
+    "word": "panacea",
+    "phonetic": "/ˌpæn.əˈsiː.ə/",
+    "partOfSpeech": "noun",
+    "definition": "A solution or remedy for all difficulties or diseases; a universal cure.",
+    "example": "Technology is a powerful tool, but it is not a panacea for deep social inequity.",
+    "synonyms": [
+      "cure-all",
+      "elixir",
+      "universal remedy",
+      "wonder-drug"
+    ],
+    "antonyms": [
+      "toxin",
+      "bane",
+      "hindrance",
+      "affliction"
+    ],
+    "usageTip": "Nearly always used in the negative (\"not a panacea\") to caution against oversimplified fixes."
+  },
+  {
+    "word": "quandary",
+    "phonetic": "/ˈkwɒn.dri/",
+    "partOfSpeech": "noun",
+    "definition": "A state of perplexity or uncertainty over what to do in a difficult situation.",
+    "example": "George was in a quandary about whether to accept the promotion abroad.",
+    "synonyms": [
+      "dilemma",
+      "predicament",
+      "plight",
+      "impasse"
+    ],
+    "antonyms": [
+      "certainty",
+      "resolution",
+      "clarity",
+      "solution"
+    ],
+    "usageTip": "Use when caught between two difficult choices or confronting an ethical crossroads."
+  },
+  {
+    "word": "reticent",
+    "phonetic": "/ˈret.ɪ.sənt/",
+    "partOfSpeech": "adjective",
+    "definition": "Not revealing one thoughts or feelings readily; reserved.",
+    "example": "She was remarkably reticent about her wartime service and honors.",
+    "synonyms": [
+      "reserved",
+      "uncommunicative",
+      "guarded",
+      "discreet"
+    ],
+    "antonyms": [
+      "expansive",
+      "frank",
+      "candid",
+      "effusive"
+    ],
+    "usageTip": "Indicates deliberate reluctance or modesty in speaking, rather than inability."
+  },
+  {
+    "word": "sagacious",
+    "phonetic": "/səˈɡeɪ.ʃəs/",
+    "partOfSpeech": "adjective",
+    "definition": "Having or showing keen mental discernment and good judgment; shrewd.",
+    "example": "The elder diplomat gave sagacious counsel that averted military escalation.",
+    "synonyms": [
+      "wise",
+      "shrewd",
+      "perspicacious",
+      "judicious"
+    ],
+    "antonyms": [
+      "foolish",
+      "naive",
+      "shortsighted",
+      "obtuse"
+    ],
+    "usageTip": "Conveys deep wisdom honed by years of practical experience and thoughtful reflection."
+  },
+  {
+    "word": "tacit",
+    "phonetic": "/ˈtæs.ɪt/",
+    "partOfSpeech": "adjective",
+    "definition": "Understood or implied without being stated aloud.",
+    "example": "There was a tacit agreement among the roommates never to touch the coffee roast.",
+    "synonyms": [
+      "implicit",
+      "unspoken",
+      "inferred",
+      "unexpressed"
+    ],
+    "antonyms": [
+      "explicit",
+      "stated",
+      "expressed",
+      "formal"
+    ],
+    "usageTip": "Commonly paired with \"approval\", \"agreement\", \"consent\", or \"understanding\"."
+  },
+  {
+    "word": "unprecedented",
+    "phonetic": "/ʌnˈpres.ɪ.den.tɪd/",
+    "partOfSpeech": "adjective",
+    "definition": "Never done or known before; without previous instance.",
+    "example": "The sudden heatwave brought unprecedented temperatures to the arctic region.",
+    "synonyms": [
+      "unmatched",
+      "singular",
+      "novel",
+      "groundbreaking"
+    ],
+    "antonyms": [
+      "precedented",
+      "familiar",
+      "routine",
+      "commonplace"
+    ],
+    "usageTip": "Reserve for situations that genuinely possess zero historical parallels."
+  },
+  {
+    "word": "vex",
+    "phonetic": "/veks/",
+    "partOfSpeech": "verb",
+    "definition": "Make someone feel annoyed, frustrated, or worried, especially with trivial matters.",
+    "example": "The recurring software glitch continued to vex the development team.",
+    "synonyms": [
+      "annoy",
+      "exasperate",
+      "irritate",
+      "plague"
+    ],
+    "antonyms": [
+      "mollify",
+      "soothe",
+      "appease",
+      "placate"
+    ],
+    "usageTip": "Traditional verb that lends refined flavor when describing persistent petty annoyances."
+  },
+  {
+    "word": "wistful",
+    "phonetic": "/ˈwɪst.fəl/",
+    "partOfSpeech": "adjective",
+    "definition": "Having or showing a feeling of vague or regretful longing.",
+    "example": "He cast a wistful glance back at the farmhouse where he spent his youth.",
+    "synonyms": [
+      "nostalgic",
+      "yearning",
+      "melancholy",
+      "longing"
+    ],
+    "antonyms": [
+      "cheerful",
+      "content",
+      "satisfied",
+      "unrepentant"
+    ],
+    "usageTip": "Captures a gentle, bittersweet sadness mixed with tender nostalgia."
+  },
+  {
+    "word": "zealous",
+    "phonetic": "/ˈzel.əs/",
+    "partOfSpeech": "adjective",
+    "definition": "Having or showing passion and devotion; fervent.",
+    "example": "The young activists were zealous in their campaign for renewable energy.",
+    "synonyms": [
+      "fervent",
+      "ardent",
+      "passionate",
+      "devout"
+    ],
+    "antonyms": [
+      "apathetic",
+      "indifferent",
+      "lukewarm",
+      "halfhearted"
+    ],
+    "usageTip": "Can be positive (committed) or cautionary if zeal borders on fanaticism."
+  },
+  {
+    "word": "aberrant",
+    "phonetic": "/əˈber.ənt/",
+    "partOfSpeech": "adjective",
+    "definition": "Departing from an accepted standard; diverging from normal type.",
+    "example": "The meteorologist detected aberrant wind patterns preceding the storm.",
+    "synonyms": [
+      "anomalous",
+      "atypical",
+      "deviant",
+      "divergent"
+    ],
+    "antonyms": [
+      "normal",
+      "typical",
+      "standard",
+      "conventional"
+    ],
+    "usageTip": "Common in scientific research, psychology, and quality assurance."
+  },
+  {
+    "word": "bolster",
+    "phonetic": "/ˈbəʊl.stər/",
+    "partOfSpeech": "verb",
+    "definition": "Support or strengthen; prop up; boost confidence.",
+    "example": "Fresh clinical trial data helped bolster investor faith in the biotech firm.",
+    "synonyms": [
+      "reinforce",
+      "fortify",
+      "augment",
+      "buttress"
+    ],
+    "antonyms": [
+      "undermine",
+      "weaken",
+      "diminish",
+      "sap"
+    ],
+    "usageTip": "Used for physical structural support or psychological/argumentative backing."
+  },
+  {
+    "word": "capricious",
+    "phonetic": "/kəˈprɪʃ.əs/",
+    "partOfSpeech": "adjective",
+    "definition": "Given to sudden and unaccountable changes of mood or behavior; fickle.",
+    "example": "Sailors feared the capricious winds of the southern passage.",
+    "synonyms": [
+      "fickle",
+      "volatile",
+      "unpredictable",
+      "whimsical"
+    ],
+    "antonyms": [
+      "consistent",
+      "steady",
+      "predictable",
+      "reliable"
+    ],
+    "usageTip": "Characterizes unstable weather, financial markets, or mercurial rulers."
+  },
+  {
+    "word": "dearth",
+    "phonetic": "/dɜːθ/",
+    "partOfSpeech": "noun",
+    "definition": "A scarcity or lack of something.",
+    "example": "There is a troubling dearth of skilled electrical engineers in the region.",
+    "synonyms": [
+      "scarcity",
+      "shortage",
+      "paucity",
+      "deficiency"
+    ],
+    "antonyms": [
+      "abundance",
+      "surfeit",
+      "plethora",
+      "copiousness"
+    ],
+    "usageTip": "Almost always followed by \"of\", as in a \"dearth of evidence\" or \"dearth of rain\"."
+  },
+  {
+    "word": "effervescent",
+    "phonetic": "/ˌef.əˈves.ənt/",
+    "partOfSpeech": "adjective",
+    "definition": "Giving off bubbles; fizzy; vivacious and enthusiastic.",
+    "example": "Her effervescent personality lit up the room at every family gathering.",
+    "synonyms": [
+      "bubbly",
+      "vivacious",
+      "exuberant",
+      "sparkling"
+    ],
+    "antonyms": [
+      "somber",
+      "subdued",
+      "morose",
+      "dull"
+    ],
+    "usageTip": "Applies equally to sparkling champagne and infectious, joyful enthusiasm."
+  },
+  {
+    "word": "fortuitous",
+    "phonetic": "/fɔːˈtʃuː.ɪ.təs/",
+    "partOfSpeech": "adjective",
+    "definition": "Happening by accident or chance rather than design; fortunate.",
+    "example": "Their fortuitous encounter at the transit hub launched a lifelong partnership.",
+    "synonyms": [
+      "lucky",
+      "providential",
+      "serendipitous",
+      "unplanned"
+    ],
+    "antonyms": [
+      "premeditated",
+      "deliberate",
+      "calculated",
+      "intentional"
+    ],
+    "usageTip": "Technically means accidental, though modern usage nearly always implies good fortune."
+  },
+  {
+    "word": "gregarious",
+    "phonetic": "/ɡrɪˈɡeər.i.əs/",
+    "partOfSpeech": "adjective",
+    "definition": "Fond of company; sociable; living in flocks or loose communities.",
+    "example": "Unlike his introverted twin, Leo was gregarious and thrived at crowded parties.",
+    "synonyms": [
+      "sociable",
+      "convivial",
+      "companionable",
+      "outgoing"
+    ],
+    "antonyms": [
+      "solitary",
+      "introverted",
+      "aloof",
+      "reclusive"
+    ],
+    "usageTip": "Used for outgoing personalities as well as herd animals like elephants and sheep."
+  },
+  {
+    "word": "hedonist",
+    "phonetic": "/ˈhiː.dən.ɪst/",
+    "partOfSpeech": "noun",
+    "definition": "A person who believes that the pursuit of pleasure is the most important thing in life.",
+    "example": "He lived as an unrepentant hedonist, touring Europe in pursuit of fine wine and opera.",
+    "synonyms": [
+      "epicure",
+      "sensualist",
+      "sybarite",
+      "pleasure-seeker"
+    ],
+    "antonyms": [
+      "ascetic",
+      "puritan",
+      "spartan",
+      "disciplinarian"
+    ],
+    "usageTip": "In philosophy, hedonism refers to pleasure as the highest moral good."
+  },
+  {
+    "word": "iconoclast",
+    "phonetic": "/aɪˈkɒn.ə.klæst/",
+    "partOfSpeech": "noun",
+    "definition": "A person who attacks cherished beliefs, traditional institutions, or established values.",
+    "example": "The rebel filmmaker was hailed as an iconoclast who dismantled Hollywood tropes.",
+    "synonyms": [
+      "maverick",
+      "heretic",
+      "nonconformist",
+      "dissenter"
+    ],
+    "antonyms": [
+      "traditionalist",
+      "conformist",
+      "orthodox believer",
+      "dogmatist"
+    ],
+    "usageTip": "Historically destroyed religious images; now describes disruptive artistic or intellectual pioneers."
+  },
+  {
+    "word": "judicious",
+    "phonetic": "/dʒuːˈdɪʃ.əs/",
+    "partOfSpeech": "adjective",
+    "definition": "Having, showing, or done with good sense or sound judgment.",
+    "example": "Through judicious investment in solar energy, the municipality reduced costs by half.",
+    "synonyms": [
+      "prudent",
+      "sensible",
+      "shrewd",
+      "circumspect"
+    ],
+    "antonyms": [
+      "foolish",
+      "imprudent",
+      "hasty",
+      "reckless"
+    ],
+    "usageTip": "Highlights cautious, balanced choices made after sober evaluation of facts."
+  },
+  {
+    "word": "kindle",
+    "phonetic": "/ˈkɪn.dəl/",
+    "partOfSpeech": "verb",
+    "definition": "Light or set on fire; arouse or inspire an emotion or curiosity.",
+    "example": "Her grandfather tales of exploration helped kindle a lifelong passion for biology.",
+    "synonyms": [
+      "ignite",
+      "stimulate",
+      "awaken",
+      "spark"
+    ],
+    "antonyms": [
+      "extinguish",
+      "quench",
+      "smother",
+      "dampen"
+    ],
+    "usageTip": "Effective metaphor for igniting enthusiasm, curiosity, romance, or debate."
+  },
+  {
+    "word": "lament",
+    "phonetic": "/ləˈment/",
+    "partOfSpeech": "verb",
+    "definition": "Mourn a person loss or death; express regret or disappointment about something.",
+    "example": "Scholars continue to lament the tragic destruction of the ancient Library of Alexandria.",
+    "synonyms": [
+      "mourn",
+      "grieve",
+      "deplore",
+      "rue"
+    ],
+    "antonyms": [
+      "celebrate",
+      "rejoice",
+      "applaud",
+      "exult"
+    ],
+    "usageTip": "Can be used as a verb (\"to lament loss\") or a noun (\"a mournful lament\")."
+  },
+  {
+    "word": "mellifluous",
+    "phonetic": "/məˈlɪf.lu.əs/",
+    "partOfSpeech": "adjective",
+    "definition": "Sweet or musical; pleasant to hear; flowing smoothly like honey.",
+    "example": "The cellist delivered a mellifluous tone that enchanted the symphony hall.",
+    "synonyms": [
+      "dulcet",
+      "euphonious",
+      "melodious",
+      "silky"
+    ],
+    "antonyms": [
+      "cacophonous",
+      "strident",
+      "jarring",
+      "grating"
+    ],
+    "usageTip": "Literally means \"honey-flowing\" in Latin; applied to voices, music, and prose."
+  },
+  {
+    "word": "nonchalant",
+    "phonetic": "/ˌnɒn.ʃəl.ənt/",
+    "partOfSpeech": "adjective",
+    "definition": "Feeling or appearing casually calm and relaxed; not displaying anxiety.",
+    "example": "She gave a nonchalant shrug when asked about her astonishing test score.",
+    "synonyms": [
+      "unconcerned",
+      "insouciant",
+      "composed",
+      "breezy"
+    ],
+    "antonyms": [
+      "anxious",
+      "agitated",
+      "flustered",
+      "concerned"
+    ],
+    "usageTip": "Conveys an effortless, cool composure—sometimes genuine, sometimes affected."
+  },
+  {
+    "word": "opaque",
+    "phonetic": "/oʊˈpeɪk/",
+    "partOfSpeech": "adjective",
+    "definition": "Not able to be seen through; not transparent; hard or impossible to understand.",
+    "example": "The accounting techniques used by the offshore fund were completely opaque.",
+    "synonyms": [
+      "cloudy",
+      "impenetrable",
+      "inscrutable",
+      "obscure"
+    ],
+    "antonyms": [
+      "transparent",
+      "clear",
+      "translucent",
+      "lucid"
+    ],
+    "usageTip": "Used for frosted glass or opaque governmental and corporate policies."
+  },
+  {
+    "word": "plausible",
+    "phonetic": "/ˈplɔː.zə.bəl/",
+    "partOfSpeech": "adjective",
+    "definition": "Seeming reasonable, probable, or worthy of belief.",
+    "example": "Investigators offered a plausible explanation for the sudden power grid outage.",
+    "synonyms": [
+      "credible",
+      "believable",
+      "tenable",
+      "likely"
+    ],
+    "antonyms": [
+      "implausible",
+      "far-fetched",
+      "unbelievable",
+      "dubious"
+    ],
+    "usageTip": "Means reasonable on the surface; occasionally implies superficial plausibility."
+  },
+  {
+    "word": "quell",
+    "phonetic": "/kwel/",
+    "partOfSpeech": "verb",
+    "definition": "Put an end to a rebellion or other disorder, typically by force; subdue or silence.",
+    "example": "The governor appeared on television to quell rising public panic.",
+    "synonyms": [
+      "subdue",
+      "suppress",
+      "calm",
+      "allay"
+    ],
+    "antonyms": [
+      "incite",
+      "inflame",
+      "provoke",
+      "agitate"
+    ],
+    "usageTip": "Frequently collocated with \"fears\", \"riots\", \"doubts\", or \"rumors\"."
+  },
+  {
+    "word": "reverence",
+    "phonetic": "/ˈrev.ər.əns/",
+    "partOfSpeech": "noun",
+    "definition": "Deep respect for someone or something, often accompanied by awe.",
+    "example": "The botanist spoke with profound reverence for century-old redwood groves.",
+    "synonyms": [
+      "veneration",
+      "esteem",
+      "deference",
+      "homage"
+    ],
+    "antonyms": [
+      "disrespect",
+      "scorn",
+      "contempt",
+      "irreverence"
+    ],
+    "usageTip": "A higher emotional octave than mere respect; touches upon awe or sanctity."
+  },
+  {
+    "word": "scrupulous",
+    "phonetic": "/ˈskruː.pjə.ləs/",
+    "partOfSpeech": "adjective",
+    "definition": "Diligent, thorough, and extremely attentive to details; very principled.",
+    "example": "The auditor was scrupulous in verifying every corporate expense claim.",
+    "synonyms": [
+      "meticulous",
+      "principled",
+      "upright",
+      "painstaking"
+    ],
+    "antonyms": [
+      "unscrupulous",
+      "careless",
+      "dishonest",
+      "lax"
+    ],
+    "usageTip": "Blends intellectual precision with moral integrity and ethical adherence."
+  },
+  {
+    "word": "tangible",
+    "phonetic": "/ˈtæn.dʒə.bəl/",
+    "partOfSpeech": "adjective",
+    "definition": "Perceptible by touch; clear, definite, and real rather than imaginary.",
+    "example": "The new training program yielded tangible improvements in customer satisfaction.",
+    "synonyms": [
+      "palpable",
+      "concrete",
+      "discernible",
+      "substantial"
+    ],
+    "antonyms": [
+      "intangible",
+      "abstract",
+      "ethereal",
+      "illusory"
+    ],
+    "usageTip": "Contrasts with vague promises; used for concrete assets, physical objects, or real outcomes."
+  },
+  {
+    "word": "unravel",
+    "phonetic": "/ʌnˈræv.əl/",
+    "partOfSpeech": "verb",
+    "definition": "Undo twisted or woven threads; investigate and solve or collapse.",
+    "example": "Archaeologists worked decades to unravel the script of the Linear B tablets.",
+    "synonyms": [
+      "disentangle",
+      "solve",
+      "decipher",
+      "disintegrate"
+    ],
+    "antonyms": [
+      "entangle",
+      "complicate",
+      "knot",
+      "weave"
+    ],
+    "usageTip": "Can be transitive (\"unravel a mystery\") or intransitive (\"their alliance unraveled\")."
+  },
+  {
+    "word": "venerable",
+    "phonetic": "/ˈven.ər.ə.bəl/",
+    "partOfSpeech": "adjective",
+    "definition": "Accorded a great deal of respect, especially because of age, wisdom, or character.",
+    "example": "The university venerable stone library has welcomed scholars since 1636.",
+    "synonyms": [
+      "revered",
+      "distinguished",
+      "hallowed",
+      "august"
+    ],
+    "antonyms": [
+      "disreputable",
+      "ignoble",
+      "disgraced",
+      "juvenile"
+    ],
+    "usageTip": "Honors institutions, elder figures, or longstanding traditions with storied history."
+  },
+  {
+    "word": "whimsical",
+    "phonetic": "/ˈwɪm.zɪ.kəl/",
+    "partOfSpeech": "adjective",
+    "definition": "Playfully quaint or fanciful, especially in an appealing and amusing way.",
+    "example": "The children book featured whimsical illustrations of flying clockwork cats.",
+    "synonyms": [
+      "fanciful",
+      "playful",
+      "quirky",
+      "eccentric"
+    ],
+    "antonyms": [
+      "serious",
+      "grave",
+      "solemn",
+      "matter-of-fact"
+    ],
+    "usageTip": "Delightful and imaginative; distinctive from erratic or hostile behavior."
+  },
+  {
+    "word": "zenith",
+    "phonetic": "/ˈzen.ɪθ/",
+    "partOfSpeech": "noun",
+    "definition": "The time at which something is most powerful or successful; celestial point directly overhead.",
+    "example": "At the zenith of her athletic career, she held four world sprint records.",
+    "synonyms": [
+      "pinnacle",
+      "apex",
+      "culmination",
+      "acme"
+    ],
+    "antonyms": [
+      "nadir",
+      "bottom",
+      "trough",
+      "decline"
+    ],
+    "usageTip": "Astronomical term denoting the highest point in the sky; metaphorically peak achievement."
+  },
+  {
+    "word": "anachronism",
+    "phonetic": "/əˈnæk.rə.nɪ.zəm/",
+    "partOfSpeech": "noun",
+    "definition": "A thing belonging or appropriate to a period other than that in which it exists.",
+    "example": "Wearing a modern wristwatch in a play set in ancient Rome is a glaring anachronism.",
+    "synonyms": [
+      "chronological error",
+      "misplacement",
+      "relic",
+      "throwback"
+    ],
+    "antonyms": [
+      "contemporary",
+      "modernity",
+      "synchronicity",
+      "currency"
+    ],
+    "usageTip": "Often spotted in historical films, literature, or when describing obsolete customs."
+  },
+  {
+    "word": "belligerent",
+    "phonetic": "/bəˈlɪdʒ.ər.ənt/",
+    "partOfSpeech": "adjective",
+    "definition": "Hostile and aggressive; engaged in a war or conflict.",
+    "example": "The unruly customer adopted a belligerent tone toward the store staff.",
+    "synonyms": [
+      "pugnacious",
+      "combative",
+      "truculent",
+      "quarrelsome"
+    ],
+    "antonyms": [
+      "peaceful",
+      "conciliatory",
+      "placid",
+      "friendly"
+    ],
+    "usageTip": "Can describe nations at formal war or individuals ready for a verbal or physical brawl."
+  },
+  {
+    "word": "circumspect",
+    "phonetic": "/ˈsɜː.kəm.spekt/",
+    "partOfSpeech": "adjective",
+    "definition": "Wary and unwilling to take risks; thinking carefully before acting.",
+    "example": "The legal counsel was circumspect in answering questions during the deposition.",
+    "synonyms": [
+      "cautious",
+      "prudent",
+      "vigilant",
+      "guarded"
+    ],
+    "antonyms": [
+      "reckless",
+      "rash",
+      "incautious",
+      "heedless"
+    ],
+    "usageTip": "From Latin \"looking around\"; emphasizes evaluating all angles before taking action."
+  },
+  {
+    "word": "deleterious",
+    "phonetic": "/ˌdel.ɪˈtɪə.ri.əs/",
+    "partOfSpeech": "adjective",
+    "definition": "Causing harm or damage, often in a subtle or unexpected way.",
+    "example": "Prolonged sleep deprivation has deleterious effects on immune defense.",
+    "synonyms": [
+      "harmful",
+      "detrimental",
+      "injurious",
+      "pernicious"
+    ],
+    "antonyms": [
+      "beneficial",
+      "salutary",
+      "advantageous",
+      "helpful"
+    ],
+    "usageTip": "Formal scientific or legal term for factors that gradually erode health or safety."
+  },
+  {
+    "word": "epiphany",
+    "phonetic": "/ɪˈpɪf.ən.i/",
+    "partOfSpeech": "noun",
+    "definition": "A moment of sudden and profound revelation or realization.",
+    "example": "While hiking through the quiet forest, she experienced an epiphany about her true calling.",
+    "synonyms": [
+      "revelation",
+      "insight",
+      "breakthrough",
+      "illumination"
+    ],
+    "antonyms": [
+      "confusion",
+      "obscurity",
+      "blindness",
+      "misconception"
+    ],
+    "usageTip": "Often marks the psychological turning point in character arcs and personal growth."
+  },
+  {
+    "word": "foster",
+    "phonetic": "/ˈfɒs.tər/",
+    "partOfSpeech": "verb",
+    "definition": "Encourage the development of something desirable; promote growth.",
+    "example": "The creative incubator aims to foster cross-disciplinary artistic collaboration.",
+    "synonyms": [
+      "nurture",
+      "cultivate",
+      "encourage",
+      "champion"
+    ],
+    "antonyms": [
+      "stifle",
+      "discourage",
+      "suppress",
+      "hinder"
+    ],
+    "usageTip": "Applies to nurturing ideas, talent, community spirit, or parenting a foster child."
+  },
+  {
+    "word": "germane",
+    "phonetic": "/dʒɜːˈmeɪn/",
+    "partOfSpeech": "adjective",
+    "definition": "Relevant to a subject under consideration; pertinent.",
+    "example": "Please keep your questions germane to the financial audit under discussion.",
+    "synonyms": [
+      "relevant",
+      "pertinent",
+      "applicable",
+      "apposite"
+    ],
+    "antonyms": [
+      "irrelevant",
+      "extraneous",
+      "inapplicable",
+      "tangential"
+    ],
+    "usageTip": "Frequently used in courtroom procedures, parliamentary debate, and academic review."
+  },
+  {
+    "word": "hyperbole",
+    "phonetic": "/haɪˈpɜː.bəl.i/",
+    "partOfSpeech": "noun",
+    "definition": "Exaggerated statements or claims not meant to be taken literally.",
+    "example": "Saying she had told him a million times was typical adolescent hyperbole.",
+    "synonyms": [
+      "exaggeration",
+      "overstatement",
+      "magnification",
+      "embellishment"
+    ],
+    "antonyms": [
+      "understatement",
+      "litotes",
+      "modesty",
+      "veracity"
+    ],
+    "usageTip": "Pronounced \"hy-PER-buh-lee\"; common rhetorical device in literature and daily speech."
+  },
+  {
+    "word": "insidious",
+    "phonetic": "/ɪnˈsɪd.i.əs/",
+    "partOfSpeech": "adjective",
+    "definition": "Proceeding in a gradual, subtle way, but with very harmful effects.",
+    "example": "Termite damage can be insidious, eroding structural beams unseen for years.",
+    "synonyms": [
+      "stealthy",
+      "treacherous",
+      "surreptitious",
+      "pernicious"
+    ],
+    "antonyms": [
+      "straightforward",
+      "harmless",
+      "benign",
+      "open"
+    ],
+    "usageTip": "Highlights dangers that develop quietly before showing their destructive nature."
+  },
+  {
+    "word": "judiciously",
+    "phonetic": "/dʒuːˈdɪʃ.əs.li/",
+    "partOfSpeech": "adverb",
+    "definition": "With good judgment or common sense; wisely.",
+    "example": "The funds were distributed judiciously among community health clinics.",
+    "synonyms": [
+      "prudently",
+      "wisely",
+      "sensibly",
+      "shrewdly"
+    ],
+    "antonyms": [
+      "foolishly",
+      "recklessly",
+      "indiscriminately",
+      "rashly"
+    ],
+    "usageTip": "Describes handling scarce resources, power, or authority with fair wisdom."
+  },
+  {
+    "word": "kaleidoscopic",
+    "phonetic": "/kəˌlaɪ.dəˈskɒp.ɪk/",
+    "partOfSpeech": "adjective",
+    "definition": "Having complex patterns of colors; constantly shifting and multifaceted.",
+    "example": "The evening festival offered a kaleidoscopic spectacle of lanterns and fireworks.",
+    "synonyms": [
+      "variegated",
+      "multicolored",
+      "shifting",
+      "psychedelic"
+    ],
+    "antonyms": [
+      "monochrome",
+      "static",
+      "uniform",
+      "drab"
+    ],
+    "usageTip": "Evokes visual dazzle or rapid, dizzying changes in ideas, landscapes, or moods."
+  },
+  {
+    "word": "lucidity",
+    "phonetic": "/luːˈsɪd.ə.ti/",
+    "partOfSpeech": "noun",
+    "definition": "Clarity of expression; intelligibility; the ability to think clearly.",
+    "example": "Despite his advanced years, the philosopher wrote with astonishing lucidity.",
+    "synonyms": [
+      "clarity",
+      "coherence",
+      "transparency",
+      "perspicuity"
+    ],
+    "antonyms": [
+      "confusion",
+      "obscurity",
+      "ambiguity",
+      "incoherence"
+    ],
+    "usageTip": "Praise for crystalline exposition in science, philosophy, or medicine."
+  },
+  {
+    "word": "morose",
+    "phonetic": "/məˈrəʊs/",
+    "partOfSpeech": "adjective",
+    "definition": "Sullen and ill-tempered; gloomy.",
+    "example": "He sat in morose silence after his chess queen was captured.",
+    "synonyms": [
+      "gloomy",
+      "sullen",
+      "glum",
+      "melancholy"
+    ],
+    "antonyms": [
+      "cheerful",
+      "buoyant",
+      "jovial",
+      "sanguine"
+    ],
+    "usageTip": "Carries a sense of broody, sour unhappiness that pushes others away."
+  },
+  {
+    "word": "nuance",
+    "phonetic": "/ˈnjuː.ɑːns/",
+    "partOfSpeech": "noun",
+    "definition": "A subtle difference in meaning, expression, sound, or color.",
+    "example": "A skilled translator preserves cultural nuance that machine models overlook.",
+    "synonyms": [
+      "subtlety",
+      "refinement",
+      "shade",
+      "gradation"
+    ],
+    "antonyms": [
+      "crudeness",
+      "coarseness",
+      "bluntness",
+      "uniformity"
+    ],
+    "usageTip": "Crucial for discussing diplomacy, art, psychology, and expressive translation."
+  },
+  {
+    "word": "ostentatious",
+    "phonetic": "/ˌɒs.tenˈteɪ.ʃəs/",
+    "partOfSpeech": "adjective",
+    "definition": "Characterized by pretentious or showy display designed to impress.",
+    "example": "The mansion was an ostentatious monument of gold leaf and crystal chandeliers.",
+    "synonyms": [
+      "showy",
+      "flamboyant",
+      "pretentious",
+      "gaudy"
+    ],
+    "antonyms": [
+      "modest",
+      "understated",
+      "restrained",
+      "humble"
+    ],
+    "usageTip": "Implies lack of genuine taste in favor of brazen flaunting of wealth or skill."
+  },
+  {
+    "word": "penchant",
+    "phonetic": "/ˈpɒ̃.ʃɒ̃/",
+    "partOfSpeech": "noun",
+    "definition": "A strong or habitual liking for something or a tendency to do something.",
+    "example": "She had an adventurous penchant for hiking uncharted alpine trails.",
+    "synonyms": [
+      "predilection",
+      "affinity",
+      "propensity",
+      "inclination"
+    ],
+    "antonyms": [
+      "aversion",
+      "dislike",
+      "antipathy",
+      "disinclination"
+    ],
+    "usageTip": "Usually paired with \"for\", as in having a \"penchant for foreign languages\"."
+  },
+  {
+    "word": "quixotic",
+    "phonetic": "/kwɪkˈsɒt.ɪk/",
+    "partOfSpeech": "adjective",
+    "definition": "Extremely idealistic, unrealistic, and impractical.",
+    "example": "Building a castle on a remote sandbar proved a tragically quixotic dream.",
+    "synonyms": [
+      "idealistic",
+      "visionary",
+      "romantic",
+      "starry-eyed"
+    ],
+    "antonyms": [
+      "pragmatic",
+      "realistic",
+      "grounded",
+      "practical"
+    ],
+    "usageTip": "Derived from Cervantes Don Quixote, who tilted at windmills believing them giants."
+  },
+  {
+    "word": "rhetoric",
+    "phonetic": "/ˈret.ər.ɪk/",
+    "partOfSpeech": "noun",
+    "definition": "The art of effective or persuasive speaking or writing; language designed to persuade.",
+    "example": "Voters looked past campaign rhetoric to examine the candidate voting record.",
+    "synonyms": [
+      "oratory",
+      "eloquence",
+      "persuasion",
+      "discourse"
+    ],
+    "antonyms": [
+      "inarticulateness",
+      "silence",
+      "bluntness",
+      "factuality"
+    ],
+    "usageTip": "Can be an academic discipline or pejoratively mean empty, manipulative speech."
+  },
+  {
+    "word": "spurious",
+    "phonetic": "/ˈspjʊə.ri.əs/",
+    "partOfSpeech": "adjective",
+    "definition": "Not being what it purports to be; false or fake; not genuine.",
+    "example": "The museum rejected the painting after detecting spurious provenance papers.",
+    "synonyms": [
+      "bogus",
+      "fraudulent",
+      "counterfeit",
+      "fallacious"
+    ],
+    "antonyms": [
+      "genuine",
+      "authentic",
+      "bona fide",
+      "legitimate"
+    ],
+    "usageTip": "Applied to faulty reasoning, fake artifacts, and dishonest claims."
+  },
+  {
+    "word": "trepidation",
+    "phonetic": "/ˌtrep.ɪˈdeɪ.ʃən/",
+    "partOfSpeech": "noun",
+    "definition": "A feeling of fear or agitation about something that may happen.",
+    "example": "She entered the boardroom with slight trepidation before delivering the keynote.",
+    "synonyms": [
+      "apprehension",
+      "dread",
+      "anxiety",
+      "consternation"
+    ],
+    "antonyms": [
+      "calm",
+      "serenity",
+      "composure",
+      "assurance"
+    ],
+    "usageTip": "Reflects anticipatory fear or nervous hesitation before a major ordeal."
+  },
+  {
+    "word": "unequivocal",
+    "phonetic": "/ˌʌn.ɪˈkwɪv.ə.kəl/",
+    "partOfSpeech": "adjective",
+    "definition": "Leaving no doubt; unambiguous; clear and unmistakable.",
+    "example": "The research team provided unequivocal proof of the vaccine efficacy.",
+    "synonyms": [
+      "unambiguous",
+      "unmistakable",
+      "indisputable",
+      "definitive"
+    ],
+    "antonyms": [
+      "equivocal",
+      "ambiguous",
+      "vague",
+      "uncertain"
+    ],
+    "usageTip": "Leaves zero room for misinterpretation; a strong, absolute declaration."
+  },
+  {
+    "word": "vacillate",
+    "phonetic": "/ˈvæs.ɪ.leɪt/",
+    "partOfSpeech": "verb",
+    "definition": "Alternate or waver between different opinions or actions; be indecisive.",
+    "example": "He tended to vacillate for days before choosing a vacation destination.",
+    "synonyms": [
+      "dither",
+      "waver",
+      "hesitate",
+      "oscillate"
+    ],
+    "antonyms": [
+      "decide",
+      "resolve",
+      "commit",
+      "stand firm"
+    ],
+    "usageTip": "Captures the swinging pendulum motion of an indecisive mind."
+  },
+  {
+    "word": "winsome",
+    "phonetic": "/ˈwɪn.səm/",
+    "partOfSpeech": "adjective",
+    "definition": "Attractive or appealing in a fresh, innocent, or engaging manner.",
+    "example": "The young apprentice won over customers with a winsome smile and gentle humor.",
+    "synonyms": [
+      "charming",
+      "engaging",
+      "delightful",
+      "fetching"
+    ],
+    "antonyms": [
+      "surly",
+      "repellent",
+      "forbidding",
+      "unpleasant"
+    ],
+    "usageTip": "Often implies sweet, guileless charm rather than sophisticated glamour."
+  },
+  {
+    "word": "zealot",
+    "phonetic": "/ˈzel.ət/",
+    "partOfSpeech": "noun",
+    "definition": "A person who is fanatical and uncompromising in pursuit of their religious or political ideals.",
+    "example": "The faction was led by a relentless zealot who rejected any peace treaty.",
+    "synonyms": [
+      "fanatic",
+      "extremist",
+      "radical",
+      "militant"
+    ],
+    "antonyms": [
+      "moderate",
+      "pragmatist",
+      "compromiser",
+      "centrist"
+    ],
+    "usageTip": "More intense than \"enthusiast\"; implies rigid dogmatism and refusal to compromise."
+  },
+  {
+    "word": "acumen",
+    "phonetic": "/ˈæk.jə.mən/",
+    "partOfSpeech": "noun",
+    "definition": "The ability to make good judgments and quick decisions, typically in a particular domain.",
+    "example": "Her financial acumen helped guide the startup through three recession cycles.",
+    "synonyms": [
+      "astuteness",
+      "shrewdness",
+      "sharpness",
+      "discernment"
+    ],
+    "antonyms": [
+      "ineptitude",
+      "denseness",
+      "naivety",
+      "shortsightedness"
+    ],
+    "usageTip": "Common in professional contexts like \"business acumen\" or \"political acumen\"."
+  },
+  {
+    "word": "burgeon",
+    "phonetic": "/ˈbɜː.dʒən/",
+    "partOfSpeech": "verb",
+    "definition": "Begin to grow or increase rapidly; flourish.",
+    "example": "E-commerce platforms burgeoned during the mid-2000s expansion.",
+    "synonyms": [
+      "flourish",
+      "thrive",
+      "proliferate",
+      "expand"
+    ],
+    "antonyms": [
+      "wither",
+      "diminish",
+      "contract",
+      "stagnate"
+    ],
+    "usageTip": "Evokes springtime budding and organic, rapid expansion of cities or industries."
+  },
+  {
+    "word": "cacophony",
+    "phonetic": "/kəˈkɒf.ən.i/",
+    "partOfSpeech": "noun",
+    "definition": "A harsh, discordant mixture of sounds.",
+    "example": "A cacophony of car horns, sirens, and jackhammers filled the midtown avenue.",
+    "synonyms": [
+      "din",
+      "racket",
+      "clamor",
+      "discordance"
+    ],
+    "antonyms": [
+      "harmony",
+      "euphony",
+      "symphony",
+      "silence"
+    ],
+    "usageTip": "Conveys unpleasant noise that clashes unharmoniously in the ears."
+  },
+  {
+    "word": "dogmatic",
+    "phonetic": "/dɒɡˈmæt.ɪk/",
+    "partOfSpeech": "adjective",
+    "definition": "Inclined to lay down principles as incontrovertibly true, without consideration of evidence.",
+    "example": "His dogmatic insistence on old procedures alienated younger engineers.",
+    "synonyms": [
+      "opinionated",
+      "inflexible",
+      "authoritarian",
+      "imperious"
+    ],
+    "antonyms": [
+      "open-minded",
+      "flexible",
+      "receptive",
+      "tolerant"
+    ],
+    "usageTip": "Critical descriptor for people who treat personal beliefs as absolute gospel."
+  },
+  {
+    "word": "equanimity",
+    "phonetic": "/ˌek.wəˈnɪm.ə.ti/",
+    "partOfSpeech": "noun",
+    "definition": "Mental calmness, composure, and evenness of temper, especially in a difficult situation.",
+    "example": "The pilot faced severe engine turbulence with remarkable equanimity.",
+    "synonyms": [
+      "composure",
+      "serenity",
+      "poise",
+      "aplomb"
+    ],
+    "antonyms": [
+      "anxiety",
+      "agitation",
+      "alarm",
+      "hysteria"
+    ],
+    "usageTip": "Rooted in Latin for \"equal mind\"; maintaining calm amidst external storms."
+  },
+  {
+    "word": "fallacious",
+    "phonetic": "/fəˈleɪ.ʃəs/",
+    "partOfSpeech": "adjective",
+    "definition": "Based on a mistaken belief; logically unsound.",
+    "example": "The argument that correlation implies causation is fundamentally fallacious.",
+    "synonyms": [
+      "erroneous",
+      "flawed",
+      "misleading",
+      "spurious"
+    ],
+    "antonyms": [
+      "valid",
+      "sound",
+      "logical",
+      "accurate"
+    ],
+    "usageTip": "Refers specifically to faulty reasoning rather than mere factual mistakes."
+  },
+  {
+    "word": "glib",
+    "phonetic": "/ɡlɪb/",
+    "partOfSpeech": "adjective",
+    "definition": "Fluent and voluble but insincere, shallow, or lacking depth.",
+    "example": "His glib apologies failed to satisfy the grieving families.",
+    "synonyms": [
+      "slick",
+      "facile",
+      "smooth-tongued",
+      "superficial"
+    ],
+    "antonyms": [
+      "sincere",
+      "heartfelt",
+      "thoughtful",
+      "profound"
+    ],
+    "usageTip": "Warns of charm that sounds smooth on the surface but lacks true substance."
+  },
+  {
+    "word": "hubris",
+    "phonetic": "/ˈhjuː.brɪs/",
+    "partOfSpeech": "noun",
+    "definition": "Excessive pride or self-confidence, often leading to downfall.",
+    "example": "The empire hubris prevented it from noticing rising discontent on its borders.",
+    "synonyms": [
+      "arrogance",
+      "conceit",
+      "haughtiness",
+      "presumption"
+    ],
+    "antonyms": [
+      "humility",
+      "modesty",
+      "diffidence",
+      "submissiveness"
+    ],
+    "usageTip": "Famous in Greek tragedy, where mortals who defied gods faced swift retribution (nemesis)."
+  },
+  {
+    "word": "impetuous",
+    "phonetic": "/ɪmˈpetʃ.u.əs/",
+    "partOfSpeech": "adjective",
+    "definition": "Acting or done quickly and without thought or care; moving with great force.",
+    "example": "In an impetuous moment, he resigned from his executive post without another offer.",
+    "synonyms": [
+      "impulsive",
+      "rash",
+      "reckless",
+      "hasty"
+    ],
+    "antonyms": [
+      "premeditated",
+      "cautious",
+      "circumspect",
+      "deliberate"
+    ],
+    "usageTip": "Distinguished from courageous by its lack of forethought or calculation."
+  },
+  {
+    "word": "juxtapose",
+    "phonetic": "/ˌdʒʌk.stəˈpəʊz/",
+    "partOfSpeech": "verb",
+    "definition": "Place or deal with close together for contrasting effect.",
+    "example": "The documentary juxtaposes glamorous red carpet galas with factory sweatshops.",
+    "synonyms": [
+      "compare",
+      "contrast",
+      "collocate",
+      "set side-by-side"
+    ],
+    "antonyms": [
+      "isolate",
+      "separate",
+      "dissociate",
+      "disconnect"
+    ],
+    "usageTip": "Active verb form of juxtaposition; indispensable in design and rhetoric."
+  },
+  {
+    "word": "kudos",
+    "phonetic": "/ˈkjuː.dɒs/",
+    "partOfSpeech": "noun",
+    "definition": "Praise and honor received for an achievement.",
+    "example": "She earned widespread kudos from colleagues for delivering the project ahead of schedule.",
+    "synonyms": [
+      "acclaim",
+      "applause",
+      "tribute",
+      "recognition"
+    ],
+    "antonyms": [
+      "criticism",
+      "censure",
+      "disrepute",
+      "condemnation"
+    ],
+    "usageTip": "Originally singular in Greek; treat as an uncountable noun in formal English."
+  },
+  {
+    "word": "languid",
+    "phonetic": "/ˈlæŋ.ɡwɪd/",
+    "partOfSpeech": "adjective",
+    "definition": "Displaying or having a disinclination for physical exertion or effort; slow and relaxed.",
+    "example": "They spent a languid Sunday afternoon floating along the river under willow trees.",
+    "synonyms": [
+      "leisurely",
+      "unhurried",
+      "sluggish",
+      "lethargic"
+    ],
+    "antonyms": [
+      "energetic",
+      "vigorous",
+      "brisk",
+      "dynamic"
+    ],
+    "usageTip": "Evokes peaceful slowness on warm afternoons rather than sickly tiredness."
+  },
+  {
+    "word": "mundane",
+    "phonetic": "/mʌnˈdeɪn/",
+    "partOfSpeech": "adjective",
+    "definition": "Lacking interest or excitement; dull; of this earthly world rather than heavenly.",
+    "example": "He found solace in mundane daily rituals like grinding coffee and sweeping the stoop.",
+    "synonyms": [
+      "ordinary",
+      "routine",
+      "everyday",
+      "quotidian"
+    ],
+    "antonyms": [
+      "extraordinary",
+      "celestial",
+      "thrilling",
+      "supernatural"
+    ],
+    "usageTip": "Captures the ordinary, practical tasks of day-to-day life."
+  },
+  {
+    "word": "neophyte",
+    "phonetic": "/ˈniː.ə.faɪt/",
+    "partOfSpeech": "noun",
+    "definition": "A person who is new to a subject, skill, or belief; a novice.",
+    "example": "As a political neophyte, she brought fresh perspectives free of entrenched bias.",
+    "synonyms": [
+      "novice",
+      "beginner",
+      "apprentice",
+      "fledgling"
+    ],
+    "antonyms": [
+      "veteran",
+      "expert",
+      "master",
+      "virtuoso"
+    ],
+    "usageTip": "Originally a newly baptized convert; now any enthusiastic beginner in a craft."
+  },
+  {
+    "word": "onerous",
+    "phonetic": "/ˈɒn.ər.əs/",
+    "partOfSpeech": "adjective",
+    "definition": "Involving an amount of effort and difficulty that is oppressively burdensome.",
+    "example": "The small firm struggled under the onerous compliance requirements of the new statute.",
+    "synonyms": [
+      "burdensome",
+      "arduous",
+      "strenuous",
+      "taxing"
+    ],
+    "antonyms": [
+      "effortless",
+      "facile",
+      "painless",
+      "light"
+    ],
+    "usageTip": "Applied to heavy responsibilities, contracts, debts, or administrative burdens."
+  },
+  {
+    "word": "pensive",
+    "phonetic": "/ˈpen.sɪv/",
+    "partOfSpeech": "adjective",
+    "definition": "Engaged in, involving, or reflecting deep or serious thought.",
+    "example": "She stared out at the rain in a pensive mood, pondering her next career step.",
+    "synonyms": [
+      "contemplative",
+      "reflective",
+      "meditative",
+      "brooding"
+    ],
+    "antonyms": [
+      "frivolous",
+      "carefree",
+      "shallow",
+      "unthinking"
+    ],
+    "usageTip": "Often suggests a quiet, slightly wistful or somber thoughtfulness."
+  },
+  {
+    "word": "quintessential",
+    "phonetic": "/ˌkwɪn.tɪˈsen.ʃəl/",
+    "partOfSpeech": "adjective",
+    "definition": "Representing the most perfect or typical example of a quality or class.",
+    "example": "Afternoon tea with scones is considered the quintessential English tradition.",
+    "synonyms": [
+      "archetypal",
+      "exemplary",
+      "definitive",
+      "prototypical"
+    ],
+    "antonyms": [
+      "atypical",
+      "aberrant",
+      "unrepresentative",
+      "anomalous"
+    ],
+    "usageTip": "From ancient \"fifth essence\" (ether); the purest embodiment of something."
+  },
+  {
+    "word": "resilience",
+    "phonetic": "/rɪˈzɪl.jəns/",
+    "partOfSpeech": "noun",
+    "definition": "The capacity to recover quickly from difficulties; toughness and elasticity.",
+    "example": "The economic resilience of the island nation surprised international observers.",
+    "synonyms": [
+      "toughness",
+      "adaptability",
+      "hardiness",
+      "perseverance"
+    ],
+    "antonyms": [
+      "fragility",
+      "brittleness",
+      "vulnerability",
+      "weakness"
+    ],
+    "usageTip": "Celebrated in psychology, materials science, and community development."
+  },
+  {
+    "word": "salient",
+    "phonetic": "/ˈseɪ.li.ənt/",
+    "partOfSpeech": "adjective",
+    "definition": "Most noticeable or important; prominent; projecting outward.",
+    "example": "The executive summarized the salient points of the merger proposal in one page.",
+    "synonyms": [
+      "prominent",
+      "conspicuous",
+      "notable",
+      "striking"
+    ],
+    "antonyms": [
+      "inconspicuous",
+      "trivial",
+      "minor",
+      "obscure"
+    ],
+    "usageTip": "Use when pointing out the most crucial, standout aspects of a complex matter."
+  },
+  {
+    "word": "transient",
+    "phonetic": "/ˈtræn.zi.ənt/",
+    "partOfSpeech": "adjective",
+    "definition": "Lasting only for a short time; impermanent; passing through briefly.",
+    "example": "The transient rainbow faded as the storm clouds drifted south.",
+    "synonyms": [
+      "ephemeral",
+      "fleeting",
+      "short-lived",
+      "passing"
+    ],
+    "antonyms": [
+      "permanent",
+      "eternal",
+      "constant",
+      "enduring"
+    ],
+    "usageTip": "Can be an adjective (\"transient phase\") or a noun (\"a transient population\")."
+  },
+  {
+    "word": "ubiquity",
+    "phonetic": "/juːˈbɪk.wɪ.ti/",
+    "partOfSpeech": "noun",
+    "definition": "The fact of appearing everywhere or being very common.",
+    "example": "The ubiquity of social media has transformed interpersonal discourse.",
+    "synonyms": [
+      "omnipresence",
+      "prevalence",
+      "pervasiveness",
+      "universality"
+    ],
+    "antonyms": [
+      "rarity",
+      "scarcity",
+      "uncommonness",
+      "isolation"
+    ],
+    "usageTip": "Noun form of ubiquitous; great for academic analysis of cultural shifts."
+  },
+  {
+    "word": "viable",
+    "phonetic": "/ˈvaɪ.ə.bəl/",
+    "partOfSpeech": "adjective",
+    "definition": "Capable of working successfully; feasible; capable of surviving.",
+    "example": "Solar and wind energy have emerged as economically viable alternatives to coal.",
+    "synonyms": [
+      "feasible",
+      "workable",
+      "practicable",
+      "sustainable"
+    ],
+    "antonyms": [
+      "unfeasible",
+      "impractical",
+      "unviable",
+      "hopeless"
+    ],
+    "usageTip": "Applies to business ventures, political compromises, or biological organisms."
+  },
+  {
+    "word": "wary",
+    "phonetic": "/ˈweə.ri/",
+    "partOfSpeech": "adjective",
+    "definition": "Feeling or showing caution about possible dangers or problems.",
+    "example": "Investors grew increasingly wary as market volatility spiked.",
+    "synonyms": [
+      "cautious",
+      "circumspect",
+      "vigilant",
+      "distrustful"
+    ],
+    "antonyms": [
+      "trusting",
+      "careless",
+      "gullible",
+      "reckless"
+    ],
+    "usageTip": "Always paired with \"of\", as in remaining \"wary of dubious claims\"."
+  },
+  {
+    "word": "xenophile",
+    "phonetic": "/ˈzen.ə.faɪl/",
+    "partOfSpeech": "noun",
+    "definition": "An individual who is attracted to foreign people, manners, or cultures.",
+    "example": "An enthusiastic xenophile, Maya spent every summer learning a new language abroad.",
+    "synonyms": [
+      "cosmopolitan",
+      "culture-lover",
+      "multiculturalist",
+      "internationalist"
+    ],
+    "antonyms": [
+      "xenophobe",
+      "chauvinist",
+      "isolationist",
+      "nativist"
+    ],
+    "usageTip": "Antonym of xenophobe; celebrates appreciation of international customs."
+  },
+  {
+    "word": "yearn",
+    "phonetic": "/jɜːn/",
+    "partOfSpeech": "verb",
+    "definition": "Have an intense feeling of longing for something, typically something lost or out of reach.",
+    "example": "Exiled from his homeland, the poet yearned for the rolling green hills of Galway.",
+    "synonyms": [
+      "crave",
+      "long",
+      "pine",
+      "hanker"
+    ],
+    "antonyms": [
+      "dislike",
+      "spurn",
+      "reject",
+      "repudiate"
+    ],
+    "usageTip": "Deeper and more emotional than \"want\"; expresses heartfelt inner craving."
+  },
+  {
+    "word": "zephyr",
+    "phonetic": "/ˈzef.ər/",
+    "partOfSpeech": "noun",
+    "definition": "A soft, gentle breeze.",
+    "example": "A cool evening zephyr rustled through the open balcony curtains.",
+    "synonyms": [
+      "breeze",
+      "whisper",
+      "gust",
+      "draft"
+    ],
+    "antonyms": [
+      "gale",
+      "tempest",
+      "squall",
+      "hurricane"
+    ],
+    "usageTip": "Named after Zephyrus, the ancient Greek god of the gentle west wind."
+  }
+]

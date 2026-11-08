@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordWise Dictionary Lookup</title>
+  <link rel="stylesheet" href="lookup.css">
+</head>
+<body>
+  <div class="lookup-layout">
+    <!-- Top Navigation Header -->
+    <header class="lookup-header">
+      <div class="header-inner">
+        <div class="brand-link" id="brandLink">
+          <img src="../assets/icons/icon32.png" alt="WordWise" class="brand-icon">
+          <span class="brand-title">WordWise</span>
+          <span class="header-badge">Dictionary</span>
+        </div>
+
+        <!-- Global Search Bar -->
+        <form id="lookupSearchForm" class="header-search-form">
+          <input type="text" id="lookupSearchInput" class="header-search-input" placeholder="Look up any English word or phrase..." autocomplete="off">
+          <button type="submit" class="header-search-btn">Look up</button>
+        </form>
+
+        <nav class="header-nav">
+          <button id="btnHeaderLibrary" class="nav-link-btn">My Library</button>
+          <button id="btnHeaderFlashcards" class="nav-link-btn">Flashcards</button>
+          <button id="btnHeaderQuiz" class="nav-link-btn">Quizzes</button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="lookup-main">
+      <div class="lookup-content-grid">
+        <!-- Primary Definition Column -->
+        <div class="definition-column">
+          <!-- Loading State -->
+          <div id="loadingView" class="state-card" hidden>
+            <div class="spinner"></div>
+            <div class="state-title" id="loadingTitle">Consulting dictionary...</div>
+            <div class="state-sub">Fetching verified phonetic and semantic data</div>
+          </div>
+
+          <!-- Error / Not Found State -->
+          <div id="errorView" class="state-card error-card" hidden>
+            <div class="error-icon">🔍</div>
+            <div class="state-title" id="errorTitle">Definition Not Found</div>
+            <div class="state-sub" id="errorMessage">We could not locate this entry in the dictionary. Check your spelling or try another form.</div>
+            <div class="error-actions">
+              <button id="btnRetryLookup" class="action-btn secondary">Try Again</button>
+            </div>
+          </div>
+
+          <!-- Word Definition View -->
+          <article id="definitionView" class="word-article" hidden>
+            <!-- Word Header Bar -->
+            <div class="word-hero-card">
+              <div class="word-hero-top">
+                <div>
+                  <h1 id="heroWordTitle" class="hero-word-title">ephemeral</h1>
+                  <div class="phonetic-audio-row">
+                    <span id="heroPhonetic" class="hero-phonetic">/ɪˈfem.ər.əl/</span>
+                    <button id="btnHeroAudio" class="hero-audio-btn" title="Pronounce word">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                      </svg>
+                      <span id="audioButtonText">Pronounce</span>
+                    </button>
+                    <span id="audioSourceBadge" class="source-pill" hidden>Authentic audio</span>
+                  </div>
+                </div>
+
+                <div class="save-button-wrap">
+                  <button id="btnOpenSaveModal" class="save-action-btn">
+                    <span id="saveActionIcon">+</span>
+                    <span id="saveActionText">Save to Vocabulary</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Offline / Source Notice -->
+              <div id="offlineNotice" class="offline-badge" hidden>
+                <span>Offline fallback: Loaded from verified local dictionary archive.</span>
+              </div>
+            </div>
+
+            <!-- Context Sentence (if discovered on a webpage) -->
+            <section id="contextSentenceSection" class="context-banner" hidden>
+              <div class="context-banner-header">
+                <span class="context-banner-title">Discovered in Web Context</span>
+                <span id="contextDateBadge" class="context-banner-date">Captured Today</span>
+              </div>
+              <p id="contextSentenceText" class="context-banner-text">...</p>
+              <div id="contextSourceLinkRow" class="context-source-row" hidden>
+                <span>Source:</span>
+                <a id="contextSourceLink" href="#" target="_blank" rel="noopener noreferrer" class="context-url-link">Page Link</a>
+              </div>
+            </section>
+
+            <!-- Meanings & Part of Speech Sections -->
+            <section id="meaningsContainer" class="meanings-container">
+              <!-- Dynamically populated meanings grouped by part of speech -->
+            </section>
+
+            <!-- Synonyms & Antonyms Card -->
+            <section id="synonymsCard" class="synonyms-card" hidden>
+              <div class="synonym-group">
+                <h3 class="synonym-group-title">Synonyms</h3>
+                <div id="synonymsPills" class="pill-wrap"></div>
+              </div>
+              <div id="antonymsGroup" class="synonym-group" hidden>
+                <h3 class="synonym-group-title">Antonyms</h3>
+                <div id="antonymsPills" class="pill-wrap"></div>
+              </div>
+            </section>
+          </article>
+        </div>
+
+        <!-- Sidebar Column: Saved Words & Quick History -->
+        <aside class="sidebar-column">
+          <!-- Save / Edit Notes Card (Embedded) -->
+          <div class="sidebar-card" id="saveWidgetCard">
+            <h3 class="sidebar-title">Personal Vocabulary</h3>
+            <div id="saveStatusIndicator" class="save-status-msg">Save this word to activate spaced repetition flashcards and quizzes.</div>
+
+            <div class="form-group">
+              <label for="inputCustomNotes" class="form-label">Personal Notes & Mnemonic</label>
+              <textarea id="inputCustomNotes" class="form-textarea" placeholder="Add a memory hook, context, or translation..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="inputCustomExample" class="form-label">My Example Sentence</label>
+              <textarea id="inputCustomExample" class="form-textarea small" placeholder="Write your own sentence using this word..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="inputTags" class="form-label">Tags (comma separated)</label>
+              <input type="text" id="inputTags" class="form-input" placeholder="e.g. gre, business, literature">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group half">
+                <label for="selectStatus" class="form-label">Learning Stage</label>
+                <select id="selectStatus" class="form-select">
+                  <option value="learning">Learning</option>
+                  <option value="review">Review</option>
+                  <option value="mastered">Mastered</option>
+                </select>
+              </div>
+              <div class="form-group half" style="display:flex; align-items:flex-end;">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="checkFavorite">
+                  <span>Mark as Favorite ★</span>
+                </label>
+              </div>
+            </div>
+
+            <button id="btnSaveSidebar" class="action-btn primary full-width">Save Word</button>
+          </div>
+
+          <!-- Recent Searches List -->
+          <div class="sidebar-card">
+            <div class="sidebar-title-row">
+              <h3 class="sidebar-title">Recent Lookups</h3>
+              <button id="btnClearHistory" class="text-btn">Clear</button>
+            </div>
+            <ul id="recentLookupsList" class="recent-list">
+              <li class="empty-list-item">No recent searches yet.</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="lookup.js"></script>
+</body>
+</html>

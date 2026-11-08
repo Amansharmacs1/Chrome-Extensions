@@ -1,0 +1,23 @@
+{
+  "name": "wordwise",
+  "version": "1.0.0",
+  "description": "Vocabulary-building and English-learning Chrome Extension with in-page lookups, SM-2 flashcards, and multi-mode quizzes.",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/run-all.js",
+    "icons": "node generate-icons.cjs"
+  },
+  "keywords": [
+    "chrome-extension",
+    "manifest-v3",
+    "vocabulary",
+    "dictionary",
+    "spaced-repetition",
+    "flashcards",
+    "quizzes",
+    "sm-2",
+    "english-learning"
+  ],
+  "author": "WordWise Team",
+  "license": "MIT"
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordWise</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand-group">
+        <img src="../assets/icons/icon32.png" alt="WordWise" class="app-icon">
+        <div>
+          <h1 class="brand-title">WordWise</h1>
+          <p class="brand-tagline">Discover. Learn. Remember.</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="streak-pill" id="headerStreakPill" title="Current Daily Learning Streak">
+          <span class="streak-icon">🔥</span>
+          <span id="streakCount" class="streak-number">0</span>
+        </div>
+        <button id="btnOpenDashboard" class="icon-btn" title="Open Learning Dashboard">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Search Section -->
+    <section class="search-section">
+      <form id="searchForm" class="search-form">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search dictionary or phrase..." autocomplete="off">
+        <button type="submit" class="search-submit-btn" title="Look up definition">Look up</button>
+      </form>
+    </section>
+
+    <!-- Word of the Day -->
+    <section class="daily-word-section">
+      <div class="section-title-row">
+        <span class="section-title">Word of the Day</span>
+        <span id="dailyDateLabel" class="section-badge">Today</span>
+      </div>
+
+      <div class="daily-card" id="dailyWordCard">
+        <div class="daily-card-header">
+          <div>
+            <div class="word-flex-row">
+              <h2 id="dailyWordTitle" class="daily-word-title">Loading...</h2>
+              <span id="dailyPosBadge" class="pos-badge">word</span>
+            </div>
+            <div id="dailyPhonetic" class="phonetic-text">/--/</div>
+          </div>
+          <button id="btnDailyAudio" class="audio-btn" title="Listen to pronunciation">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+            </svg>
+          </button>
+        </div>
+
+        <p id="dailyDefinition" class="daily-definition">Fetching curated word definition...</p>
+
+        <div class="daily-example-box" id="dailyExampleBox">
+          <span class="example-quote-mark">“</span>
+          <span id="dailyExampleText" class="example-text">...</span>
+        </div>
+
+        <div class="daily-card-footer">
+          <button id="btnSaveDaily" class="btn-save-daily">
+            <span id="saveDailyIcon">+</span>
+            <span id="saveDailyText">Save to Library</span>
+          </button>
+          <button id="btnExploreDaily" class="btn-text-link">Full Details →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mini Learning Stats -->
+    <section class="stats-section">
+      <div class="stat-card">
+        <span id="statTotalWords" class="stat-num">0</span>
+        <span class="stat-lbl">Saved Words</span>
+      </div>
+      <div class="stat-card highlight">
+        <span id="statDueCards" class="stat-num">0</span>
+        <span class="stat-lbl">Due Today</span>
+      </div>
+      <div class="stat-card">
+        <span id="statMastered" class="stat-num">0</span>
+        <span class="stat-lbl">Mastered</span>
+      </div>
+    </section>
+
+    <!-- Navigation Action Grid -->
+    <nav class="nav-grid">
+      <button id="btnNavFlashcards" class="nav-btn primary">
+        <div class="nav-btn-icon">🗂️</div>
+        <div class="nav-btn-content">
+          <div class="nav-btn-title">Review Cards</div>
+          <div class="nav-btn-sub" id="flashcardsDueSub">0 cards due</div>
+        </div>
+      </button>
+
+      <button id="btnNavQuiz" class="nav-btn">
+        <div class="nav-btn-icon">🎯</div>
+        <div class="nav-btn-content">
+          <div class="nav-btn-title">Take a Quiz</div>
+          <div class="nav-btn-sub">4 learning modes</div>
+        </div>
+      </button>
+
+      <button id="btnNavLibrary" class="nav-btn">
+        <div class="nav-btn-icon">📚</div>
+        <div class="nav-btn-content">
+          <div class="nav-btn-title">Vocabulary</div>
+          <div class="nav-btn-sub">Browse & export</div>
+        </div>
+      </button>
+
+      <button id="btnNavAnalytics" class="nav-btn">
+        <div class="nav-btn-icon">📊</div>
+        <div class="nav-btn-content">
+          <div class="nav-btn-title">Analytics</div>
+          <div class="nav-btn-sub">Streaks & stats</div>
+        </div>
+      </button>
+    </nav>
+  </div>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
