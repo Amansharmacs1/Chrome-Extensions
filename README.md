@@ -4,7 +4,7 @@
 
 Chrome Extensions is a growing collection of browser tools designed to make everyday browsing more productive, convenient, secure, and enjoyable.
 
-From focused study sessions and personalized new-tab experiences to website design utilities, WebRTC camera magic, and link safety checks, each extension aims to solve a specific real-world problem.
+From focused study sessions and personalized new-tab experiences to website design utilities, WebRTC camera magic, and QR code utilities, each extension aims to solve a specific real-world problem.
 
 ## ✨ Extensions
 
@@ -21,7 +21,6 @@ From focused study sessions and personalized new-tab experiences to website desi
 | [**FontLens**](./extensions/FontLens) | Inspect, identify, analyze, live-edit, and compare web typography with Shadow DOM isolation, WCAG contrast, and page scanner. | Completed & Tested |
 | [**WordWise**](./extensions/WordWise) | Discover unfamiliar words while browsing, instant dictionary lookups, save vocabulary, and achieve long-term retention with SM-2 flashcards and quizzes. | Completed & Tested |
 | [**QRQuick**](./extensions/QRQuick) | Generate, customize, scan, and bulk export QR codes with 9 payload types, center logo branding, WCAG contrast meter, and ZIP download. | Completed & Tested |
-| **LinkShield** | Check URLs for known threats and suspicious patterns before opening them. | Planned |
 
 *Extension statuses will be updated as each project is implemented and tested.*
 
@@ -122,7 +121,6 @@ Contributions, bug reports, feature ideas, and improvements are welcome:
 - [x] Build, test, and document WebNotes.
 - [ ] Develop NewTab Pro.
 - [ ] Add ReadEase, ColorPeek, and FontLens.
-- [ ] Develop LinkShield with appropriate threat-intelligence checks.
 - [ ] Add screenshots, usage guides, and testing documentation.
 - [ ] Improve accessibility, performance, and reliability.
 
