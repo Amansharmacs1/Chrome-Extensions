@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QRQuick — QR Scanner & Safety Inspector</title>
+  <link rel="stylesheet" href="scanner.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Header -->
+    <header class="main-header">
+      <div class="header-inner">
+        <a href="../generator/generator.html" class="brand-link">
+          <img src="../assets/icons/icon32.png" alt="QRQuick" class="brand-logo">
+          <div>
+            <div class="brand-name">QRQuick</div>
+            <div class="brand-sub">Scanner & Safety Inspector</div>
+          </div>
+        </a>
+
+        <nav class="main-nav">
+          <a href="../generator/generator.html" class="nav-item">Generator</a>
+          <a href="scanner.html" class="nav-item active">Scanner</a>
+          <a href="../bulk/bulk.html" class="nav-item">Bulk Batch</a>
+          <a href="../dashboard/dashboard.html" class="nav-item">History & Settings</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="scanner-container">
+      <div class="scanner-grid">
+        <!-- Left: Upload / Drop / Camera Input -->
+        <section class="scan-input-card">
+          <div class="scan-methods-header">
+            <h2>Scan QR Code</h2>
+            <p class="method-sub">Upload an image file, drop it below, paste from clipboard (<kbd>Ctrl+V</kbd>), or scan via camera.</p>
+          </div>
+
+          <!-- Dropzone -->
+          <div class="dropzone" id="scanDropzone">
+            <input type="file" id="scanFileInput" accept="image/png,image/jpeg,image/webp,image/bmp" hidden>
+            <div class="dropzone-inner" id="dropzoneContent">
+              <div class="dropzone-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="17 8 12 3 7 8"></polyline>
+                  <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+              </div>
+              <div class="dropzone-title">Drop QR image here, paste, or <span class="highlight">browse</span></div>
+              <div class="dropzone-formats">Supports PNG, JPG, WebP, BMP</div>
+            </div>
+
+            <!-- Image Preview while scanning -->
+            <div id="scanImagePreviewWrap" class="scan-image-preview-wrap" hidden>
+              <img id="scannedImagePreview" alt="Scanned image" class="scanned-image-preview">
+            </div>
+          </div>
+
+          <!-- Live Camera Section -->
+          <div class="camera-card">
+            <div class="camera-header">
+              <div>
+                <div class="camera-title">Live Camera Scanner</div>
+                <div class="camera-sub">Scan physical QR codes directly using your webcam.</div>
+              </div>
+              <button id="btnToggleCamera" class="camera-toggle-btn">
+                <span class="cam-icon">📷</span>
+                <span id="lblCameraBtn">Start Camera</span>
+              </button>
+            </div>
+
+            <!-- Camera Viewport (hidden until started) -->
+            <div id="cameraViewportWrap" class="camera-viewport-wrap" hidden>
+              <video id="cameraVideo" playsinline autoplay muted></video>
+              <div class="scan-reticle">
+                <div class="reticle-corner top-left"></div>
+                <div class="reticle-corner top-right"></div>
+                <div class="reticle-corner bottom-left"></div>
+                <div class="reticle-corner bottom-right"></div>
+                <div class="laser-beam"></div>
+              </div>
+            </div>
+            <div id="cameraNotice" class="camera-notice" hidden>
+              Camera active. Hold a QR code within the frame to scan.
+            </div>
+          </div>
+        </section>
+
+        <!-- Right: Results & Safety Inspector -->
+        <section class="scan-result-card">
+          <div class="result-header">
+            <h2>Inspection Result</h2>
+            <div id="resultStatusBadge" class="status-badge waiting">Awaiting Scan</div>
+          </div>
+
+          <!-- Empty State -->
+          <div id="emptyResultView" class="empty-result">
+            <div class="empty-icon">🔍</div>
+            <p>No QR code scanned yet.<br>Drop an image or paste a screenshot on this page.</p>
+          </div>
+
+          <!-- Scanned Content Details -->
+          <div id="scannedDetailsView" class="scanned-details" hidden>
+            <!-- Content Type Card -->
+            <div class="type-info-card">
+              <div class="type-header">
+                <span class="type-badge" id="detectedTypeBadge">URL</span>
+                <span class="scan-timestamp" id="scanTimestamp">Just now</span>
+              </div>
+              <div class="scanned-summary-title" id="scannedTitle">https://example.com</div>
+            </div>
+
+            <!-- Structured Details Breakdown -->
+            <div id="structuredFieldsWrap" class="structured-fields" hidden>
+              <!-- Filled dynamically for Wi-Fi, vCard, etc. -->
+            </div>
+
+            <!-- Raw Payload Box -->
+            <div class="raw-payload-box">
+              <label class="raw-label">Raw Decoded Payload:</label>
+              <pre class="raw-code" id="rawDecodedText"></pre>
+            </div>
+
+            <!-- Security Warnings (if any) -->
+            <div id="securityWarningBanner" class="alert-banner danger" hidden>
+              <span class="warning-icon">⚠</span>
+              <div id="securityWarningMsg">Security Warning: Review this link carefully.</div>
+            </div>
+
+            <!-- Actions Row -->
+            <div class="result-actions">
+              <button id="btnOpenUrl" class="btn-action primary" hidden>
+                <span>Open URL in New Tab</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </button>
+
+              <button id="btnCopyResult" class="btn-action secondary">
+                <span>Copy Content</span>
+              </button>
+
+              <button id="btnCustomizeInStudio" class="btn-action secondary">
+                <span>Open in Generator</span>
+              </button>
+
+              <button id="btnSaveToHistory" class="btn-action tertiary">
+                <span>Save to History</span>
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- URL Confirmation Safety Modal -->
+    <div id="urlConfirmModal" class="modal-backdrop" hidden>
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div class="modal-icon warning">🛡️</div>
+          <div class="modal-title">Confirm External URL Navigation</div>
+        </div>
+        <div class="modal-body">
+          <p class="modal-desc">
+            You are about to open an external link found inside a scanned QR code. Please verify that this URL is trustworthy:
+          </p>
+          <div class="url-confirmation-display" id="modalTargetUrl">https://...</div>
+          <p class="modal-sub">QRQuick never automatically navigates to scanned links to protect your privacy and security.</p>
+        </div>
+        <div class="modal-footer">
+          <button id="btnCancelOpenUrl" class="btn-modal cancel">Cancel</button>
+          <button id="btnConfirmOpenUrl" class="btn-modal confirm">Yes, Open in New Tab</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="scanner.js"></script>
+</body>
+</html>

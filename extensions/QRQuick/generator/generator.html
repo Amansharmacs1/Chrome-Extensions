@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QRQuick — Advanced QR Generator & Customizer</title>
+  <link rel="stylesheet" href="generator.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Header -->
+    <header class="main-header">
+      <div class="header-inner">
+        <a href="generator.html" class="brand-link">
+          <img src="../assets/icons/icon32.png" alt="QRQuick" class="brand-logo">
+          <div>
+            <div class="brand-name">QRQuick</div>
+            <div class="brand-sub">Generate. Customize. Share.</div>
+          </div>
+        </a>
+
+        <nav class="main-nav">
+          <a href="generator.html" class="nav-item active">Generator</a>
+          <a href="../scanner/scanner.html" class="nav-item">Scanner</a>
+          <a href="../bulk/bulk.html" class="nav-item">Bulk Batch</a>
+          <a href="../dashboard/dashboard.html" class="nav-item">History & Settings</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="workspace-container">
+      <!-- Left Column: Type selection & form inputs -->
+      <section class="config-column">
+        <!-- Payload Type Tabs -->
+        <div class="type-selector-card">
+          <div class="section-label">Select QR Content Type</div>
+          <div class="type-chips" id="typeChipsContainer">
+            <button class="type-chip active" data-type="url">
+              <span class="chip-icon">🔗</span> URL
+            </button>
+            <button class="type-chip" data-type="text">
+              <span class="chip-icon">📝</span> Text
+            </button>
+            <button class="type-chip" data-type="wifi">
+              <span class="chip-icon">📶</span> Wi-Fi
+            </button>
+            <button class="type-chip" data-type="contact">
+              <span class="chip-icon">👤</span> vCard
+            </button>
+            <button class="type-chip" data-type="email">
+              <span class="chip-icon">✉️</span> Email
+            </button>
+            <button class="type-chip" data-type="phone">
+              <span class="chip-icon">📞</span> Phone
+            </button>
+            <button class="type-chip" data-type="sms">
+              <span class="chip-icon">💬</span> SMS
+            </button>
+            <button class="type-chip" data-type="location">
+              <span class="chip-icon">📍</span> Location
+            </button>
+            <button class="type-chip" data-type="event">
+              <span class="chip-icon">📅</span> Event
+            </button>
+          </div>
+        </div>
+
+        <!-- Form Fields Panel -->
+        <div class="form-card">
+          <!-- 1. URL Form -->
+          <div id="formUrl" class="type-form active">
+            <div class="form-group">
+              <label for="inputUrl">Website URL</label>
+              <div class="input-with-button">
+                <input type="url" id="inputUrl" class="form-control" placeholder="https://example.com" value="https://example.com">
+                <button type="button" id="btnUseCurrentPage" class="inline-btn" title="Insert current browser tab URL">Use Current Page</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputUrlTitle">Label / Title (Optional)</label>
+              <input type="text" id="inputUrlTitle" class="form-control" placeholder="My Website">
+            </div>
+          </div>
+
+          <!-- 2. Plain Text Form -->
+          <div id="formText" class="type-form">
+            <div class="form-group">
+              <label for="inputText">Plain Text Content</label>
+              <textarea id="inputText" class="form-control" rows="4" placeholder="Enter notes, serial numbers, codes, or instructions..."></textarea>
+            </div>
+          </div>
+
+          <!-- 3. Wi-Fi Form -->
+          <div id="formWifi" class="type-form">
+            <div class="form-row">
+              <div class="form-group flex-2">
+                <label for="inputWifiSsid">Network Name (SSID) *</label>
+                <input type="text" id="inputWifiSsid" class="form-control" placeholder="HomeNetwork_5G">
+              </div>
+              <div class="form-group flex-1">
+                <label for="selectWifiEnc">Encryption</label>
+                <select id="selectWifiEnc" class="form-control">
+                  <option value="WPA" selected>WPA/WPA2/WPA3</option>
+                  <option value="WEP">WEP</option>
+                  <option value="nopass">None (Open)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group" id="groupWifiPass">
+              <label for="inputWifiPass">Password</label>
+              <div class="password-wrapper">
+                <input type="password" id="inputWifiPass" class="form-control" placeholder="Wireless network password">
+                <button type="button" id="btnToggleWifiPass" class="inline-btn icon-only" title="Show password">👁</button>
+              </div>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" id="checkWifiHidden">
+              <label for="checkWifiHidden">Hidden network (SSID not broadcasted)</label>
+            </div>
+          </div>
+
+          <!-- 4. Contact (vCard) Form -->
+          <div id="formContact" class="type-form">
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label for="inputVcardFirst">First Name</label>
+                <input type="text" id="inputVcardFirst" class="form-control" placeholder="Alex">
+              </div>
+              <div class="form-group flex-1">
+                <label for="inputVcardLast">Last Name</label>
+                <input type="text" id="inputVcardLast" class="form-control" placeholder="Morgan">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label for="inputVcardOrg">Organization / Company</label>
+                <input type="text" id="inputVcardOrg" class="form-control" placeholder="Acme Studios">
+              </div>
+              <div class="form-group flex-1">
+                <label for="inputVcardJob">Job Title</label>
+                <input type="text" id="inputVcardJob" class="form-control" placeholder="Lead Architect">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label for="inputVcardPhone">Phone Number</label>
+                <input type="tel" id="inputVcardPhone" class="form-control" placeholder="+1 (555) 234-5678">
+              </div>
+              <div class="form-group flex-1">
+                <label for="inputVcardEmail">Email Address</label>
+                <input type="email" id="inputVcardEmail" class="form-control" placeholder="alex@example.com">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputVcardUrl">Website URL</label>
+              <input type="url" id="inputVcardUrl" class="form-control" placeholder="https://alexmorgan.dev">
+            </div>
+          </div>
+
+          <!-- 5. Email Form -->
+          <div id="formEmail" class="type-form">
+            <div class="form-group">
+              <label for="inputEmailTo">Recipient Email *</label>
+              <input type="email" id="inputEmailTo" class="form-control" placeholder="support@domain.com">
+            </div>
+            <div class="form-group">
+              <label for="inputEmailSubject">Subject Line</label>
+              <input type="text" id="inputEmailSubject" class="form-control" placeholder="Product Inquiry">
+            </div>
+            <div class="form-group">
+              <label for="inputEmailBody">Email Body</label>
+              <textarea id="inputEmailBody" class="form-control" rows="3" placeholder="Hello team, I wanted to ask about..."></textarea>
+            </div>
+          </div>
+
+          <!-- 6. Phone Form -->
+          <div id="formPhone" class="type-form">
+            <div class="form-group">
+              <label for="inputPhone">Telephone Number *</label>
+              <input type="tel" id="inputPhone" class="form-control" placeholder="+1 800 555 0199">
+              <p class="field-hint">Dialers will automatically prompt to call this number when scanned.</p>
+            </div>
+          </div>
+
+          <!-- 7. SMS Form -->
+          <div id="formSms" class="type-form">
+            <div class="form-group">
+              <label for="inputSmsPhone">Recipient Phone *</label>
+              <input type="tel" id="inputSmsPhone" class="form-control" placeholder="+1 555 987 6543">
+            </div>
+            <div class="form-group">
+              <label for="inputSmsMsg">Pre-filled Message</label>
+              <textarea id="inputSmsMsg" class="form-control" rows="3" placeholder="Hi there, please send me the details..."></textarea>
+            </div>
+          </div>
+
+          <!-- 8. Location Form -->
+          <div id="formLocation" class="type-form">
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label for="inputLocLat">Latitude (-90 to 90) *</label>
+                <input type="number" step="any" id="inputLocLat" class="form-control" placeholder="37.7749">
+              </div>
+              <div class="form-group flex-1">
+                <label for="inputLocLng">Longitude (-180 to 180) *</label>
+                <input type="number" step="any" id="inputLocLng" class="form-control" placeholder="-122.4194">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputLocQuery">Place / Address Note</label>
+              <input type="text" id="inputLocQuery" class="form-control" placeholder="San Francisco Civic Center">
+            </div>
+          </div>
+
+          <!-- 9. Calendar Event Form -->
+          <div id="formEvent" class="type-form">
+            <div class="form-group">
+              <label for="inputEventTitle">Event Title *</label>
+              <input type="text" id="inputEventTitle" class="form-control" placeholder="Project Kickoff Meeting">
+            </div>
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label for="inputEventStart">Start Date & Time *</label>
+                <input type="datetime-local" id="inputEventStart" class="form-control">
+              </div>
+              <div class="form-group flex-1">
+                <label for="inputEventEnd">End Date & Time</label>
+                <input type="datetime-local" id="inputEventEnd" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputEventLoc">Location</label>
+              <input type="text" id="inputEventLoc" class="form-control" placeholder="Conference Room B / Zoom">
+            </div>
+            <div class="form-group">
+              <label for="inputEventDesc">Description</label>
+              <textarea id="inputEventDesc" class="form-control" rows="2" placeholder="Quarterly review meeting..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customization Accordion Panels -->
+        <div class="customizer-card">
+          <div class="customizer-header">
+            <div class="section-label">Style & Appearance</div>
+            <button id="btnResetStyles" class="text-btn">Reset Defaults</button>
+          </div>
+
+          <!-- Presets Row -->
+          <div class="custom-section">
+            <label class="sub-label">Design Presets</label>
+            <div class="preset-scroll" id="presetPillsContainer">
+              <!-- Dynamically rendered presets -->
+            </div>
+          </div>
+
+          <!-- Colors & Gradient -->
+          <div class="custom-section">
+            <label class="sub-label">Colors & Background</label>
+            <div class="color-controls-grid">
+              <div class="color-item">
+                <label class="mini-label">Foreground</label>
+                <div class="color-picker-wrap">
+                  <input type="color" id="pickerFgColor" value="#0F172A">
+                  <input type="text" id="hexFgColor" class="hex-input" value="#0F172A" maxlength="7">
+                </div>
+              </div>
+
+              <div class="color-item">
+                <label class="mini-label">Background</label>
+                <div class="color-picker-wrap">
+                  <input type="color" id="pickerBgColor" value="#FFFFFF">
+                  <input type="text" id="hexBgColor" class="hex-input" value="#FFFFFF" maxlength="7">
+                </div>
+              </div>
+            </div>
+
+            <!-- Gradient Options -->
+            <div class="gradient-bar">
+              <div class="form-check">
+                <input type="checkbox" id="checkUseGradient">
+                <label for="checkUseGradient">Enable Dual-Color Gradient</label>
+              </div>
+
+              <div id="gradientOptionsWrap" class="gradient-details" hidden>
+                <div class="color-item">
+                  <label class="mini-label">Secondary Color</label>
+                  <div class="color-picker-wrap">
+                    <input type="color" id="pickerGradSecondary" value="#06B6D4">
+                    <input type="text" id="hexGradSecondary" class="hex-input" value="#06B6D4" maxlength="7">
+                  </div>
+                </div>
+
+                <div class="gradient-type-picker">
+                  <label class="mini-label">Gradient Flow</label>
+                  <select id="selectGradType" class="form-control compact">
+                    <option value="linear">Linear (Diagonal)</option>
+                    <option value="radial">Radial (Center Out)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Transparent Background -->
+            <div class="form-check margin-top-sm">
+              <input type="checkbox" id="checkTransparentBg">
+              <label for="checkTransparentBg">Transparent Background (PNG / SVG only)</label>
+            </div>
+
+            <!-- Contrast Meter -->
+            <div class="contrast-meter-card" id="contrastMeter">
+              <div class="contrast-info">
+                <span class="contrast-label">Contrast Ratio:</span>
+                <span class="contrast-val" id="valContrastRatio">21.0:1</span>
+              </div>
+              <span class="contrast-badge safe" id="badgeContrastStatus">Safe for Scanning</span>
+            </div>
+            <div id="contrastWarningBox" class="alert-box warning" hidden></div>
+          </div>
+
+          <!-- Module Patterns & Corner Eyes -->
+          <div class="custom-section">
+            <label class="sub-label">Shape & Corner Eyes</label>
+            
+            <div class="shape-grid">
+              <div class="form-group">
+                <label class="mini-label">Body Modules</label>
+                <select id="selectModulePattern" class="form-control">
+                  <option value="square" selected>Square (Standard Sharp)</option>
+                  <option value="rounded">Rounded Tiles</option>
+                  <option value="dots">Circular Dots</option>
+                  <option value="classy">Classy Organic</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="mini-label">Corner Frame (Eye Outer)</label>
+                <select id="selectEyeOuter" class="form-control">
+                  <option value="square" selected>Square Frame</option>
+                  <option value="rounded">Rounded Frame</option>
+                  <option value="circle">Circular Frame</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="mini-label">Corner Pupil (Eye Inner)</label>
+                <select id="selectEyeInner" class="form-control">
+                  <option value="square" selected>Square Dot</option>
+                  <option value="circle">Round Dot</option>
+                  <option value="diamond">Diamond Dot</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Logo & Center Branding -->
+          <div class="custom-section">
+            <div class="section-title-row">
+              <label class="sub-label">Center Logo / Icon</label>
+              <button type="button" id="btnRemoveLogo" class="danger-text-btn" hidden>Remove Logo</button>
+            </div>
+
+            <div class="logo-dropzone" id="logoDropzone">
+              <input type="file" id="fileLogoUpload" accept="image/png,image/jpeg,image/webp" hidden>
+              <div id="logoDropzoneContent">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+                <span>Click or drop logo image (PNG, JPG, WebP)</span>
+              </div>
+              <div id="logoPreviewWrap" hidden>
+                <img id="imgLogoThumb" alt="Uploaded logo preview" class="logo-thumb-img">
+                <span id="logoFileName" class="logo-filename">logo.png</span>
+              </div>
+            </div>
+
+            <!-- Logo Controls (visible when logo loaded) -->
+            <div id="logoControlsPanel" class="logo-controls" hidden>
+              <div class="form-row">
+                <div class="form-group flex-1">
+                  <label class="mini-label">Logo Size (<span id="lblLogoSize">20%</span>)</label>
+                  <input type="range" id="rangeLogoSize" min="12" max="28" value="20" class="range-slider">
+                </div>
+                <div class="form-group flex-1">
+                  <label class="mini-label">Badge Shape</label>
+                  <select id="selectLogoShape" class="form-control compact">
+                    <option value="rounded" selected>Rounded</option>
+                    <option value="circle">Circle</option>
+                    <option value="square">Square</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div id="logoWarningBox" class="alert-box warning" hidden></div>
+          </div>
+
+          <!-- Parameters & Resolution -->
+          <div class="custom-section border-none">
+            <label class="sub-label">Technical Settings</label>
+            <div class="params-row">
+              <div class="form-group flex-1">
+                <label class="mini-label">Error Correction</label>
+                <select id="selectEcLevel" class="form-control compact">
+                  <option value="L">L — 7% recovery</option>
+                  <option value="M" selected>M — 15% recovery (Standard)</option>
+                  <option value="Q">Q — 25% recovery (Enhanced)</option>
+                  <option value="H">H — 30% recovery (Best for Logos)</option>
+                </select>
+              </div>
+
+              <div class="form-group flex-1">
+                <label class="mini-label">Quiet Zone Margin (<span id="lblMarginVal">4</span>)</label>
+                <input type="range" id="rangeMargin" min="0" max="8" value="4" class="range-slider">
+              </div>
+
+              <div class="form-group flex-1">
+                <label class="mini-label">Download Size</label>
+                <select id="selectExportSize" class="form-control compact">
+                  <option value="256">256 × 256 px</option>
+                  <option value="512" selected>512 × 512 px</option>
+                  <option value="1024">1024 × 1024 px</option>
+                  <option value="2048">2048 × 2048 px (HD)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Live Sticky Preview & Actions -->
+      <aside class="preview-column">
+        <div class="sticky-preview-card">
+          <div class="preview-header">
+            <span class="preview-title">Live Preview</span>
+            <div class="scannability-pill safe" id="pillScannability">Ready to Scan ✓</div>
+          </div>
+
+          <!-- QR Canvas Viewport -->
+          <div class="canvas-viewport" id="canvasViewport">
+            <canvas id="qrCanvas" width="400" height="400"></canvas>
+          </div>
+
+          <!-- Technical Specs -->
+          <div class="specs-bar">
+            <span id="specBytes">0 bytes</span>
+            <span>•</span>
+            <span id="specVersion">Version: Auto</span>
+            <span>•</span>
+            <span id="specEc">Level: M</span>
+          </div>
+
+          <!-- Scannability Alert -->
+          <div id="generalAlertBox" class="alert-box warning" hidden></div>
+
+          <!-- Export Actions -->
+          <div class="export-actions-group">
+            <button id="btnDownloadPng" class="btn-main primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Download PNG
+            </button>
+
+            <div class="btn-row">
+              <button id="btnDownloadSvg" class="btn-main secondary">SVG Vector</button>
+              <button id="btnDownloadJpeg" class="btn-main secondary">JPEG</button>
+            </div>
+
+            <div class="btn-row">
+              <button id="btnCopyImage" class="btn-main tertiary">Copy Image</button>
+              <button id="btnCopyPayload" class="btn-main tertiary">Copy Text</button>
+            </div>
+          </div>
+
+          <!-- Static vs Dynamic Educational Card -->
+          <div class="dynamic-explainer-card">
+            <div class="explainer-header">
+              <span class="explainer-badge">Static QR Code</span>
+              <span class="explainer-tag">100% Private</span>
+            </div>
+            <p class="explainer-text">
+              This code directly encodes your destination data with zero third-party redirects. It works permanently offline and never expires.
+            </p>
+            <details class="explainer-details">
+              <summary>Learn about Static vs Dynamic QR</summary>
+              <div class="details-content">
+                <strong>Static QR:</strong> Your payload (URL, text, Wi-Fi password) is physically etched into the black/white modules. Once printed, its destination cannot be changed.<br><br>
+                <strong>Dynamic QR:</strong> Requires an external routing server and database to redirect the scan. To maintain strict privacy and zero cloud dependencies, QRQuick creates direct, permanent static QR codes.
+              </div>
+            </details>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script type="module" src="generator.js"></script>
+</body>
+</html>

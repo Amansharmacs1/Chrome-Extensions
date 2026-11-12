@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QRQuick — Bulk QR Batch Generator</title>
+  <link rel="stylesheet" href="bulk.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Header -->
+    <header class="main-header">
+      <div class="header-inner">
+        <a href="../generator/generator.html" class="brand-link">
+          <img src="../assets/icons/icon32.png" alt="QRQuick" class="brand-logo">
+          <div>
+            <div class="brand-name">QRQuick</div>
+            <div class="brand-sub">Bulk Batch Generator</div>
+          </div>
+        </a>
+
+        <nav class="main-nav">
+          <a href="../generator/generator.html" class="nav-item">Generator</a>
+          <a href="../scanner/scanner.html" class="nav-item">Scanner</a>
+          <a href="bulk.html" class="nav-item active">Bulk Batch</a>
+          <a href="../dashboard/dashboard.html" class="nav-item">History & Settings</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="bulk-container">
+      <div class="bulk-header-row">
+        <div>
+          <h1>Bulk QR Code Generator</h1>
+          <p class="bulk-desc">Generate tens or hundreds of QR codes at once from a CSV file or list of URLs/text, then download as a ZIP archive.</p>
+        </div>
+      </div>
+
+      <!-- Top Settings & Input Grid -->
+      <div class="input-settings-grid">
+        <!-- Input Method Card -->
+        <div class="bulk-card">
+          <div class="card-header">
+            <span class="card-title">1. Provide Content</span>
+            <div class="input-tabs">
+              <button class="input-tab active" id="tabPasteText">Paste List</button>
+              <button class="input-tab" id="tabUploadCsv">Upload CSV</button>
+            </div>
+          </div>
+
+          <!-- Paste View -->
+          <div id="viewPasteText" class="input-tab-view active">
+            <label for="bulkTextArea" class="field-label">One item per line (URLs, codes, names, or text):</label>
+            <textarea id="bulkTextArea" class="bulk-textarea" rows="7" placeholder="https://example.com/item1&#10;https://example.com/item2&#10;https://example.com/item3&#10;Product-SKU-98234"></textarea>
+            <div class="textarea-actions">
+              <button id="btnParseText" class="btn-sub primary">Parse List</button>
+              <button id="btnClearInput" class="btn-sub secondary">Clear</button>
+            </div>
+          </div>
+
+          <!-- CSV Upload View -->
+          <div id="viewUploadCsv" class="input-tab-view">
+            <div class="csv-dropzone" id="csvDropzone">
+              <input type="file" id="fileCsvInput" accept=".csv,text/csv" hidden>
+              <div class="csv-icon">📄</div>
+              <div class="csv-title">Drop CSV file here, or <span class="highlight">browse</span></div>
+              <div class="csv-hint">Auto-detects columns: content, url, label, title</div>
+            </div>
+            <div id="csvFileInfo" class="file-info-badge" hidden>
+              <span id="csvFileName">data.csv</span>
+              <button id="btnRemoveCsv" class="remove-btn">✕</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Batch Styling Settings -->
+        <div class="bulk-card">
+          <div class="card-header">
+            <span class="card-title">2. Output Settings</span>
+          </div>
+
+          <div class="settings-form">
+            <div class="form-group">
+              <label for="selectBulkPreset">Visual Style</label>
+              <select id="selectBulkPreset" class="form-control">
+                <option value="preset_classic_dark" selected>Classic Dark (High Scannability)</option>
+                <option value="preset_electric_cyan">Electric Cyan</option>
+                <option value="preset_ocean_breeze">Ocean Gradient</option>
+                <option value="preset_sunset_violet">Sunset Glow</option>
+                <option value="preset_minimal_mono">Minimal Mono</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label for="selectBulkFormat">Format</label>
+                <select id="selectBulkFormat" class="form-control">
+                  <option value="png" selected>PNG (Raster)</option>
+                  <option value="svg">SVG (Vector)</option>
+                </select>
+              </div>
+
+              <div class="form-group flex-1">
+                <label for="selectBulkSize">Resolution</label>
+                <select id="selectBulkSize" class="form-control">
+                  <option value="256">256 × 256 px</option>
+                  <option value="512" selected>512 × 512 px</option>
+                  <option value="1024">1024 × 1024 px</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label for="selectBulkEc">Error Correction</label>
+                <select id="selectBulkEc" class="form-control">
+                  <option value="M" selected>Level M (Standard 15%)</option>
+                  <option value="Q">Level Q (Enhanced 25%)</option>
+                  <option value="H">Level H (Maximum 30%)</option>
+                  <option value="L">Level L (Compact 7%)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Batch Execution & Progress Bar -->
+      <div id="batchProgressCard" class="progress-card" hidden>
+        <div class="progress-header">
+          <span class="progress-title" id="progressStatusText">Generating batch...</span>
+          <span class="progress-pct" id="progressPctText">0%</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Parsed Queue & Table View -->
+      <div class="table-card">
+        <div class="table-header">
+          <div class="table-title-group">
+            <span class="table-title">Batch Queue</span>
+            <span class="queue-counter" id="queueCounter">0 records ready</span>
+          </div>
+
+          <div class="table-actions">
+            <button id="btnRemoveInvalid" class="btn-sub secondary" hidden>Remove Invalid Rows</button>
+            <button id="btnStartBatch" class="btn-sub primary" disabled>Generate All</button>
+            <button id="btnDownloadZip" class="btn-sub zip-btn" hidden>
+              <span>Download ZIP Archive</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="table-scroll">
+          <table class="bulk-table" id="bulkTable">
+            <thead>
+              <tr>
+                <th width="40"><input type="checkbox" id="checkSelectAll" checked></th>
+                <th width="50">#</th>
+                <th width="140">Label / Title</th>
+                <th>Content / Destination</th>
+                <th width="80">Type</th>
+                <th width="110">Status</th>
+                <th width="120">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <tr>
+                <td colspan="7" class="empty-table-msg">
+                  No records loaded. Paste a list of items or upload a CSV above to begin.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="bulk.js"></script>
+</body>
+</html>

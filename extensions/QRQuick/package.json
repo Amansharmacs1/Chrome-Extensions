@@ -1,0 +1,23 @@
+{
+  "name": "qrquick",
+  "version": "1.0.0",
+  "description": "All-in-one QR code generator and scanner for Chrome. Generate, customize, scan, and bulk export QR codes with zero external tracking.",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/run-all.js",
+    "icons": "node generate-icons.cjs"
+  },
+  "keywords": [
+    "chrome-extension",
+    "manifest-v3",
+    "qr-code",
+    "qr-generator",
+    "qr-scanner",
+    "vcard",
+    "wifi-qr",
+    "svg-export",
+    "bulk-qr"
+  ],
+  "author": "QRQuick Team",
+  "license": "MIT"
+}

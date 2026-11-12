@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QRQuick — History & Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Header -->
+    <header class="main-header">
+      <div class="header-inner">
+        <a href="../generator/generator.html" class="brand-link">
+          <img src="../assets/icons/icon32.png" alt="QRQuick" class="brand-logo">
+          <div>
+            <div class="brand-name">QRQuick</div>
+            <div class="brand-sub">History & Management Hub</div>
+          </div>
+        </a>
+
+        <nav class="main-nav">
+          <a href="../generator/generator.html" class="nav-item">Generator</a>
+          <a href="../scanner/scanner.html" class="nav-item">Scanner</a>
+          <a href="../bulk/bulk.html" class="nav-item">Bulk Batch</a>
+          <a href="dashboard.html" class="nav-item active">History & Settings</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="dashboard-container">
+      <!-- Top Metrics -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-val" id="valTotalGenerated">0</div>
+          <div class="stat-label">Generated Codes</div>
+          <div class="stat-sub">Created locally</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-val" id="valTotalScanned">0</div>
+          <div class="stat-label">Scanned Items</div>
+          <div class="stat-sub">Decoded via images or webcam</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-val" id="valTotalFavorites">0</div>
+          <div class="stat-label">Starred Favorites</div>
+          <div class="stat-sub">Bookmarked records</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-val" id="valRecentActivity">0</div>
+          <div class="stat-label">Active (24h)</div>
+          <div class="stat-sub">Recent actions</div>
+        </div>
+      </section>
+
+      <!-- Main History & Controls Card -->
+      <section class="history-main-card">
+        <!-- Tab & Filter Header -->
+        <div class="history-controls-header">
+          <div class="mode-tabs">
+            <button class="mode-tab active" id="tabGenerated">Generated Codes (<span id="countGenTab">0</span>)</button>
+            <button class="mode-tab" id="tabScanned">Scanned Codes (<span id="countScanTab">0</span>)</button>
+          </div>
+
+          <div class="filter-actions">
+            <!-- Search -->
+            <div class="search-wrap">
+              <input type="text" id="inputSearchHistory" class="search-input" placeholder="Search title or content...">
+            </div>
+
+            <!-- Type Filter -->
+            <select id="selectTypeFilter" class="filter-select">
+              <option value="all" selected>All Types</option>
+              <option value="url">URLs</option>
+              <option value="wifi">Wi-Fi</option>
+              <option value="contact">Contacts</option>
+              <option value="text">Text</option>
+              <option value="email">Email</option>
+              <option value="phone">Phone</option>
+              <option value="sms">SMS</option>
+              <option value="location">Location</option>
+              <option value="event">Events</option>
+            </select>
+
+            <!-- Favorites Only Toggle -->
+            <button id="btnToggleFavFilter" class="fav-filter-btn" title="Filter by Favorites">
+              ★ Favorites
+            </button>
+          </div>
+        </div>
+
+        <!-- History Records Grid -->
+        <div id="historyGrid" class="history-grid">
+          <!-- Dynamically populated cards -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyHistoryState" class="empty-state" hidden>
+          <div class="empty-icon">📭</div>
+          <p id="emptyStateMsg">No history records found.</p>
+        </div>
+      </section>
+
+      <!-- Preferences & Storage Management Section -->
+      <section class="preferences-section">
+        <h2 class="section-heading">Preferences & Local Storage</h2>
+        <div class="preferences-grid">
+          <!-- Settings Card -->
+          <div class="pref-card">
+            <h3>Default Preferences</h3>
+            <div class="pref-row">
+              <div>
+                <div class="pref-label">Confirm before opening URLs</div>
+                <div class="pref-sub">Prompts a safety confirmation modal before opening scanned links</div>
+              </div>
+              <input type="checkbox" id="checkConfirmUrls" class="toggle-checkbox" checked>
+            </div>
+
+            <div class="pref-row">
+              <div>
+                <div class="pref-label">Auto-save generated QR codes</div>
+                <div class="pref-sub">Automatically records generated items to history</div>
+              </div>
+              <input type="checkbox" id="checkAutoSaveGen" class="toggle-checkbox" checked>
+            </div>
+
+            <div class="pref-row">
+              <div>
+                <div class="pref-label">Auto-save scanned QR codes</div>
+                <div class="pref-sub">Automatically records decoded scans to scan history</div>
+              </div>
+              <input type="checkbox" id="checkAutoSaveScan" class="toggle-checkbox" checked>
+            </div>
+          </div>
+
+          <!-- Data Management Card -->
+          <div class="pref-card">
+            <h3>Backup & Danger Zone</h3>
+            <div class="pref-row">
+              <div>
+                <div class="pref-label">Export Full Backup</div>
+                <div class="pref-sub">Download complete JSON file of all history, presets, and settings</div>
+              </div>
+              <button id="btnExportBackup" class="btn-sub secondary">Export JSON</button>
+            </div>
+
+            <div class="pref-row">
+              <div>
+                <div class="pref-label">Clear Generated History</div>
+                <div class="pref-sub">Removes all generated records (preserves starred favorites)</div>
+              </div>
+              <button id="btnClearGenHistory" class="btn-sub secondary">Clear Generated</button>
+            </div>
+
+            <div class="pref-row danger-border">
+              <div>
+                <div class="pref-label text-danger">Erase All Data</div>
+                <div class="pref-sub">Permanently delete all QR codes, scan logs, custom presets, and settings</div>
+              </div>
+              <button id="btnEraseAll" class="btn-sub danger">Delete Everything</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>
